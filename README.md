@@ -2,6 +2,23 @@
 
 This is a living style guide for web applications.
 
+
+### Usage
+
+```js
+// index.js
+var app = require('pattern-library-node');
+var PORT = process.env.PORT || 4000;
+
+app.listen(PORT, function() {
+    console.log('Running on', PORT);
+});
+```
+
+```bash
+node index.js
+```
+
 ### Features
 
 * Colour definitions
