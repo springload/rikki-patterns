@@ -1,0 +1,12 @@
+// ============================================================================
+//
+// Call to action
+// Coloured block that will contain button/s and minimal text content
+//
+// ============================================================================
+
+.cta-block {
+	@include default-space;
+	@include arrow('up', inherit, rem(10));
+	padding: ($size-space-default / 1.25) $size-space-default;
+}

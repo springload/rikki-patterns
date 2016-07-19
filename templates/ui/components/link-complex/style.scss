@@ -1,0 +1,22 @@
+.link-complex {
+	display: block;
+	color: inherit;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+	.link-complex__faux-link {
+		color: $color-link-primary;
+
+		* + & {
+			margin-top: .5em;
+		}
+	}
+
+
+// Hover state for "fake links" inside complex block
+.link-complex:hover .link-complex__faux-link {
+	text-decoration: underline;
+	color: $color-link-primary-dark;
+}

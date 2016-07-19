@@ -1,0 +1,83 @@
+// ============================================================================
+// Media blocks
+// ============================================================================
+
+.media,
+.media--rev {
+    @include clearfix;
+}
+
+	.media__image {
+	    float: left;
+	    margin-right: $size-space-default;
+	    @include upto-smallish {
+			margin-bottom: $size-space-default / 3;
+	    }
+	}
+
+	.media__image--min-width {
+		min-width: 8em;
+		text-align: center;
+	}
+
+	.media__image--max-width {
+		max-width: 6.25rem;
+	}
+
+	.media__body {
+	    @include clearfix;
+	    @include smallish {
+			overflow: hidden;
+	    }
+	}
+
+
+	// Swap the image to the right
+	.media--rev > .media__image {
+	    float: right;
+	    margin-right: 0;
+	    margin-left: $size-space-default;
+	}
+
+
+// ============================================================================
+// Modifiers
+// ============================================================================
+
+.media--middle-align {
+    @include clearfix;
+    display: table;
+
+    > .media__body {
+        display: table-cell;
+        vertical-align: middle;
+
+        > * {
+            margin: 0;
+        }
+    }
+}
+
+.media--middle-align\@smallish {
+	@include smallish {
+		@include clearfix;
+		display: table;
+
+		> .media__body {
+		    display: table-cell;
+		    vertical-align: middle;
+
+		    > *:last-child {
+		        margin: 0;
+		    }
+		}
+	}
+}
+
+.media--rev.media--middle-align\@smallish {
+	direction: rtl;
+
+	> * {
+		direction: ltr;
+	}
+}

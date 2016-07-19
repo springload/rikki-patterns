@@ -1,0 +1,21 @@
+@mixin list-reset {
+	margin-left: 0;
+	list-style: none;
+}
+
+@mixin list-item-spacing {
+	margin-bottom: .8em;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.list-unstyled {
+	@include list-reset;
+	padding-left: 0;
+}
+
+	.list-unstyled > li {
+		@include list-item-spacing;
+	}

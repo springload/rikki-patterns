@@ -1,0 +1,34 @@
+# Component documentation and configuration
+status: 'production'
+classBase: 'btn'
+displayName: 'Button'
+flavours:
+  - base
+dependencies:
+  - core
+
+# Generates the `Data` table
+schema:
+  title:
+    type: string
+    description: ""
+  text: 
+    type: string
+    description: "Button text"
+  url:
+    type: string
+    description: "Url for link"
+  theme:
+    type: string
+    description: "Set colour of button"
+
+# Generates the `Usage` table
+usage:
+  - class: .btn
+    required: True
+    elements:
+      - a
+      - button
+      - input
+    outcome: Defines the Button component
+    comments: Wrapping element, adds margin at bottom

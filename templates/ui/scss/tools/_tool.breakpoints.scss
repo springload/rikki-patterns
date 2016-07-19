@@ -1,0 +1,39 @@
+// ----------------------------------------------------------------------------
+// Breakpoints and simple media query mixins
+// ----------------------------------------------------------------------------
+
+@mixin small {
+    @media #{$media-query-mq-small} {
+        @content;
+    }
+}
+
+@mixin upto-smallish {
+    @media #{$media-query-mq-upto-smallish} {
+        @content;
+    }
+}
+
+@mixin smallish {
+    @media #{$media-query-mq-smallish} {
+        @content;
+    }
+}
+
+@mixin medium {
+    @media #{$media-query-mq-medium} {
+        @content;
+    }
+}
+
+@mixin large {
+    @media #{$media-query-mq-large} {
+        @content;
+    }
+}
+
+@mixin xlarge {
+    @media #{$media-query-mq-xlarge} {
+        @content;
+    }
+}

@@ -1,0 +1,51 @@
+{% extends "generic.html" %}
+{% block title %}{{ config.app.seo.title }} - Colours {% endblock %}
+
+{% block header %}
+    <h1>
+        Colours
+    </h1>
+{% endblock %}
+
+{% block intro %}
+    <div class="panel-right-padding panel-intro">
+        <p>
+            Colours are generated from the Design Tokens automatically.
+        </p>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="u-overflow">
+
+
+    {% for colour in colours %}
+        <div class="swatch">
+            <div class="swatch__image"><div style="width: 100%; height: 100px; background-color: {{ colour.value }};"></div></div>
+            <div class="swatch__body">
+                <h3>
+                    {{ colour.humanName }}
+                </h3>
+                <p class='u-tight'>
+                <span class="code-label">
+                    SCSS:
+                </span>
+                <code class='code-inline'>{{ colour.cssName }}</code>
+                </p>
+                <p class='u-tight'>
+                <span class="code-label">
+                    Value:
+                </span>
+                <code class='code-inline'>{{ colour.value }}</code>
+                </p>
+                <p class='u-tight'>
+                <span class="code-label">
+                    Alias:
+                </span>
+                <code class='code-inline'>{{ colour.name }}</code>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

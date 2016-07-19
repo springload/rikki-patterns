@@ -1,0 +1,29 @@
+// ============================================================================
+//
+// Callout blocks
+// Can be anything that needs a slight heiracrchy bump.
+// eg. Highlighted content, Update notification, content alerts and warnings.
+//
+// ============================================================================
+
+.callout {
+	@include default-space;
+	padding: $size-space-default;
+}
+
+// Callout blocks with arrow markers
+.callout--arrow-down {
+	@include arrow('down', inherit, rem(10));
+}
+
+.callout--arrow-up {
+	@include arrow('up', inherit, rem(10));
+}
+
+.callout--arrow-right {
+	@include arrow('right', inherit, rem(10));
+}
+
+.callout--arrow-left {
+	@include arrow('left', inherit, rem(10));
+}

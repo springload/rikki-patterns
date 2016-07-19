@@ -1,0 +1,49 @@
+// ============================================================================
+// Labels
+// ============================================================================
+
+.label-group {
+	margin-left: rem(4);
+}
+
+.label-group .label {
+    margin-left: rem(-5);
+}
+
+.label {
+	display: inline-block;
+	padding: .3em .75em .25em;
+	font-size: rem(11);
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    line-height: $font-line-height-base;
+    vertical-align: top;
+    background-color: $color-panel-light-grey;
+    border-color: $color-panel-light-grey;
+}
+
+// Label colours
+.label--hot {
+	background-color: $color-orange-hot;
+	border-color: $color-orange-hot;
+	color: $color-white;
+}
+
+.label--gold {
+	background-color: $color-orange-zest;
+	border-color: $color-orange-zest;
+	color: $color-white;
+}
+
+.label--green {
+	background-color: $color-button-green;
+	border-color: $color-button-green;
+	color: $color-white;
+}
+
+
+// Label extras
+.label--arrow {
+	margin-right: 1.75em;
+	@include arrow('right', inherit, 1em, true);
+}

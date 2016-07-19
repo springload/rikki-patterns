@@ -1,0 +1,21 @@
+// ============================================================================
+// Groups of buttons
+// ============================================================================
+
+.btn-group {
+	margin-top: -.75em;
+}
+
+	.btn-group > .btn {
+	    margin-top: .75em;
+		margin-right: .75em;
+	}
+
+.btn-group--tight {
+	margin-top: -.5em;
+}
+
+	.btn-group--tight > .btn {
+	    margin-top: .5em;
+		margin-right: .125em;
+	}

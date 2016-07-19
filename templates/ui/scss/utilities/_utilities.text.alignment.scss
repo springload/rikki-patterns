@@ -1,0 +1,35 @@
+.u-text-center {
+    text-align: center;
+}
+
+.u-text-center\@medium-only {
+    @include small {
+    	text-align: left;
+    }
+    @include medium {
+    	text-align: center;
+    }
+    @include large {
+		text-align: left;
+    }
+}
+
+.u-text-left {
+    text-align: left;
+}
+
+.u-text-right {
+    text-align: right;
+}
+
+.u-text-left\@medium {
+    @include medium {
+        text-align: left;
+    }
+}
+
+.u-text-right\@medium {
+    @include medium {
+        text-align: right;
+    }
+}

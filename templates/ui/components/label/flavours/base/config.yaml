@@ -1,0 +1,10 @@
+title: 'Base'
+status: 'development'
+states:
+  - title: 'Basic'
+  - title: 'Hot Label'
+    theme: 'hot'
+  - title: 'Green Label'
+    theme: 'green'
+  - title: 'Gold Label'
+    theme: 'gold'

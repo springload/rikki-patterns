@@ -1,0 +1,12 @@
+<ul class="accordion">
+    <li class="accordion__item hide-content" id="href-{{ component.title }}">
+        <a class="accordion__title icon-text--rev" aria-selected="false" id="label-{{ component.title }}" aria-controls="control-{{ component.title }}" href="#href-{{ component.title }}" role="tab">
+            {{ component.title }}
+            <svg class="icon icon--blue accordion__up accordion__icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-caret-d"></use></svg>
+            <svg class="icon icon--blue accordion__down accordion__icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-caret-u"></use></svg>
+        </a>
+        <div id="control-{{ component.title }}" role="tabpanel" class="accordion__content" aria-hidden="true" aria-expanded="false" aria-labelledby="label-{{ component.title }}">
+            {{ component.content }}
+        </div>
+    </li>
+</ul>

@@ -1,0 +1,22 @@
+title: 'Base'
+status: 'production'
+states:
+  - title: 'Basic Card'
+    excerpt: 'This is a short card intro'
+    url: 'http://google.com'
+    img:
+      src: 'path/to/image'
+      alt: 'Alt text'
+  - title: 'Complex Card'
+    subtitle: 'No subtitle!'
+    excerpt: 'This is a short card intro'
+    url: 'http://google.com'
+    3d: True
+    img:
+      src: 'path/to/image'
+      alt: 'Alt text'
+    labels:
+      - title: 'Hot rate'
+      - title: 'Home loan'
+        theme: 'hot'
+

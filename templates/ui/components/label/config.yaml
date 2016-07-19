@@ -1,0 +1,28 @@
+# Component documentation and configuration
+status: 'production'
+classBase: 'label'
+displayName: 'Label'
+flavours:
+  - base
+dependencies:
+  - core
+
+# Generates the `Data` table
+schema:
+  title:
+    type: string
+    description: ""
+  theme:
+    type: string
+    description: "Give label a different colour to default grey"
+
+# Generates the `Usage` table
+usage:
+  - class: .label
+    required: True
+    elements:
+      - div
+      - span
+      - p
+    outcome: Defines the Label component
+    comments: Wrapping element, adds margin at bottom

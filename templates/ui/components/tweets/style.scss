@@ -1,0 +1,74 @@
+.tweets {
+    min-height: 14rem;
+    @include clearfix();
+}
+
+.tweet__wrapper {
+    float: left;
+    min-height: 10em;
+    margin-bottom: 2rem;
+    width: 100%;
+
+    @include medium {
+        width: 45%;
+        margin-right: 2.5%;
+    }
+}
+
+
+.tweet {
+    text-align: left;
+    position: relative;
+    width: 100%;
+}
+
+$tweet-color: #e4f5dd;
+
+.tweet__body {
+    background-color: $tweet-color;
+    border-color: $tweet-color;
+    padding: 1rem;
+    text-align: left;
+    position: relative;
+    margin-bottom: $size-space-default;
+    min-height: 7em;
+    @include arrow('down', $tweet-color, .5rem);
+}
+
+
+// =============================================================================
+// Tweets Keyframes
+// =============================================================================
+
+.tweet-enter {
+  opacity: 0.01;
+  transform: translateY(-10%);
+}
+
+.tweet-enter.tweet-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in 300ms, transform 500ms ease-out;
+  transform: translateY(0%);
+}
+
+.tweet-leave {
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+.tweet-leave.tweet-leave-active {
+  opacity: 0.01;
+  transition: opacity 400ms ease-out, transform 400ms ease-in;
+  transform: translateY(10%);
+}
+
+
+.tweet-delay-1 {
+    .tweet-leave-active {
+        transition-delay: 200ms;
+    }
+
+    .tweet-enter-active {
+        transition-delay: 500ms;
+    }
+}

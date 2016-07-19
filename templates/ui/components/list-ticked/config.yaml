@@ -1,0 +1,26 @@
+# Component documentation and configuration
+status: 'production'
+classBase: 'list-ticked'
+displayName: 'List ticks as list stye'
+flavours:
+  - base
+dependencies:
+  - core
+
+# Generates the `Data` table
+schema:
+  title:
+    type: string
+    description: ""
+  features:
+    type: array
+    description: "List items"
+
+# Generates the `Usage` table
+usage:
+  - class: .list-ticked
+    required: True
+    elements:
+      - div
+    outcome: Defines the List Ticked component
+    comments: Wrapping element, adds margin at bottom

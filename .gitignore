@@ -1,0 +1,43 @@
+.DS_Store
+/.venv/
+/var/static/
+/var/media/
+/local/
+/.vagrant/
+/Vagrantfile.local
+/docs/_build/
+*.pyc
+*.pyo
+.installed.cfg
+bin
+.idea/
+develop-eggs
+# dist
+downloads
+eggs
+parts
+src/*.egg-info
+lib
+lib64
+*.log
+*.pot
+static/CACHE/*
+.vagrant/*
+media/*
+.anaconda
+*.DS_Store
+*.sass-cache
+.idea
+.coverage
+
+# node
+node_modules/
+# bower
+bower_components/
+
+www/
+ui/swatches/
+ui/css/
+
+site/static/css/site.css
+site/static/css/ui.css

@@ -1,0 +1,40 @@
+.list-action {
+	counter-reset: section;
+	margin-left: 0;
+	list-style: none;
+}
+
+	.list-action > li {
+		padding-left: 2.25em;
+        position: relative;
+        margin-bottom: 1em;
+
+        &:last-child {
+        	margin-bottom: 0;
+        }
+	}
+
+		.list-action > li:before {
+			display: inline-block;
+			width: 1.5em;
+	        height: 1.5em;
+			position: absolute;
+			left: 0;
+	        background: $color-brand-headline-green;
+	        border-radius: 10em;
+	        content: ' ';
+		}
+
+		.list-action > li:after {
+			counter-increment: section;
+			content: counters(section, ".") " ";
+			color: $color-white;
+			display: inline-block;
+			font-size: .8125em;
+			line-height: 1.95;
+			position: absolute;
+			width: 1.9em;
+			left: 0;
+			top: 0;
+			text-align: center;
+		}

@@ -1,0 +1,30 @@
+// * selectors will also catch every :before and :after and SVG.
+//  Presume this isn't the desired result :)
+// TDO Sam - figure out a better way to do this along the line 
+// when we have more streamfield components sorted out
+.intro,
+.intro p,
+.intro li {
+	font-family: $font-family;
+	font-size: rem(18);
+	margin-bottom: $size-space-default;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.intro--large {
+	font-size: rem(21);
+	line-height: 1.4
+}
+
+.intro--max-width {
+	max-width: 25em;
+}
+
+.intro--max-width\@medium {
+	@include medium {
+		max-width: 25em;
+	}
+}

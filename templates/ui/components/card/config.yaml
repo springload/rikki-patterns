@@ -1,0 +1,69 @@
+status: 'production'
+classBase: 'card'
+displayName: 'Card'
+flavours:
+  - base
+  - interactive
+  - product
+dependencies:
+  - core/media-objects
+  - core/icons
+schema:
+  title:
+    type: string
+    description: "The title attribute for the Card"
+  subtitle:
+    type: string
+    description: "Optional subtitle for card"
+  labels:
+    type: array
+    description: "Optional card labels eg. Hot rate"
+  url:
+    type: string
+    description: "Card url"
+  img:
+    type: array
+    description: "Contains path to image and alternative text"
+  3d:
+    type: boolean
+    description: "Adds a shadow to the bottom of the card"
+
+usage:
+  - class: .card
+    required: True
+    elements:
+      - div
+    outcome: Defines the Card component
+    comments: A card will have a white background by default
+  - class: .card__image
+    required: False
+    elements:
+      - span
+      - div
+    outcome: Full-width 16:9 image sits at the top of the card
+    comments: ''
+  - class: .card__content
+    required: True
+    elements:
+      - span
+      - div
+    outcome: 'Applies padding for the text content'
+    comments: ''
+  - class: .card__labels
+    elements:
+      - div
+    required: False
+    outcome: 'Adds top left positioned element where label items get included'
+  - class: .card__body
+    elements:
+      - div
+    required: False
+    outcome: 'Gives main body copy a nice line length.'
+    comments: Usually included when there is a card visual that goes next to content
+  - class: .card__visual
+    elements:
+      - div
+    required: False
+    outcome: Adds bottom spacing to visual
+    comment: 'Will either be image or a rate block'
+

@@ -1,0 +1,16 @@
+
+.u-space {
+    margin-bottom: $size-space-default;
+}
+
+.u-space\+\+ {
+    margin-bottom: $size-space-default * 2;
+}
+
+.u-space\- {
+    margin-bottom: $size-space-default / 1.5;
+}
+
+.u-space-- {
+    margin-bottom: $size-space-default / 2.5;
+}

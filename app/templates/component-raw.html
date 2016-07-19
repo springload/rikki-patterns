@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <script src="/static/js/iframeResizer.contentWindow.min.js"></script>
+        <link rel="stylesheet" href="/static/css/ui.css">
+        <style>
+            body {
+                background: transparent !important;
+            }
+        </style>
+        <title>
+            {{ config.seo.title }}
+        </title>
+    </head>
+    <body>
+        {% set componentPath = component.template %}
+        {% set component = state %}
+        {% include componentPath %}
+    </body>
+</html>

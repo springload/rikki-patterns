@@ -1,0 +1,16 @@
+{
+  "global": {
+    "category": "background-color",
+    "comment": "Project panel/background colours"
+  },
+  "imports": [
+    "./aliases.json"
+  ],
+  "props": {
+    "GREEN": {
+      "value": "<%= BRAND_PRIMARY_GREEN %>",
+      "type": "color",
+      "cssProperties": ["color", "background-color"]
+    }
+  }
+}

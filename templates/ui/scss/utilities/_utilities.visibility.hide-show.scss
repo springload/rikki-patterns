@@ -1,0 +1,84 @@
+.u-hide {
+  display: none;
+}
+
+.u-show {
+  display: block;
+}
+
+// Block
+.u-show\@small {
+    display: none;
+    @include small {
+        display: block;
+    }
+}
+
+.u-show\@medium {
+    display: none;
+    @include medium {
+        display: block;
+    }
+}
+
+.u-show\@large {
+    display: none;
+    @include large {
+        display: block;
+    }
+}
+
+.u-hide\@small {
+    display: block;
+    @include small {
+        display: none;
+    }
+}
+
+.u-hide\@medium {
+    display: block;
+    @include medium {
+        display: none;
+    }
+}
+
+.u-hide\@large {
+    display: block;
+    @include large {
+        display: none;
+    }
+}
+
+
+// Inline block
+.u-show--inline-block\@medium {
+    display: none;
+    @include medium {
+        display: inline-block;
+    }
+}
+
+.u-hide--inline-block\@medium {
+    display: inline-block;
+    @include medium {
+        display: none;
+    }
+}
+
+
+// Inline
+.u-show--inline\@large {
+    display: none;
+    @include large {
+        display: inline;
+    }
+}
+
+.u-hide--inline\@large {
+    display: inline;
+    @include large {
+        display: none;
+    }
+}
+
+

@@ -1,0 +1,12 @@
+.#{$css-prefix}type-focus {
+  border-bottom: $border-width-thin solid transparent;
+  cursor: pointer;
+
+  &:hover {
+    border-bottom: $border-width-thin solid $color-text-link-hover;
+  }
+
+  &:focus {
+    @include focus;
+  }
+}

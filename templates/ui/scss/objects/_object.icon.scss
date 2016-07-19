@@ -1,0 +1,30 @@
+.icon {
+    display: inline-block;
+    width: $size-icon;
+    height: $size-icon;
+    vertical-align: middle;
+}
+
+.icon\+ {
+    width: $size-icon-large;
+    height: $size-icon-large;
+}
+
+
+.icon\+\+ {
+    width: $size-icon-xlarge;
+    height: $size-icon-xlarge;
+    margin-top: -.25em;
+}
+
+.icon\+\+\+ {
+    width: $size-icon-double;
+    height: $size-icon-double;
+}
+
+.icon-- {
+    width: $size-icon-small;
+    height: $size-icon-small;
+}
+
+

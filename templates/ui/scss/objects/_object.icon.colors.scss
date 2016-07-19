@@ -1,0 +1,24 @@
+.icon--white {
+    color: $color-white;
+    > use {
+    	fill: $color-white;
+    }
+}
+
+.icon--green > use {
+	fill: $color-button-green;
+}
+
+
+.icon--dark-green > use {
+    fill: $color-business-green;
+}
+
+
+.icon--blue > use {
+	fill: $color-button-blue;
+}
+
+.icon--grey > use {
+	fill: $color-light-separator;
+}

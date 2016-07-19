@@ -1,0 +1,40 @@
+{
+  "global": {
+    "category": "media-query",
+    "type": "media-query",
+    "format": "string"
+  },
+  "imports": [
+    "./breakpoints.json"
+  ],
+  "props": {
+    "MQ_SMALL": {
+      "value": "only screen and (max-width: <%= BREAKPOINT_SMALL %>)",
+      "comment": "Small form factor: devices smaller than tablet"
+    },
+    "MQ_UPTO_SMALLISH": {
+      "value": "only screen and (max-width: <%= BREAKPOINT_UPTO_SMALLISH %>)",
+      "comment": "Small form factor: devices smaller than tablet"
+    },
+    "MQ_SMALLISH": {
+      "value": "only screen and (min-width: <%= BREAKPOINT_SMALLISH %>)",
+      "comment": "Small form factor: devices larger than small"
+    },
+    "MQ_MEDIUM": {
+      "value": "only screen and (min-width: <%= BREAKPOINT_MEDIUM %>)",
+      "comment": "Medium form factor:  devices larger than phone"
+    },
+    "MQ_MEDIUM_LANDSCAPE": {
+      "value": "only screen and (min-width: <%= BREAKPOINT_MEDIUM %>) and (min-aspect-ratio: 4/3)",
+      "comment": "Medium form factor, landscape:  devices larger than phone, in landscape orientation"
+    },
+    "MQ_LARGE": {
+      "value": "only screen and (min-width:<%= BREAKPOINT_LARGE %>)",
+      "comment": "Large form factor:  devices larger than tablet"
+    },
+    "MQ_XLARGE": {
+      "value": "only screen and (min-width:<%= BREAKPOINT_XLARGE %>)",
+      "comment": "Large form factor:  devices large sizes beyond the max width"
+    }
+  }
+}

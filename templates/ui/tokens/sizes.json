@@ -1,0 +1,40 @@
+{
+  "global": {
+    "category": "size",
+    "comment": "Project asset sizing"
+  },
+  "props": {
+    "SPACE_DEFAULT": {
+      "value": "1.5rem",
+      "comment": "Generic sizing token scale for UI components."
+    },
+    "LOGO": {
+      "value": "3.5rem",
+      "comment": "Generic sizing token scale for UI components."
+    },
+    "LOGO_SMALL": {
+      "value": "2.875rem",
+      "comment": "Generic sizing token scale for UI components."
+    },
+    "ICON": {
+      "value": "1rem",
+      "comment": "Standard icon should be hinted for 16px"
+    },
+    "ICON_SMALL": {
+      "value": ".75rem",
+      "comment": "Standard icon should be hinted for 16px"
+    },
+    "ICON_LARGE": {
+      "value": "1.25rem",
+      "comment": "Standard icon should be hinted for 16px"
+    },
+    "ICON_XLARGE": {
+      "value": "1.5rem",
+      "comment": "Standard icon should be hinted for 16px"
+    },
+    "ICON_DOUBLE": {
+      "value": "2rem",
+      "comment": "Standard icon should be hinted for 16px"
+    }
+  }
+}

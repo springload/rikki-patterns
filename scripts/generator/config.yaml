@@ -1,0 +1,23 @@
+# Component documentation and configuration
+status: 'production'
+classBase: '{{ data.className }}'
+displayName: '{{ data.humanName }}'
+flavours:
+  - base
+dependencies:
+  - core
+
+# Generates the `Data` table
+schema:
+  title:
+    type: string
+    description: ""
+
+# Generates the `Usage` table
+usage:
+  - class: .{{ data.className }}
+    required: True
+    elements:
+      - div
+    outcome: Defines the {{ data.humanName }} component
+    comments: Wrapping element, adds margin at bottom

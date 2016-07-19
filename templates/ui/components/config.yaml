@@ -1,0 +1,15 @@
+components:
+  - card
+  - tile
+  - button
+  - media
+  - label
+  - button-group
+  - tweets
+  - accordion
+  - cta-block
+  - related-content
+  - callout
+  - link-complex
+  - rate
+  - list-ticked

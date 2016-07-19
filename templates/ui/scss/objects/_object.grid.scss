@@ -1,0 +1,145 @@
+.grid {
+    @include clearfix;
+    margin:  0;
+    padding: 0;
+    list-style: none;
+    font-size: 0;
+}
+
+    .grid > * {
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        font-size: medium; // Font-size medium reset the block to the context of body (ie, 16px)
+        text-justify: auto;
+    }
+
+// Modifiers
+
+.grid--justified,
+.grid--polar {
+    text-align: justify;
+    text-justify: distribute-all-lines;
+
+    > * {
+        text-align: left;
+    }
+
+    &:after{
+        content: '';
+        display: inline-block;
+        width: 100%;
+    }
+}
+
+.grid--row-spacing {
+    margin-bottom: -$size-space-default;
+
+    & > * {
+        margin-bottom: $size-space-default;
+    }
+}
+
+.grid--row-spacing\@large {
+    @include large {
+        margin-bottom: -$size-space-default;
+
+        & > * {
+            margin-bottom: $size-space-default;
+        }
+    }
+}
+
+.grid--row-spacing\@medium {
+    @include medium {
+        margin-bottom: -$size-space-default;
+
+        & > * {
+            margin-bottom: $size-space-default;
+        }
+    }
+}
+
+.grid--row-spacing\@small {
+    @include small {
+        margin-bottom: -$size-space-default;
+
+        & > * {
+            margin-bottom: $size-space-default;
+        }
+    }
+}
+
+.grid--row-spacing\@upto-medium {
+    margin-bottom: -$size-space-default;
+
+    & > * {
+        margin-bottom: $size-space-default;
+    }
+    @include large {
+        margin-bottom: 0;
+
+        & > * {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.grid--row-spacing-small {
+    & > * {
+        margin-bottom: $size-space-default / 2;
+    }
+}
+
+.grid--col-spacing {
+    margin-left: -$size-space-default;
+
+    > * {
+        padding-left: $size-space-default;
+    }
+}
+
+.grid--col-spacing-large {
+    margin-left: -$size-space-default * 1.5;
+
+    > * {
+        padding-left: $size-space-default * 1.5;
+    }
+}
+
+.grid--col-spacing-xlarge {
+    margin-left: -$size-space-default * 2;
+
+    > * {
+        padding-left: $size-space-default * 2;
+    }
+}
+
+.grid--middle > * {
+    vertical-align: middle;
+}
+
+.grid--bottom > * {
+    vertical-align: bottom;
+}
+
+
+
+// Grid float
+.grid-float {
+    @include clearfix;
+    width: auto;
+
+    > * {
+        float: left;
+        width: 100%;
+    }
+
+}
+
+// Grid flex 
+.grid-flex {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}

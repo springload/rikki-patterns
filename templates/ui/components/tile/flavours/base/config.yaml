@@ -1,0 +1,9 @@
+title: 'Base'
+status: 'development'
+states:
+  - title: 'New ’round here?'
+    heading_class: 'u-color-primary'
+    body: 'Our name says it all. We are a bank made for New Zealanders, by New Zealanders. Helping Kiwis achieve financial independence is what we do.'
+    link:
+      text: 'Read more'
+      url: '/link-to-page'
