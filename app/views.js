@@ -1,20 +1,19 @@
-import _ from 'lodash';
-import fs from 'fs';
-import Path from 'path';
-import nconf from 'nconf';
+const _ = require('lodash');
+const fs = require('fs');
+const Path = require('path');
+const nconf = require('nconf');
 
-import {
-  getSchema,
-  pathTrimStart,
-  findComponent,
-  getStateFromFlavour,
-  getTokens
-} from '../scripts/tasks/ui';
+const _ui = require('../scripts/tasks/ui');
+const getSchema = _ui.getSchema;
+const pathTrimStart = _ui.pathTrimStart;
+const findComponent = _ui.findComponent;
+const getStateFromFlavour = _ui.getStateFromFlavour;
+const getTokens = _ui.getTokens;
 
-import {nav} from './navigation';
+const nav = require('./navigation').nav;
 
 
-export const getComponentData = (data) => {
+exports.getComponentData = (data) => {
     let {id, path} = data;
     let componentData = findComponent(id);
     componentData.template = pathTrimStart(Path.join(path, id + '.html'));
@@ -22,13 +21,13 @@ export const getComponentData = (data) => {
 }
 
 
-export const getComponentFromNav = (nav, name) => {
+exports.getComponentFromNav = (nav, name) => {
     let components = _.find(nav.children, {'id': 'components'});
     return _.find(components.children, {'id': name});
 }
 
 
-export const componentOverviewView = (req, res, next) => {
+exports.componentOverviewView = (req, res, next) => {
     let {name, flavour, variant} = req.params;
     let navData = getComponentFromNav(nav, name);
     let data = getComponentData(navData);
@@ -41,7 +40,7 @@ export const componentOverviewView = (req, res, next) => {
     });
 }
 
-export const componentRawView = (req, res, next) => {
+exports.componentRawView = (req, res, next) => {
     let {name, flavour, variant} = req.params;
     let navData = getComponentFromNav(nav, name);
     let component = getComponentData(navData);
@@ -56,12 +55,14 @@ export const componentRawView = (req, res, next) => {
     });
 }
 
-export const autoIndexify = (page) => {
+const autoIndexify = (page) => {
     return page === '' ? 'index' : page;
 }
 
+exports.autoIndexify = autoIndexify;
 
-export const generic = (req, res, next) => {
+
+exports.generic = (req, res, next) => {
     let page = req.params[0];
     page = pathTrimStart(page);
     page = autoIndexify(page);

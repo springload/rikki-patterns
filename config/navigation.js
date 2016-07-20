@@ -1,49 +1,48 @@
-var getUI = require('../scripts/tasks/ui').getUI;
+var getUI = require('../app/utils/ui').getUI;
 var packageJson = require('../package.json');
 
-
 module.exports = {
-  navigation: {
-    label: 'Root',
-    path: '/',
-    children: [
+  "navigation": {
+    "label": "Root",
+    "path": "/",
+    "children": [
       {
-        label: 'Getting Started',
-        children: [
-          { 'label': 'CSS' },
-          { 'label': 'How To' }
+        "label": "Getting Started",
+        "children": [
+          { "label": "CSS" },
+          { "label": "How To" }
         ]
       },
       {
-        label: 'Design',
-        children: [
+        "label": "Design",
+        "children": [
           {
-            'label': 'Overview'
+            "label": "Overview"
           },
           {
-            label: 'Layout'
+            "label": "Layout"
           },
           {
-            'label': 'Colours'
+            "label": "Colours"
           },
           {
-            'label': 'Typography'
+            "label": "Typography"
           }
         ]
       },
       {
-        label: 'Components',
-        children: getUI('components').map(function(component) {
+        "label": "Components",
+        "children": getUI('components').map(function(component) {
           return {label: component.title};
         })
       },
       {
-        label: 'Style and Tone'
+        "label": "Style and Tone"
       },
       {
-        label: 'Give Feedback',
-        path: packageJson.bugs.url,
-        internal: false
+        "label": "Give Feedback",
+        "path": packageJson.bugs.url,
+        "internal": false
       }
     ]
   }

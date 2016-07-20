@@ -51,4 +51,4 @@ const TemplateRenderer = {
 }
 
 
-export default TemplateRenderer;
+module.exports = TemplateRenderer;

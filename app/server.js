@@ -1,20 +1,19 @@
 // =============================================================================
 // Dependencies
-// =============================================================================
+// ============================================================================= =
 
-import config from './config';
-import bodyParser from 'body-parser';
-import express from 'express';
-import nunjucks from 'nunjucks';
-import marked from 'marked';
-import reactRender from 'react-render';
-import changeCase from 'change-case';
-import Path from 'path';
-import favicon from 'serve-favicon';
-
-import templates from './templates';
-import * as views from './views';
-import * as errors from './utils/errors';
+const config = require('./config');
+const bodyParser = require('body-parser');
+const express = require('express');
+const nunjucks = require('nunjucks');
+const marked = require('marked');
+const reactRender = require('react-render');
+const changeCase = require('change-case');
+const Path = require('path');
+const favicon = require('serve-favicon');
+const templates = require('./templates');
+const views =  require('./views');
+const errors = require('./utils/errors');
 
 
 // =============================================================================

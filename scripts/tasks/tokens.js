@@ -1,27 +1,31 @@
-var _ = require('lodash');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var Path = require('path');
-var fs = require('fs');
-var ase = require('ase-utils');
-var rename = require('gulp-rename');
-var Color = require("color");
-var transform = require('vinyl-transform')
-var map = require('map-stream');
-var concat = require('gulp-concat');
+const _ = require('lodash');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const Path = require('path');
+const fs = require('fs');
+const ase = require('ase-utils');
+const rename = require('gulp-rename');
+const Color = require("color");
+const transform = require('vinyl-transform')
+const map = require('map-stream');
+const concat = require('gulp-concat');
 
-var utils = require('../../app/utils');
-var config = require('../../app/config');
+const utils = require('../../app/utils');
+const config = require('../../app/config');
+
+const OUTPATH_TOKENS = config.get('paths:ui:swatches');
+const PATH_TOKENS = config.get('paths:ui:tokens');
+const PATH_ALIASES = config.get('paths:ui:aliases');
+const PATH_SCSS = config.get('paths:ui:scss');
+const TOKENS_SCSS = config.get('paths:ui:tokensScss');
 
 
-var OUTPATH_TOKENS = config.get('paths:ui:swatches');
-var PATH_TOKENS = config.get('paths:ui:tokens');
-var PATH_ALIASES = config.get('paths:ui:aliases');
-var PATH_SCSS = config.get('paths:ui:scss');
-var TOKENS_SCSS = config.get('paths:ui:tokensScss');
+const logError = (err) => {
+    gutil.log(err.message);
+};
 
 
-function makeContext(arr) {
+const makeContext = (arr) => {
     var obj = {};
     arr.forEach(function(item) {
         _.forOwn(item, function(val, key) {
@@ -32,7 +36,7 @@ function makeContext(arr) {
 }
 
 
-gulp.task('tokens:css', function() {
+gulp.task('tokens:css', () => {
 
     function formatAliases(tokens, filename) {
         var doc = [];
@@ -84,8 +88,8 @@ gulp.task('tokens:css', function() {
         return doc.join('\n');
     }
 
-    var cssify = transform(function(filename) {
-        return map(function(chunk, next) {
+    var cssify = transform((filename) => {
+        return map((chunk, next) => {
             var tokens = JSON.parse(chunk.toString());
 
             if (tokens.global) {
@@ -114,18 +118,13 @@ gulp.task('tokens:css', function() {
         .pipe(concat(TOKENS_SCSS))
         .pipe(template)
         .pipe(gulp.dest(PATH_SCSS))
-        .on('error', function handleError(err) {
-            gutil.log(err.message);
-        });
+        .on('error', logError);
 });
 
 
+gulp.task('tokens:sketch', () => {
 
-
-
-gulp.task('tokens:sketch', function() {
-
-    function getColors(data) {
+    const getColors = (data) => {
         var arr = [];
 
         for (var key in data) {
@@ -137,8 +136,8 @@ gulp.task('tokens:sketch', function() {
         return arr;
     }
 
-    var sketchify = transform(function(filename) {
-        return map(function(chunk, next) {
+    var sketchify = transform((filename) => {
+        return map((chunk, next) => {
             var data = JSON.parse(chunk.toString());
             var formatted = {
                 "compatibleVersion": "1.0",
@@ -153,16 +152,14 @@ gulp.task('tokens:sketch', function() {
         .pipe(sketchify)
         .pipe(rename(config.get('swatches:sketch')))
         .pipe(gulp.dest(OUTPATH_TOKENS))
-        .on('error', function handleError(err) {
-            gutil.log(err.message);
-        });
+        .on('error', logError);
 });
 
 
-gulp.task('tokens:adobe', function() {
+gulp.task('tokens:adobe', () => {
     var VERSION_NUMBER = '1.0.0';
 
-    function formatAdobeFloatColour(val) {
+    const formatAdobeFloatColour = (val) => {
         if (val.match(/transparent/)) {
             return [0, 0, 0];
         }
@@ -177,7 +174,7 @@ gulp.task('tokens:adobe', function() {
         ];
     }
 
-    function generateColours(data) {
+    const generateColours = (data) => {
         var arr = [];
 
         for (var key in data) {
@@ -195,8 +192,8 @@ gulp.task('tokens:adobe', function() {
         return arr;
     }
 
-    var swatchify = transform(function(filename) {
-        return map(function(chunk, next) {
+    const swatchify = transform((filename) => {
+        return map((chunk, next) => {
             var data = JSON.parse(chunk);
             var input = {
               "version": VERSION_NUMBER,
@@ -211,16 +208,10 @@ gulp.task('tokens:adobe', function() {
         .pipe(swatchify)
         .pipe(rename(config.get('swatches:adobe')))
         .pipe(gulp.dest(OUTPATH_TOKENS))
-        .on('error', function handleError(err) {
-            gutil.log(err.message);
-        });
+        .on('error', logError);
 });
 
 
-gulp.task('tokens', [
-  'tokens:sketch',
-  'tokens:adobe',
-  'tokens:css'
-], function() {
+gulp.task('tokens', ['tokens:sketch','tokens:adobe','tokens:css'], () => {
     // done();
 });

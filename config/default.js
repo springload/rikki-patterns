@@ -1,4 +1,6 @@
-{
+module.exports = {
+  "PORT": 4000,
+  "proxy": 5000,
   "paths": {
     "components": "./ui/components",
     "generator": {
@@ -12,7 +14,7 @@
       "pages": "./app/pages",
       "static": "./app/static"
     },
-    "ui:": {
+    "ui": {
       "swatches": "./ui/swatches",
       "tokens": "./ui/tokens/",
       "aliases": "./ui/tokens/aliases.json",

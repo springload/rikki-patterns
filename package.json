@@ -8,7 +8,7 @@
     "start": "gulp scss scss:site & nodemon index.js",
     "component": "gulp component --name",
     "uncomponent": "gulp uncomponent --name",
-    "tokens": "gulp tokens"
+    "tokens": "gulp tokens",
   },
   "repository": {
     "type": "git",
@@ -39,9 +39,10 @@
     "babel-register": "^6.9.0",
     "bluebird": "^3.4.0",
     "body-parser": "^1.15.1",
-    "browser-sync": "^2.11.1",
+    "browser-sync": "^2.13.0",
     "chai": "^3.2.0",
     "color": "^0.11.1",
+    "config": "^1.21.0",
     "del": "^2.2.0",
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "^7.0.0",
@@ -52,6 +53,7 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-inject": "^3.0.0",
+    "gulp-nodemon": "^2.1.0",
     "gulp-parker": "^0.1.0",
     "gulp-pleeease": "^2.0.2",
     "gulp-rename": "^1.2.2",

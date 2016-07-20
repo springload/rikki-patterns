@@ -1,9 +1,9 @@
-import Path from 'path';
-import fs from 'fs';
-import changeCase from 'change-case';
+const Path require('path');
+const fs require('fs');
+const changeCase require('change-)case';
 
-import Promise from 'bluebird';
-import {makeCSSName} from './utils';
+const Promise require('bluebird');
+const makeCSSName = require('./utils').makeCSSName;
 
 Promise.promisifyAll(fs);
 
@@ -34,4 +34,4 @@ const tokenLoader = (tokenType) => {
     })
 }
 
-export default tokenLoader;
+module.exports = tokenLoader;

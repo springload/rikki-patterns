@@ -1,35 +1,34 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var Path = require('path');
-var transform = require('vinyl-transform')
-var map = require('map-stream');
-var concat = require('gulp-concat');
-var fs = require('fs');
-var _ = require('lodash');
-var rename = require('gulp-rename');
-var nunjucks = require('nunjucks');
+const _ = require('lodash');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const Path = require('path');
+const transform = require('vinyl-transform')
+const map = require('map-stream');
+const concat = require('gulp-concat');
+const fs = require('fs');
+const rename = require('gulp-rename');
+const nunjucks = require('nunjucks');
 
-
-var utils = require('../../app/utils');
-var navigation = require('../../app/navigation');
-var templates = require('../../app/templates');
-var nconf = require('../../app/config');
+const utils = require('../../app/utils');
+const navigation = require('../../app/navigation');
+const templates = require('../../app/templates');
+const nconf = require('../../app/config');
 
 
 // Destructuring, old school.
-var ui = require('./ui');
-var pathTrimStart = ui.pathTrimStart;
-var findComponent = ui.findComponent;
-var getStateFromFlavour = ui.getStateFromFlavour;
-var getTokens = ui.getTokens;
+const ui = require('./ui');
+const pathTrimStart = ui.pathTrimStart;
+const findComponent = ui.findComponent;
+const getStateFromFlavour = ui.getStateFromFlavour;
+const getTokens = ui.getTokens;
 
 
-gulp.task('site:pages', function() {
+gulp.task('site:pages', () => {
     var dir = nconf.get('paths:site:pages');
     var env = templates.configure();
 
-    var render = transform(function(filename) {
-        return map(function(chunk, next) {
+    var render = transform((filename) => {
+        return map((chunk, next) => {
             var str = chunk.toString();
             var tokens = getTokens();
 
@@ -37,7 +36,7 @@ gulp.task('site:pages', function() {
                 navigation: navigation.nav,
                 config: nconf.get(),
                 tokens: tokens,
-                colours: _.find(tokens, {name: 'aliases'}).items,
+                colours: _.get(_.find(tokens, {name: 'aliases'}), 'items', []),
             });
             return next(null, html);
         });
@@ -57,7 +56,7 @@ gulp.task('site:pages', function() {
 });
 
 
-gulp.task('site:static', function() {
+gulp.task('site:static', () => {
     gulp.src(Path.join(nconf.get('paths:site:static'), '**'))
         .pipe(gulp.dest(nconf.get('paths:staticSite:static')))
 });
@@ -85,9 +84,9 @@ function renderState(env, stateDir, nav, componentData, state) {
 function renderDocs(SITE_DIR, name) {
     var env = templates.configure();
     var nav = navigation.nav;
-    var components = _.find(nav.children, {id: name});
+    var components = _.find(nav.children, {id: name}) || {children: []};
 
-    components.children.forEach(function(component) {
+    components.children.forEach((component) => {
         var dirPath = Path.join(SITE_DIR, component.path);
         var htmlPath = Path.join(dirPath, 'index.html');
         var rawDir = Path.join(SITE_DIR, 'raw', component.id);
@@ -110,9 +109,9 @@ function renderDocs(SITE_DIR, name) {
         fs.writeFileSync(htmlPath, html, 'utf-8');
 
         if (componentData.flavours) {
-            componentData.flavours.forEach(function(flavour) {
+            componentData.flavours.forEach((flavour) => {
                 if (flavour.states) {
-                    flavour.states.forEach(function(variant) {
+                    flavour.states.forEach((variant) => {
                         var state = getStateFromFlavour(componentData, flavour.id, variant.id);
                         var stateDir = Path.join(rawDir, flavour.id, variant.id);
                         renderState(env, stateDir, nav, componentData, state);
@@ -129,7 +128,7 @@ function renderDocs(SITE_DIR, name) {
 }
 
 
-gulp.task('site', ['site:pages', 'site:static'], function(done) {
+gulp.task('site', ['site:pages', 'site:static'], (done) => {
     renderDocs(nconf.get('paths:staticSite:root'), 'components');
     done(null);
     process.exit(0);

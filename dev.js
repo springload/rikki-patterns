@@ -1,6 +1,8 @@
 var app = require('./index');
-var PORT = process.env.PORT || 4000;
+var config = require('./app/config');
+var PORT = config.get('PORT');
+
 
 app.listen(PORT, function() {
-    console.log('Running on', PORT);
+    // console.log('Running on', PORT);
 });

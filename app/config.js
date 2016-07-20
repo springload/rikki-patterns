@@ -1,26 +1,25 @@
-import nconf from 'nconf';
-import Path from 'path';
+const nconf = require('nconf');
+const Path = require('path');
 
+const confPath = Path.join(__dirname, '..', 'config', 'default.js');
 const navPath = Path.join(__dirname, '..', 'config', 'navigation.js');
-const confPath = Path.join(__dirname, '..', 'config', 'index.json');
 
-const jsFileLoader = (file) => {
+const jsFileLoader = function (file) {
   return {
     file: file,
     format: {
-      parse: (data, options) => {
+      parse: function(data, options) {
         return require(file);
       },
-      stringify: (data, options) => {
+      stringify: function(data, options) {
         return JSON.stringify(data);
-      },
+      }
     }
   }
 };
 
 nconf.argv().env();
-nconf.file({file: confPath});
-nconf.file(jsFileLoader(navPath));
-nconf.use('memory');
+nconf.file(jsFileLoader(confPath));
+nconf.file('navigation', jsFileLoader(navPath));
 
 module.exports = nconf;

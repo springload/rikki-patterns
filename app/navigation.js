@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var path  = require('path');
-var nconf = require('nconf');
+var nconf = require('./config');
 
 
 var formatNavItem = function(item, parent={}) {

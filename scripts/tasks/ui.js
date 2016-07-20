@@ -10,37 +10,36 @@ var tokens = require('../../app/utils/tokens');
 var Schema = schema.default;
 var TokenSchema = tokens.default;
 
-
 var _cachedSchema;
 
 var UI_PATH = path.join(__dirname, '..', '..', 'ui');
 var COMPONENTS_PATH = path.join(UI_PATH, 'components');
 
 
-function getUI(category) {
+const getUI = (category) => {
     var scheme = Schema({ path: UI_PATH }).generate();
     _cachedSchema = scheme;
 
     if (scheme.length) {
-      return _.find(scheme, {'id': category }).components;
+      return _.get(_.find(scheme, {'id': category }), 'components', []);
     }
 
     return [];
 }
 
-function getSchema(category) {
+const getSchema = (category) => {
     var schema = Schema({ path: UI_PATH }).generate();
     return _.find(schema, {'id': category});
 }
 
 
-function findComponent(id) {
+const findComponent = (id) => {
     var components = getSchema('components');
     return _.find(components.components, {'id': id})
 }
 
 
-function getStateFromFlavour(component, flavour, variant) {
+const getStateFromFlavour = (component, flavour, variant) => {
     var flavourData = _.find(component.flavours, {'id': flavour});
     var state;
 
@@ -56,17 +55,10 @@ function getStateFromFlavour(component, flavour, variant) {
 }
 
 
-
-
-
-
-
-function getTokens() {
+const getTokens = () => {
     var tokens = TokenSchema({ path: path.join('./ui/tokens', '*.json') }).generate();
-    return tokens;
+    return tokens ? tokens : {};
 }
-
-
 
 
 module.exports = {
@@ -80,7 +72,7 @@ module.exports = {
 };
 
 
-gulp.task('schema', function(done) {
+gulp.task('schema', (done) => {
     getTokens();
     done();
 })
