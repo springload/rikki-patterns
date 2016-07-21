@@ -38,7 +38,9 @@ const addToComponentsManifest = (name) => {
 const removeFromManifest = (name) => {
     let yamlFile = Path.join(basePath, 'config.yaml');
     let dumpOpts = {};
-    let data = yaml.safeLoad(fs.readFileSync(yamlFile).toString());
+    let data = yaml.safeLoad(fs.readFileSync(yamlFile).toString()) || {};
+
+    data.components = _.get(data, 'components', []);
 
     let index = data.components.indexOf(name);
     if (index > -1) {
