@@ -11,6 +11,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const rename = require('gulp-rename');
 const config = require('../../app/config');
 
+const prefix = require('./prefix');
 
 const prod = (process.env.NODE_ENV === 'production');
 
@@ -62,6 +63,6 @@ const libraryCSSTask = (gulp) => {
 
 
 module.exports = (gulp) => {
-  gulp.task('scss', () => {libraryCSSTask(gulp)});
-  gulp.task('scss:site', () => {siteCSSTask(gulp)});
+  gulp.task(prefix('scss'), () => {libraryCSSTask(gulp)});
+  gulp.task(prefix('scss:site'), () => {siteCSSTask(gulp)});
 }

@@ -7,7 +7,8 @@ const schemaTask = (done) => {
   done();
 }
 
+const prefix = require('./prefix');
 
 module.exports = (gulp) => {
-  gulp.task('schema', schemaTask)
+  gulp.task(prefix('schema'), schemaTask)
 }

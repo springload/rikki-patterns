@@ -15,6 +15,7 @@ const utils = require('../../app/utils');
 const navigation = require('../../app/navigation');
 const templates = require('../../app/templates');
 const nconf = require('../../app/config');
+const prefix = require('./prefix');
 
 
 // Destructuring, old school.
@@ -138,10 +139,10 @@ const siteDocsTask = (gulp, done) => {
 
 
 module.exports = (gulp) => {
-  gulp.task('site:pages', () => {sitePagesTask(gulp)});
-  gulp.task('site:static', () => {siteStaticTask(gulp)});
-  gulp.task('site', [
-    'site:pages',
-    'site:static'
+  gulp.task(prefix('site:pages'), () => {sitePagesTask(gulp)});
+  gulp.task(prefix('site:static'), () => {siteStaticTask(gulp)});
+  gulp.task(prefix('site'), [
+    prefix('site:pages'),
+    prefix('site:static')
   ], (done) => {siteDocsTask(gulp, done)});
 }

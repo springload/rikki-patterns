@@ -4,6 +4,7 @@ const config = require('../../app/config');
 const browserSync = require('browser-sync').create(config.get('app:title'));
 const nodemon = require('gulp-nodemon');
 const Path = require('path');
+const prefix = require('./prefix');
 
 const NODEMON_BOOT_WAIT_TIME = config.get('NODEMON_BOOT_WAIT_TIME');
 
@@ -66,8 +67,7 @@ const browserSyncTask = () => {
 
 
 module.exports = (gulp) => {
-  let prefix = config.get('taskPrefix');
-  gulp.task(`${prefix}:server`, [`${prefix}:browser-sync`], () => {});
-  gulp.task(`${prefix}:browser-sync`, [`${prefix}:nodemon`], browserSyncTask);
-  gulp.task(`${prefix}:nodemon`, nodemonTask);
+  gulp.task(prefix('server'), [prefix('browser-sync')], () => {});
+  gulp.task(prefix('browser-sync'), [prefix('nodemon')], browserSyncTask);
+  gulp.task(prefix('nodemon'), nodemonTask);
 }

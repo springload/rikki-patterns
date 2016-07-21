@@ -12,6 +12,8 @@ const yaml = require('js-yaml');
 const fs = require('fs');
 const del = require('del');
 
+const prefix = require('./prefix');
+
 
 const config = require('../../app/config');
 const utils = require('../../app/utils');
@@ -92,9 +94,7 @@ const addComponentTask = (gulp) => {
 }
 
 
-
 module.exports = (gulp) => {
-  let prefix = config.get('taskPrefix');
-  gulp.task(`${prefix}:uncomponent`, () => {removeComponentTask(gulp)});
-  gulp.task(`${prefix}:component`, () => {addComponentTask(gulp)});
+  gulp.task(prefix('uncomponent'), () => {removeComponentTask(gulp)});
+  gulp.task(prefix('component'), () => {addComponentTask(gulp)});
 }

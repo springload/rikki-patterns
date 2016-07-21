@@ -213,10 +213,15 @@ const tokensAdobeTask = (gulp) => {
     .on('error', logError);
 }
 
+const prefix = require('./prefix');
 
 module.exports = (gulp) => {
-  gulp.task('tokens:css', () => {tokenCssTask(gulp)});
-  gulp.task('tokens:sketch', () => {tokensSketchTask(gulp)});
-  gulp.task('tokens:adobe', () => {tokensAdobeTask(gulp)});
-  gulp.task('tokens', ['tokens:sketch','tokens:adobe','tokens:css'], () => {});
+  gulp.task(prefix('tokens:css'), () => {tokenCssTask(gulp)});
+  gulp.task(prefix('tokens:sketch'), () => {tokensSketchTask(gulp)});
+  gulp.task(prefix('tokens:adobe'), () => {tokensAdobeTask(gulp)});
+  gulp.task(prefix('tokens'), [
+    prefix('tokens:sketch'),
+    prefix('tokens:adobe'),
+    prefix('tokens:css')
+  ], () => {});
 }
