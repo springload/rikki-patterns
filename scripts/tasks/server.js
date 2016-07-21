@@ -18,8 +18,8 @@ const nodemonTask = (cb) => {
     script: script,
     watch: [script],
     ignore: [
-      Path.join(config.get('root', 'gulpfile.js'),
-      Path.join(config.get('root', 'node_modules'),
+      Path.join(config.get('root', 'gulpfile.js')),
+      Path.join(config.get('root', 'node_modules')),
       'gulpfile.js',
       'node_modules',
     ],
