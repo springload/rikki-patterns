@@ -23,7 +23,13 @@ const yamlFile = Path.join(basePath, config.get('paths:ui:config'));
 const ensureDirectoryStructure = () => {
   utils.mkdirpSync(config.get('paths:ui:root'));
   utils.mkdirpSync(config.get('paths:ui:components'));
-  fs.openSync(yamlFile, 'a');
+
+  try {
+    fs.accessSync(yamlFile);
+  } catch(e) {
+    gutil.log(`${yamlFile} does not exist. Creating...`)
+    fs.writeFileSync(yamlFile, yaml.safeDump({'components': []}, {}));
+  }
 };
 
 
@@ -36,7 +42,7 @@ const addToComponentsManifest = (name) => {
         data.components.push(name);
     }
 
-    fs.writeFileSync(yamlFile, yaml.safeDump(data, {}));
+    fs.writeFileSync(yamlFile, yaml.safeDump([data], {}));
 }
 
 
@@ -61,6 +67,7 @@ const removeFromManifest = (name) => {
 
 
 const pruneManifest = () => {
+  ensureDirectoryStructure();
 
   let data = yaml.safeLoad(fs.readFileSync(yamlFile).toString()) || {};
   data.components = _.get(data, 'components', []);
@@ -91,7 +98,6 @@ const removeComponentTask = () => {
 
 
 const addComponentTask = (gulp) => {
-    ensureDirectoryStructure();
 
     let argv = require('yargs').argv;
     let name = argv.name;

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const getUI = require('../app/utils/ui').getUI;
 const packageJson = require('../package.json');
