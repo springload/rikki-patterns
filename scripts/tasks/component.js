@@ -1,11 +1,10 @@
 "use strict";
 
-const gulp = require('gulp');
+const _ = require('lodash');
 const gutil = require('gulp-util');
 const Path = require('path');
 const nunjucks = require('nunjucks');
 const transform = require('vinyl-transform')
-const _ = require('lodash');
 const map = require('map-stream');
 const rename = require('gulp-rename');
 const yaml = require('js-yaml');
@@ -25,7 +24,9 @@ const basePath = config.get('paths:components');
 const addToComponentsManifest = (name) => {
     let yamlFile = Path.join(basePath, 'config.yaml');
     let dumpOpts = {};
-    let data = yaml.safeLoad(fs.readFileSync(yamlFile).toString());
+    let data = yaml.safeLoad(fs.readFileSync(yamlFile).toString()) || {};
+
+    data.components = _.get(data, 'components', []);
 
     if (data.components.indexOf(name) < 0) {
         data.components.push(name);
@@ -56,7 +57,7 @@ const removeComponentTask = () => {
 
   removeFromManifest(component.paramName);
 
-  console.log('[Deleting]', Path.join(__dirname, '..', '..', compPath));
+  gutil.log('[Deleting]', Path.join(__dirname, '..', '..', compPath));
 
   return del([compPath]);
 }
@@ -68,7 +69,7 @@ const addComponentTask = (gulp) => {
     let component = makeName(name, basePath);
     let compPath = Path.join(basePath, component.paramName);
 
-    console.log('[Writing]', Path.join(__dirname, '..', '..', compPath));
+    gutil.log('[Writing]', Path.join(__dirname, '..', '..', compPath));
 
     let template = transform((filename) => {
       return map((chunk, next) => {
