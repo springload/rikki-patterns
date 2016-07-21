@@ -1,4 +1,9 @@
+'use strict';
+
+const Path = require('path');
+
 module.exports = {
+  'root': Path.join(__dirname, '..'),
   "PORT": 4000,
   "proxy": 5000,
   "paths": {
@@ -11,8 +16,8 @@ module.exports = {
       "static": "./www/static"
     },
     "site": {
-      "pages": "./app/pages",
-      "static": "./app/static"
+      "pages": "./site/pages",
+      "static": "./site/static"
     },
     "ui": {
       "swatches": "./ui/swatches",
@@ -34,4 +39,8 @@ module.exports = {
   },
   "taskPrefix": "pl",
   "NODEMON_BOOT_WAIT_TIME": 500,
+  "templates": {
+    "component": "component.html",
+    "raw": "component-raw.html"
+  }
 }
