@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const _ = require('lodash');
 const gutil = require('gulp-util');
@@ -54,8 +54,8 @@ const nuke = (arr, name) => {
   return arr;
 }
 
-const removeFromManifest = (name) => {
 
+const removeFromManifest = (name) => {
     let dumpOpts = {};
     let data = yaml.safeLoad(fs.readFileSync(yamlFile).toString()) || {};
 
@@ -98,7 +98,6 @@ const removeComponentTask = () => {
 
 
 const addComponentTask = (gulp) => {
-
     let argv = require('yargs').argv;
     let name = argv.name;
     let component = makeName(name, basePath);
@@ -123,7 +122,12 @@ const addComponentTask = (gulp) => {
     // Automagically add to the components manifest.
     addToComponentsManifest(component.paramName);
 
-    gulp.src(config.get('paths:generator:template'))
+    let templatePath = Path.join(
+      config.get('root'),
+      config.get('paths:generator:template')
+    );
+
+    gulp.src(templatePath)
       .pipe(template)
       .pipe(rename(renameTemplate))
       .pipe(gulp.dest(compPath));
