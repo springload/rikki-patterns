@@ -5,6 +5,7 @@ const browserSync = require('browser-sync').create(config.get('app:title'));
 const nodemon = require('gulp-nodemon');
 const Path = require('path');
 const prefix = require('./prefix');
+const gutil = require('gulp-util');
 
 const NODEMON_BOOT_WAIT_TIME = config.get('NODEMON_BOOT_WAIT_TIME');
 
@@ -22,9 +23,6 @@ const nodemonTask = (cb) => {
     ],
     env: { 'NODE_ENV': 'development' }
   })
-  .on('readable', () => {
-    console.log('app is readable')
-  })
   .on('start', () => {
     // to avoid nodemon being started multiple times
     // thanks @matthisk
@@ -36,12 +34,12 @@ const nodemonTask = (cb) => {
     }
   })
   .on('crash',()  => {
-    console.log('nodemon.crash');
+    gutil.log('nodemon.crash');
   })
   .on('restart', () => {
     setTimeout(() => {
       browserSync.reload({ stream: false });
-    }, 1000);
+    }, config.get('BROWSERSYNC_RELOAD_INTERVAL'));
   })
   .once('quit', () => {
     // handle ctrl+c without crying
@@ -61,12 +59,13 @@ const browserSyncTask = () => {
     notify: true,
     open: 'local',
   }, () => {
-    console.log('Browserify booted');
+    gutil.log('Browserify booted');
   });
 }
 
 
 module.exports = (gulp) => {
+  gulp.task(prefix('dev'), [prefix('watch'), prefix('browser-sync')], () => {});
   gulp.task(prefix('server'), [prefix('browser-sync')], () => {});
   gulp.task(prefix('browser-sync'), [prefix('nodemon')], browserSyncTask);
   gulp.task(prefix('nodemon'), nodemonTask);

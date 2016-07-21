@@ -1,19 +1,17 @@
+'use strict';
+
 const nconf = require('nconf');
 const Path = require('path');
 
 const confPath = Path.join(__dirname, '..', 'config', 'default.js');
 const navPath = Path.join(__dirname, '..', 'config', 'navigation.js');
 
-const jsFileLoader = function (file) {
+const jsFileLoader = (file) => {
   return {
     file: file,
     format: {
-      parse: function(data, options) {
-        return require(file);
-      },
-      stringify: function(data, options) {
-        return JSON.stringify(data);
-      }
+      parse: (data, options) => require(file),
+      stringify: (data, options) => JSON.stringify(data),
     }
   }
 };

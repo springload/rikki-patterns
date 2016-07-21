@@ -39,6 +39,7 @@ module.exports = {
   },
   "taskPrefix": "pl",
   "NODEMON_BOOT_WAIT_TIME": 500,
+  "BROWSERSYNC_RELOAD_INTERVAL": 1000,
   "templates": {
     "component": "component.html",
     "raw": "component-raw.html"

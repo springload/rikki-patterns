@@ -7,4 +7,5 @@ module.exports = (gulp) => {
   require('./ui')(gulp);
   require('./site')(gulp);
   require('./component')(gulp);
+  require('./watch')(gulp);
 }
