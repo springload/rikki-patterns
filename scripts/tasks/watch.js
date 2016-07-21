@@ -1,10 +1,12 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var transform = require('vinyl-transform')
-var map = require('map-stream');
-var fs = require('fs');
-var _ = require('lodash');
-var path = require('path');
+"use strict";
+
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const transform = require('vinyl-transform')
+const map = require('map-stream');
+const fs = require('fs');
+const _ = require('lodash');
+const path = require('path');
 
 
 gulp.task('watch', function() {

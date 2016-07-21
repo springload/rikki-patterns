@@ -1,59 +1,73 @@
 'use strict';
 
-var gulp = require('gulp');
-var browserSync = require('browser-sync').create();
-var nodemon = require('gulp-nodemon');
-var nconf = require('../../app/config');
-var Path = require('path');
+const config = require('../../app/config');
+const browserSync = require('browser-sync').create(config.get('app:title'));
+const nodemon = require('gulp-nodemon');
+const Path = require('path');
+
+const NODEMON_BOOT_WAIT_TIME = config.get('NODEMON_BOOT_WAIT_TIME');
 
 
-gulp.task('server', ['browser-sync'], function () {
-});
+const nodemonTask = (cb) => {
+  let script = Path.join(__dirname, '..', '..', 'dev.js')
+  let called = false;
 
-gulp.task('browser-sync', ['nodemon'], function() {
-	browserSync.init({
-		proxy: "http://localhost:" + nconf.get('PORT'),
-    files: [
-      "app/static/**/*.*",
-      "ui/**/*.*",
-    ],
-    browser: ['google chrome'],
-    port: nconf.get('proxy'),
-    notify: true,
-    open: 'local'
-	});
-});
-
-gulp.task('nodemon', function (cb) {
-  var script = Path.join(__dirname, '..', '..', 'dev.js')
-	var called = false;
-
-	return nodemon({
-		script: script,
+  return nodemon({
+    script: script,
     watch: [script],
     ignore: [
       'gulpfile.js',
       'node_modules/'
     ],
     env: { 'NODE_ENV': 'development' }
-	}).on('start', function () {
-		// to avoid nodemon being started multiple times
-		// thanks @matthisk
-		if (!called) {
-			cb();
-			called = true;
-		}
-	})
-  .on('crash', function() {
-		console.log('nodemon.crash');
   })
-  .on('restart', function () {
-    setTimeout(function () {
+  .on('readable', () => {
+    console.log('app is readable')
+  })
+  .on('start', () => {
+    // to avoid nodemon being started multiple times
+    // thanks @matthisk
+    if (!called) {
+      setTimeout(() => {
+        called = true;
+        cb();
+      }, NODEMON_BOOT_WAIT_TIME);
+    }
+  })
+  .on('crash',()  => {
+    console.log('nodemon.crash');
+  })
+  .on('restart', () => {
+    setTimeout(() => {
       browserSync.reload({ stream: false });
     }, 1000);
   })
-  .once('quit', function () {
-		// handle ctrl+c without a big weep
-		process.exit();
-	});
-});
+  .once('quit', () => {
+    // handle ctrl+c without crying
+    process.exit();
+  });
+}
+
+const browserSyncTask = () => {
+  browserSync.init({
+    proxy: `http://localhost:${config.get('PORT')}`,
+    files: [
+      "app/static/**/*.*",
+      "ui/**/*.*",
+    ],
+    browser: ['google chrome'],
+    port: config.get('proxy'),
+    notify: true,
+    open: 'local',
+  }, () => {
+    console.log('Browserify booted');
+  });
+}
+
+
+module.exports = (gulp) => {
+  let prefix = config.get('taskPrefix');
+  gulp.task(`${prefix}:server`, [`${prefix}:browser-sync`], () => {});
+  gulp.task(`${prefix}:browser-sync`, [`${prefix}:nodemon`], browserSyncTask);
+  gulp.task(`${prefix}:nodemon`, nodemonTask);
+}

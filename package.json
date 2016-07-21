@@ -1,5 +1,5 @@
 {
-  "name": "pattern-library-node",
+  "name": "pattern-library-core",
   "version": "1.0.0",
   "description": "Pattern Library Server",
   "main": "index.js",
@@ -8,11 +8,11 @@
     "start": "gulp scss scss:site & nodemon index.js",
     "component": "gulp component --name",
     "uncomponent": "gulp uncomponent --name",
-    "tokens": "gulp tokens",
+    "tokens": "gulp tokens"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/springload/pattern-library-node.git"
+    "url": "git+https://github.com/springload/pattern-library-core.git"
   },
   "keywords": [
     "Design",
@@ -23,15 +23,14 @@
   "author": "Josh Barr",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/springload/pattern-library-node/issues"
+    "url": "https://github.com/springload/pattern-library-core/issues"
   },
-  "homepage": "https://github.com/springload/pattern-library-node#readme",
+  "homepage": "https://github.com/springload/pattern-library-core#readme",
   "engines": {
     "node": "^4.2.6"
   },
   "devDependencies": {
     "ase-utils": "^0.1.1",
-    "babel-core": "^6.9.0",
     "babel-eslint": "^6.0.3",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.3.13",

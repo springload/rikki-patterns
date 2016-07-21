@@ -31,5 +31,7 @@ module.exports = {
     "seo": {
       "title": "Pattern Library"
     }
-  }
+  },
+  "taskPrefix": "pl",
+  "NODEMON_BOOT_WAIT_TIME": 500,
 }

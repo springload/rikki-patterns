@@ -1,9 +1,15 @@
-var _ = require('lodash');
-var path  = require('path');
-var nconf = require('./config');
+"use strict";
+
+const _ = require('lodash');
+const path  = require('path');
+const nconf = require('./config');
 
 
-var formatNavItem = function(item, parent={}) {
+const formatNavItem = (item, parent) => {
+  if (!parent) {
+    parent = {}
+  }
+
   item.id = _.kebabCase(item.label);
 
   if (!item.path && parent.path) {

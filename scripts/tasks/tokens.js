@@ -1,5 +1,7 @@
+"use strict";
+
 const _ = require('lodash');
-const gulp = require('gulp');
+// const gulp = require('gulp');
 const gutil = require('gulp-util');
 const Path = require('path');
 const fs = require('fs');
@@ -36,182 +38,185 @@ const makeContext = (arr) => {
 }
 
 
-gulp.task('tokens:css', () => {
+const formatAliases = (tokens, filename) => {
+  var doc = [];
+  var prefix = null;
 
-    function formatAliases(tokens, filename) {
-        var doc = [];
-        var prefix = null;
+  if (filename.match(/aliases/)) {
+    prefix = 'color';
+  }
 
-        if (filename.match(/aliases/)) {
-            prefix = 'color';
-        }
+  _.forOwn(tokens, (val, key) => {
+    doc.push(utils.makeCSSVariable(prefix, key, val));
+  });
 
-        _.forOwn(tokens, function(val, key) {
-            doc.push(utils.makeCSSVariable(prefix, key, val));
-        });
+  return doc.join('\n');
+}
 
-        return doc.join('\n');
-    }
 
-    function formatTokens(tokens, filename) {
-        var doc = [];
-        var imports;
-        var context;
-        var category = _.kebabCase(tokens.global.category);
+const formatTokens = (tokens, filename) => {
+  var doc = [];
+  var imports;
+  var context;
+  var category = _.kebabCase(tokens.global.category);
 
-        if (tokens.imports) {
-            imports = tokens.imports.map(function(file) {
-                var path = Path.join(Path.dirname(filename), file);
-                return JSON.parse(fs.readFileSync(path));
-            });
-            context = makeContext(imports);
-        }
-
-        _.forOwn(tokens.props, function(val, key) {
-            var textValue = val;
-
-            if (val.hasOwnProperty('value')) {
-                textValue = val.value;
-            }
-
-            var compiled = _.template(textValue);
-            textValue = compiled(context);
-
-            // Deal with string types
-            if (tokens.global.format === 'string') {
-                textValue = utils.quote(textValue);
-            }
-
-            doc.push(utils.makeCSSVariable(category, key, textValue));
-        });
-
-        return doc.join('\n');
-    }
-
-    var cssify = transform((filename) => {
-        return map((chunk, next) => {
-            var tokens = JSON.parse(chunk.toString());
-
-            if (tokens.global) {
-                return next(null, formatTokens(tokens, filename));
-            } else {
-                return next(null, formatAliases(tokens, filename));
-            }
-        })
+  if (tokens.imports) {
+    imports = tokens.imports.map((file) => {
+      var path = Path.join(Path.dirname(filename), file);
+      return JSON.parse(fs.readFileSync(path));
     });
+    context = makeContext(imports);
+  }
 
-    var template = transform(function(filename) {
-        return map(function(chunk, next) {
-            var template = '// Design System Tokens \n// Generated at <%= time %> \n\n<%= data %>';
-            var ctx = {
-                data: chunk.toString(),
-                time: new Date().toString(),
-                file: chunk
-            };
+  _.forOwn(tokens.props, (val, key) => {
+    var textValue = val;
 
-            return next(null, gutil.template(template, ctx));
-        })
-    });
-
-    gulp.src([PATH_ALIASES, Path.join(PATH_TOKENS, '*.json')])
-        .pipe(cssify)
-        .pipe(concat(TOKENS_SCSS))
-        .pipe(template)
-        .pipe(gulp.dest(PATH_SCSS))
-        .on('error', logError);
-});
-
-
-gulp.task('tokens:sketch', () => {
-
-    const getColors = (data) => {
-        var arr = [];
-
-        for (var key in data) {
-            var val = data[key];
-            var color = Color(val);
-            arr.push(color.rgbString());
-        }
-
-        return arr;
+    if (val.hasOwnProperty('value')) {
+      textValue = val.value;
     }
 
-    var sketchify = transform((filename) => {
-        return map((chunk, next) => {
-            var data = JSON.parse(chunk.toString());
-            var formatted = {
-                "compatibleVersion": "1.0",
-                "pluginVersion": "1.1",
-                "colors": getColors(data)
-            }
-            return next(null, JSON.stringify(formatted, null, 4));
-        });
-    });
+    var compiled = _.template(textValue);
+    textValue = compiled(context);
 
-    gulp.src([PATH_ALIASES])
-        .pipe(sketchify)
-        .pipe(rename(config.get('swatches:sketch')))
-        .pipe(gulp.dest(OUTPATH_TOKENS))
-        .on('error', logError);
-});
-
-
-gulp.task('tokens:adobe', () => {
-    var VERSION_NUMBER = '1.0.0';
-
-    const formatAdobeFloatColour = (val) => {
-        if (val.match(/transparent/)) {
-            return [0, 0, 0];
-        }
-
-        var color = Color(val);
-        var arr = color.rgbArray();
-
-        return [
-            arr[0]/255,
-            arr[1]/255,
-            arr[2]/255
-        ];
+    // Deal with string types
+    if (tokens.global.format === 'string') {
+      textValue = utils.quote(textValue);
     }
 
-    const generateColours = (data) => {
-        var arr = [];
+    doc.push(utils.makeCSSVariable(category, key, textValue));
+  });
 
-        for (var key in data) {
-            var val = data[key];
-            var colour = formatAdobeFloatColour(val);
+  return doc.join('\n');
+}
 
-            arr.push({
-                "name": _.startCase(_.lowerCase(key)),
-                "model": "RGB",
-                "color": colour,
-                "type": "global"
-            });
-        }
 
-        return arr;
+const tokenCssTask = (gulp) => {
+  let cssify = transform((filename) => {
+    return map((chunk, next) => {
+      let tokens = JSON.parse(chunk.toString());
+
+      if (tokens.global) {
+        return next(null, formatTokens(tokens, filename));
+      } else {
+        return next(null, formatAliases(tokens, filename));
+      }
+    })
+  });
+
+  let template = transform((filename) => {
+    return map((chunk, next) => {
+      let template = '// Design System Tokens \n// Generated at <%= time %> \n\n<%= data %>';
+      let ctx = {
+        data: chunk.toString(),
+        time: new Date().toString(),
+        file: chunk
+      };
+
+      return next(null, gutil.template(template, ctx));
+    })
+  });
+
+  gulp.src([PATH_ALIASES, Path.join(PATH_TOKENS, '*.json')])
+    .pipe(cssify)
+    .pipe(concat(TOKENS_SCSS))
+    .pipe(template)
+    .pipe(gulp.dest(PATH_SCSS))
+    .on('error', logError);
+}
+
+
+
+const tokensSketchTask = (gulp) => {
+  const getColors = (data) => {
+    var arr = [];
+
+    for (var key in data) {
+      var val = data[key];
+      var color = Color(val);
+      arr.push(color.rgbString());
     }
 
-    const swatchify = transform((filename) => {
-        return map((chunk, next) => {
-            var data = JSON.parse(chunk);
-            var input = {
-              "version": VERSION_NUMBER,
-              "groups": [],
-              "colors": generateColours(data)
-            };
-            return next(null, ase.encode(input))
-        });
+    return arr;
+  }
+
+  var sketchify = transform((filename) => {
+    return map((chunk, next) => {
+      var data = JSON.parse(chunk.toString());
+      var formatted = {
+        "compatibleVersion": "1.0",
+        "pluginVersion": "1.1",
+        "colors": getColors(data)
+      }
+      return next(null, JSON.stringify(formatted, null, 4));
     });
+  });
 
-    gulp.src([PATH_ALIASES])
-        .pipe(swatchify)
-        .pipe(rename(config.get('swatches:adobe')))
-        .pipe(gulp.dest(OUTPATH_TOKENS))
-        .on('error', logError);
-});
+  gulp.src([PATH_ALIASES])
+    .pipe(sketchify)
+    .pipe(rename(config.get('swatches:sketch')))
+    .pipe(gulp.dest(OUTPATH_TOKENS))
+    .on('error', logError);
+}
+
+const tokensAdobeTask = (gulp) => {
+  var VERSION_NUMBER = '1.0.0';
+
+  const formatAdobeFloatColour = (val) => {
+    if (val.match(/transparent/)) {
+      return [0, 0, 0];
+    }
+
+    var color = Color(val);
+    var arr = color.rgbArray();
+
+    return [
+      arr[0]/255,
+      arr[1]/255,
+      arr[2]/255
+    ];
+  }
+
+  const generateColours = (data) => {
+    var arr = [];
+
+    for (var key in data) {
+      var val = data[key];
+      var colour = formatAdobeFloatColour(val);
+
+      arr.push({
+        "name": _.startCase(_.lowerCase(key)),
+        "model": "RGB",
+        "color": colour,
+        "type": "global"
+      });
+    }
+
+    return arr;
+  }
+
+  const swatchify = transform((filename) => {
+    return map((chunk, next) => {
+      var data = JSON.parse(chunk);
+      var input = {
+        "version": VERSION_NUMBER,
+        "groups": [],
+        "colors": generateColours(data)
+      };
+      return next(null, ase.encode(input))
+    });
+  });
+
+  gulp.src([PATH_ALIASES])
+    .pipe(swatchify)
+    .pipe(rename(config.get('swatches:adobe')))
+    .pipe(gulp.dest(OUTPATH_TOKENS))
+    .on('error', logError);
+}
 
 
-gulp.task('tokens', ['tokens:sketch','tokens:adobe','tokens:css'], () => {
-    // done();
-});
+module.exports = (gulp) => {
+  gulp.task('tokens:css', () => {tokenCssTask(gulp)});
+  gulp.task('tokens:sketch', () => {tokensSketchTask(gulp)});
+  gulp.task('tokens:adobe', () => {tokensAdobeTask(gulp)});
+  gulp.task('tokens', ['tokens:sketch','tokens:adobe','tokens:css'], () => {});
+}

@@ -1,3 +1,5 @@
+"use strict";
+
 const nunjucks = require('nunjucks');
 const marked = require('marked');
 const beautify = require('js-beautify').html;

@@ -1,3 +1,5 @@
+"use strict";
+
 const _ = require('lodash');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
@@ -23,65 +25,48 @@ const getStateFromFlavour = ui.getStateFromFlavour;
 const getTokens = ui.getTokens;
 
 
-gulp.task('site:pages', () => {
-    var dir = nconf.get('paths:site:pages');
-    var env = templates.configure();
-
-    var render = transform((filename) => {
-        return map((chunk, next) => {
-            var str = chunk.toString();
-            var tokens = getTokens();
-
-            var html = env.renderString(str, {
-                navigation: navigation.nav,
-                config: nconf.get(),
-                tokens: tokens,
-                colours: _.get(_.find(tokens, {name: 'aliases'}), 'items', []),
-            });
-            return next(null, html);
-        });
-    });
-
-    function renameDirectory(filepath) {
-        if (filepath.basename !== "index") {
-            filepath.dirname = Path.join(filepath.dirname, filepath.basename);
-            filepath.basename = 'index';
-        }
-    }
-
-    return gulp.src([ Path.join(dir, '**/*') ])
-        .pipe(render)
-        .pipe(rename(renameDirectory))
-        .pipe(gulp.dest(nconf.get('paths:staticSite:root')))
-});
+const renameDirectory = (filepath) => {
+  if (filepath.basename !== 'index') {
+    filepath.dirname = Path.join(filepath.dirname, filepath.basename);
+    filepath.basename = 'index';
+  }
+}
 
 
-gulp.task('site:static', () => {
-    gulp.src(Path.join(nconf.get('paths:site:static'), '**'))
-        .pipe(gulp.dest(nconf.get('paths:staticSite:static')))
-});
+const sitePagesTask = (gulp) => {
+  var dir = nconf.get('paths:site:pages');
+  var env = templates.configure();
+
+  var render = transform((filename) => {
+      return map((chunk, next) => {
+          var str = chunk.toString();
+          var tokens = getTokens();
+
+          var html = env.renderString(str, {
+              navigation: navigation.nav,
+              config: nconf.get(),
+              tokens: tokens,
+              colours: _.get(_.find(tokens, {name: 'aliases'}), 'items', []),
+          });
+          return next(null, html);
+      });
+  });
+
+  return gulp.src([ Path.join(dir, '**/*') ])
+      .pipe(render)
+      .pipe(rename(renameDirectory))
+      .pipe(gulp.dest(nconf.get('paths:staticSite:root')))
+}
 
 
-// Renders the `raw` view of each component's state
-function renderState(env, stateDir, nav, componentData, state) {
-    var statePath = Path.join(stateDir, 'index.html');
-
-    var raw = env.render('component-raw.html', {
-        navigation: nav,
-        component: componentData,
-        state: state,
-        config: nconf.get(),
-        tokens: getTokens()
-    });
-
-    utils.mkdirpSync(stateDir);
-    fs.writeFileSync(statePath, raw, 'utf-8');
-    console.log(statePath);
+const siteStaticTask = (gulp) => {
+  gulp.src(Path.join(nconf.get('paths:site:static'), '**'))
+      .pipe(gulp.dest(nconf.get('paths:staticSite:static')))
 }
 
 
 // Renders the documentation for each component
-function renderDocs(SITE_DIR, name) {
+const renderDocs = (SITE_DIR, name) => {
     var env = templates.configure();
     var nav = navigation.nav;
     var components = _.find(nav.children, {id: name}) || {children: []};
@@ -128,8 +113,35 @@ function renderDocs(SITE_DIR, name) {
 }
 
 
-gulp.task('site', ['site:pages', 'site:static'], (done) => {
+// Renders the `raw` view of each component's state
+const renderState = (env, stateDir, nav, componentData, state) => {
+    let statePath = Path.join(stateDir, 'index.html');
+    let raw = env.render('component-raw.html', {
+        navigation: nav,
+        component: componentData,
+        state: state,
+        config: nconf.get(),
+        tokens: getTokens()
+    });
+
+    utils.mkdirpSync(stateDir);
+    fs.writeFileSync(statePath, raw, 'utf-8');
+    console.log(statePath);
+}
+
+
+const siteDocsTask = (gulp, done) => {
     renderDocs(nconf.get('paths:staticSite:root'), 'components');
     done(null);
     process.exit(0);
-});
+}
+
+
+module.exports = (gulp) => {
+  gulp.task('site:pages', () => {sitePagesTask(gulp)});
+  gulp.task('site:static', () => {siteStaticTask(gulp)});
+  gulp.task('site', [
+    'site:pages',
+    'site:static'
+  ], (done) => {siteDocsTask(gulp, done)});
+}

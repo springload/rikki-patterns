@@ -1,9 +1,11 @@
+"use strict";
+
 const _ = require('lodash');
 const fs = require('fs');
 const Path = require('path');
 const nconf = require('nconf');
 
-const _ui = require('../scripts/tasks/ui');
+const _ui = require('./utils/ui');
 const getSchema = _ui.getSchema;
 const pathTrimStart = _ui.pathTrimStart;
 const findComponent = _ui.findComponent;
@@ -14,7 +16,8 @@ const nav = require('./navigation').nav;
 
 
 exports.getComponentData = (data) => {
-    let {id, path} = data;
+    let id = data.id;
+    let path = data.path;
     let componentData = findComponent(id);
     componentData.template = pathTrimStart(Path.join(path, id + '.html'));
     return componentData;
@@ -28,7 +31,10 @@ exports.getComponentFromNav = (nav, name) => {
 
 
 exports.componentOverviewView = (req, res, next) => {
-    let {name, flavour, variant} = req.params;
+    let name = req.params.name;
+    let flavour = req.params.flavour;
+    let variant = req.params.variant;
+
     let navData = getComponentFromNav(nav, name);
     let data = getComponentData(navData);
 
@@ -41,7 +47,10 @@ exports.componentOverviewView = (req, res, next) => {
 }
 
 exports.componentRawView = (req, res, next) => {
-    let {name, flavour, variant} = req.params;
+    let name = req.params.name;
+    let flavour = req.params.flavour;
+    let variant = req.params.variant;
+
     let navData = getComponentFromNav(nav, name);
     let component = getComponentData(navData);
     let state = getStateFromFlavour(component, flavour, variant);

@@ -1,5 +1,8 @@
-var getUI = require('../app/utils/ui').getUI;
-var packageJson = require('../package.json');
+"use strict";
+
+const getUI = require('../app/utils/ui').getUI;
+const packageJson = require('../package.json');
+
 
 module.exports = {
   "navigation": {
