@@ -36,7 +36,7 @@ module.exports = {
   },
   "tokens": {
     "templateString": "// Design System Tokens \n// Generated at <%= time %> \n\n<%= data %>"
-  }
+  },
   "app": {
     "title": "Pattern Library",
     "seo": {
