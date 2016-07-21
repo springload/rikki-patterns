@@ -1,7 +1,6 @@
-"use strict";
+'use strict';
 
 const _ = require('lodash');
-// const gulp = require('gulp');
 const gutil = require('gulp-util');
 const Path = require('path');
 const fs = require('fs');
@@ -14,6 +13,7 @@ const concat = require('gulp-concat');
 
 const utils = require('../../app/utils');
 const config = require('../../app/config');
+const prefix = require('./prefix');
 
 const OUTPATH_TOKENS = config.get('paths:ui:swatches');
 const PATH_TOKENS = config.get('paths:ui:tokens');
@@ -105,14 +105,13 @@ const tokenCssTask = (gulp) => {
 
   let template = transform((filename) => {
     return map((chunk, next) => {
-      let template = '// Design System Tokens \n// Generated at <%= time %> \n\n<%= data %>';
       let ctx = {
         data: chunk.toString(),
         time: new Date().toString(),
         file: chunk
       };
 
-      return next(null, gutil.template(template, ctx));
+      return next(null, gutil.template(config.get('tokens:templateString'), ctx));
     })
   });
 
@@ -128,24 +127,24 @@ const tokenCssTask = (gulp) => {
 
 const tokensSketchTask = (gulp) => {
   const getColors = (data) => {
-    var arr = [];
+    let arr = [];
 
-    for (var key in data) {
-      var val = data[key];
-      var color = Color(val);
+    for (let key in data) {
+      let val = data[key];
+      let color = Color(val);
       arr.push(color.rgbString());
     }
 
     return arr;
   }
 
-  var sketchify = transform((filename) => {
+  const sketchify = transform((filename) => {
     return map((chunk, next) => {
-      var data = JSON.parse(chunk.toString());
-      var formatted = {
-        "compatibleVersion": "1.0",
-        "pluginVersion": "1.1",
-        "colors": getColors(data)
+      let data = JSON.parse(chunk.toString());
+      let formatted = {
+        'compatibleVersion': config.get('swatches:sketchCompatibleVersion'),
+        'pluginVersion': config.get('swatches:sketchPluginVersion'),
+        'colors': getColors(data)
       }
       return next(null, JSON.stringify(formatted, null, 4));
     });
@@ -158,49 +157,53 @@ const tokensSketchTask = (gulp) => {
     .on('error', logError);
 }
 
+
+
+const formatAdobeFloatColour = (val) => {
+  if (val.match(/transparent/)) {
+    return [0, 0, 0];
+  }
+
+  let color = Color(val);
+  let arr = color.rgbArray();
+
+  return [
+    arr[0]/255,
+    arr[1]/255,
+    arr[2]/255
+  ];
+}
+
+
+const generateAdobeColours = (data) => {
+  let arr = [];
+
+  for (let key in data) {
+    let val = data[key];
+    let colour = formatAdobeFloatColour(val);
+
+    arr.push({
+      "name": _.startCase(_.lowerCase(key)),
+      "model": "RGB",
+      "color": colour,
+      "type": "global"
+    });
+  }
+
+  return arr;
+}
+
+
 const tokensAdobeTask = (gulp) => {
-  var VERSION_NUMBER = '1.0.0';
-
-  const formatAdobeFloatColour = (val) => {
-    if (val.match(/transparent/)) {
-      return [0, 0, 0];
-    }
-
-    var color = Color(val);
-    var arr = color.rgbArray();
-
-    return [
-      arr[0]/255,
-      arr[1]/255,
-      arr[2]/255
-    ];
-  }
-
-  const generateColours = (data) => {
-    var arr = [];
-
-    for (var key in data) {
-      var val = data[key];
-      var colour = formatAdobeFloatColour(val);
-
-      arr.push({
-        "name": _.startCase(_.lowerCase(key)),
-        "model": "RGB",
-        "color": colour,
-        "type": "global"
-      });
-    }
-
-    return arr;
-  }
+  const VERSION_NUMBER = confif.get('swatches:adobeVersionNumber');
 
   const swatchify = transform((filename) => {
     return map((chunk, next) => {
-      var data = JSON.parse(chunk);
-      var input = {
+      let data = JSON.parse(chunk);
+      let input = {
         "version": VERSION_NUMBER,
         "groups": [],
-        "colors": generateColours(data)
+        "colors": generateAdobeColours(data)
       };
       return next(null, ase.encode(input))
     });
@@ -212,8 +215,6 @@ const tokensAdobeTask = (gulp) => {
     .pipe(gulp.dest(OUTPATH_TOKENS))
     .on('error', logError);
 }
-
-const prefix = require('./prefix');
 
 module.exports = (gulp) => {
   gulp.task(prefix('tokens:css'), () => {tokenCssTask(gulp)});

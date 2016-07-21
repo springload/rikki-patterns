@@ -29,8 +29,14 @@ module.exports = {
   },
   "swatches": {
     "sketch": "swatches-sketch.sketchpalette",
-    "adobe": "swatches-adobe.ase"
+    "sketchCompatibleVersion": "1.0",
+    "sketchPluginVersion": "1.1",
+    "adobe": "swatches-adobe.ase",
+    "adobeVersionNumber": '1.0.0'
   },
+  "tokens": {
+    "templateString": "// Design System Tokens \n// Generated at <%= time %> \n\n<%= data %>"
+  }
   "app": {
     "title": "Pattern Library",
     "seo": {

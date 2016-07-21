@@ -28,8 +28,11 @@ const PlzOptions = {
 };
 
 
-const siteCSSTask = (gulp) => {
-  return gulp.src(path.join( './app/scss', "*.scss" ), {base: './app/scss'})
+const patternLibraryCSSTask = (gulp) => {
+  const destPath = path.join(config.get('root'), 'app', 'static', 'css');
+  const scssPath = path.join(config.get('root'), 'app', 'scss');
+
+  return gulp.src(path.join(scssPath, '*.scss' ), {base: scssPath})
     .pipe(prod ? gutil.noop() : sourcemaps.init())
     .pipe(sassGlob())
     .pipe(sass())
@@ -40,11 +43,11 @@ const siteCSSTask = (gulp) => {
     .pipe(plz( PlzOptions ))
     .pipe(prod ? gutil.noop() : sourcemaps.write())
     .pipe(size({ title: prod ? 'CSS' : 'CSS (unminified)', showFiles: true, gzip: prod }))
-    .pipe(gulp.dest( './app/static/css' ))
+    .pipe(gulp.dest(destPath))
 }
 
 
-const libraryCSSTask = (gulp) => {
+const projectSpecificCSSTask = (gulp) => {
   return gulp.src(path.join( './ui/scss', '*.scss' ), {base: './ui/scss'})
     .pipe(prod ? gutil.noop() : sourcemaps.init())
     .pipe(sassGlob())
@@ -58,11 +61,11 @@ const libraryCSSTask = (gulp) => {
     .pipe(size({ title: prod ? 'CSS' : 'CSS (unminified)', showFiles: true, gzip: prod }))
     .pipe(gulp.dest( './ui/css' ))
     .pipe(rename('ui.css'))
-    .pipe(gulp.dest( './app/static/css' ))
+    .pipe(gulp.dest( './site/static/css' ))
 }
 
 
 module.exports = (gulp) => {
-  gulp.task(prefix('scss'), () => {libraryCSSTask(gulp)});
-  gulp.task(prefix('scss:site'), () => {siteCSSTask(gulp)});
+  gulp.task(prefix('scss'), () => {projectSpecificCSSTask(gulp)});
+  gulp.task(prefix('scss:site'), () => {patternLibraryCSSTask(gulp)});
 }

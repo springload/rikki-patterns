@@ -51,7 +51,7 @@ const browserSyncTask = () => {
   browserSync.init({
     proxy: `http://localhost:${config.get('PORT')}`,
     files: [
-      "app/static/**/*.*",
+      Path.join(config.get('root'), "app/static/**/*.*"),
       "ui/**/*.*",
     ],
     browser: ['google chrome'],
