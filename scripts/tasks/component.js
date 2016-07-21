@@ -17,19 +17,17 @@ const utils = require('../../app/utils');
 
 const makeName = utils.makeName;
 const basePath = config.get('paths:components');
+const yamlFile = Path.join(basePath, config.get('paths:ui:config'));
 
 
 const ensureDirectoryStructure = () => {
-  let yamlFile = Path.join(basePath, 'config.yaml');
-  utils.mkdirpSync('./ui');
-  utils.mkdirpSync('./ui/components');
+  utils.mkdirpSync(config.get('paths:ui:root'));
+  utils.mkdirpSync(config.get('paths:ui:components'));
   fs.openSync(yamlFile, 'a');
 };
 
 
 const addToComponentsManifest = (name) => {
-    let yamlFile = Path.join(basePath, 'config.yaml');
-    let dumpOpts = {};
     let data = yaml.safeLoad(fs.readFileSync(yamlFile).toString()) || {};
 
     data.components = _.get(data, 'components', []);
@@ -38,7 +36,7 @@ const addToComponentsManifest = (name) => {
         data.components.push(name);
     }
 
-    fs.writeFileSync(yamlFile, yaml.safeDump(data, dumpOpts));
+    fs.writeFileSync(yamlFile, yaml.safeDump(data, {}));
 }
 
 
@@ -51,7 +49,7 @@ const nuke = (arr, name) => {
 }
 
 const removeFromManifest = (name) => {
-    let yamlFile = Path.join(basePath, 'config.yaml');
+
     let dumpOpts = {};
     let data = yaml.safeLoad(fs.readFileSync(yamlFile).toString()) || {};
 
@@ -63,7 +61,7 @@ const removeFromManifest = (name) => {
 
 
 const pruneManifest = () => {
-  let yamlFile = Path.join(basePath, 'config.yaml');
+
   let data = yaml.safeLoad(fs.readFileSync(yamlFile).toString()) || {};
   data.components = _.get(data, 'components', []);
 
@@ -111,7 +109,7 @@ const addComponentTask = (gulp) => {
     });
 
     const renameTemplate = (filepath) => {
-      if (filepath.extname === '.html') {
+      if (filepath.extname === config.get('templates:ext')) {
         filepath.basename = component.paramName;
       }
     }

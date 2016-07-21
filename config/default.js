@@ -3,9 +3,12 @@
 const Path = require('path');
 
 module.exports = {
-  'root': Path.join(__dirname, '..'),
+  'NODE_ENV': 'development',
+  "NODEMON_BOOT_WAIT_TIME": 500,
+  "BROWSERSYNC_RELOAD_INTERVAL": 1000,
   "PORT": 4000,
   "proxy": 5000,
+  'root': Path.join(__dirname, '..'),
   "paths": {
     "components": "./ui/components",
     "generator": {
@@ -24,7 +27,10 @@ module.exports = {
       "tokens": "./ui/tokens/",
       "aliases": "./ui/tokens/aliases.json",
       "scss": "./ui/scss",
-      "tokensScss": "_tokens.scss"
+      "tokensScss": "_tokens.scss",
+      "components": "./ui/components",
+      "config": "config.yaml",
+      "root": "./ui"
     }
   },
   "swatches": {
@@ -44,10 +50,10 @@ module.exports = {
     }
   },
   "taskPrefix": "pl",
-  "NODEMON_BOOT_WAIT_TIME": 500,
-  "BROWSERSYNC_RELOAD_INTERVAL": 1000,
   "templates": {
     "component": "component.html",
-    "raw": "component-raw.html"
+    "raw": "component-raw.html",
+    "ext": ".html",
+    "indexName": "index"
   }
 }

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const _ = require('lodash');
 const gutil = require('gulp-util');
@@ -9,15 +9,14 @@ const concat = require('gulp-concat');
 const fs = require('fs');
 const rename = require('gulp-rename');
 const nunjucks = require('nunjucks');
+const print = require('gulp-print');
 
+const prefix = require('./prefix');
 const utils = require('../../app/utils');
 const navigation = require('../../app/navigation');
 const templates = require('../../app/templates');
 const config = require('../../app/config');
-const prefix = require('./prefix');
 
-
-var print = require('gulp-print');
 
 
 // Destructuring, old school.
@@ -27,12 +26,14 @@ const findComponent = ui.findComponent;
 const getStateFromFlavour = ui.getStateFromFlavour;
 const getTokens = ui.getTokens;
 
-const INDEX = 'index';
+
+const INDEX = config.get('templates:indexName');
+const EXT = config.get('templates:ext');
 const ENCODING = 'utf-8';
 
 
 const rootPage = () => {
-  return `${INDEX}.html`;
+  return `${INDEX}${EXT}`;
 }
 
 const renameDirectory = (filepath) => {
@@ -102,7 +103,7 @@ const renderComponentDoc = (component, env, nav) => {
   let rawPath = Path.join(rawDir, rootPage());
 
   let componentData = findComponent(component.id);
-  let componentPath = Path.join(component.path, component.id + '.html');
+  let componentPath = Path.join(component.path, component.id + EXT);
   componentData.template = pathTrimStart(componentPath);
 
   let html = env.render(config.get('templates:component'), {

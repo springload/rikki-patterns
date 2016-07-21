@@ -18,10 +18,12 @@ const nodemonTask = (cb) => {
     script: script,
     watch: [script],
     ignore: [
+      Path.join(config.get('root', 'gulpfile.js'),
+      Path.join(config.get('root', 'node_modules'),
       'gulpfile.js',
-      'node_modules/'
+      'node_modules',
     ],
-    env: { 'NODE_ENV': 'development' }
+    env: { 'NODE_ENV': config.get('NODE_ENV') }
   })
   .on('start', () => {
     // to avoid nodemon being started multiple times
