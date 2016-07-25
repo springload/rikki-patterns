@@ -2,49 +2,31 @@
 // Site-specific CSS
 // =============================================================================
 
-@import 'vendor/roboto';
-@import 'vendor/prism';
+@import 'variables.global';
+@import 'tools/tools.breakpoints';
 
+@import 'generic/generic.normalize';
+@import 'generic/generic.box-sizing';
+@import 'generic/generic.reset';
+@import 'generic/generic.shared';
 
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    color: #636E77;
-    line-height: 1.5;
-}
+@import 'elements/elements.page';
+@import 'elements/elements.headings';
+@import 'elements/elements.hr';
 
-h1, h2, h3, h4 {
-    margin-top: 0;
-}
+@import 'objects/object.wrappers';
 
-h1 {
-    font-weight: 300;
-    margin-bottom: 2.5rem;
-}
+@import 'components/component.page.gutters';
+@import 'components/component.nav.primary';
 
 
 .t-heading {
     color: #00bcd4;
 }
 
-
-h2, h3 {
-    font-weight: 400;
-}
-
-h4 {
-    font-weight: 400;
-    color: #008BA5;
-}
-
-
 .u-tiny {
     font-size: 14px;
     vertical-align: middle;
-}
-
-p {
-    margin-top: 0;
 }
 
 
@@ -55,7 +37,7 @@ p {
  */
 
 
-.comp-header {
+.page-header {
     padding: 2em;
     padding-top: 3em;
     padding-bottom: 3em;
@@ -63,7 +45,7 @@ p {
     color: #fff;
 }
 
-.comp-header > h1 {
+.page-header > h1 {
     margin-bottom: 0;
 }
 
@@ -181,43 +163,6 @@ p {
 }
 
 
-.panels {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    // height: 100%;
-    min-height: 100vh;
-    align-items: stretch;
-    flex-flow: flex-start;
-}
-
-.panel-left {
-    min-width: 200px;
-    padding: 1.5rem 1rem;
-    border-right: solid 2px #E2EBEF;
-
-}
-
-
-.depth-1 {
-    background: #F5F8F9;
-}
-
-
-
-.panel-right {
-    /*margin-left: 3rem;*/
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-}
-
-
-.panel-right-content {
-    flex: 1;
-}
-
-
 a {
     color: #0099AD;
     text-decoration: none;
@@ -225,6 +170,7 @@ a {
 
 a:hover {
     color: #007686;
+    text-decoration: underline;
 }
 
 
@@ -280,17 +226,6 @@ a:hover {
 }
 
 
-
-
-
-.panel-right-padding {
-    padding-left: 2rem;
-    padding-top: 1.5rem;
-    padding-right: 2rem;
-    padding-bottom: 1.5rem;
-}
-
-
 .panel-intro {
     /*background-color: #EBF2F3;*/
     /*border-bottom: solid 1px #D5E0E2;*/
@@ -299,19 +234,6 @@ a:hover {
     padding-bottom: 0;
 }
 
-
-
-.nav {
-    /*position: fixed;*/
-    /*max-width: 180px;*/
-    width: 100%;
-}
-
-hr {
-    border: 0;
-    height: 0;
-    border-bottom: solid 1px #bbb;
-}
 
 .divider {
     border-bottom-color: #ddd;
@@ -325,17 +247,7 @@ hr {
     border-style: dotted;
 }
 
-.nav__item {
-    margin-bottom: .5rem;
-    font-size: 14px;
-}
 
-
-
-
-.nav__current {
-    color: #222 !important;
-}
 
 pre[class*=language] {
     background-color: #F5F8F9;
@@ -525,19 +437,15 @@ cite {
 
 
 
-
-
-
-
 /**
  * =============================================================================
  * Themes
  * =============================================================================
  */
+
 .t-string {
     background: #07a;
 }
-
 
 .t-array {
     background: #690;
@@ -546,3 +454,6 @@ cite {
 .t-object {
     background: #E6A013;
 }
+
+@import 'vendor/roboto';
+@import 'vendor/prism';

@@ -195,7 +195,7 @@ const generateAdobeColours = (data) => {
 
 
 const tokensAdobeTask = (gulp) => {
-  const VERSION_NUMBER = confif.get('swatches:adobeVersionNumber');
+  const VERSION_NUMBER = config.get('swatches:adobeVersionNumber');
 
   const swatchify = transform((filename) => {
     return map((chunk, next) => {

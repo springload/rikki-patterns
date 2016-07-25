@@ -9,12 +9,23 @@ const _ = require('lodash');
 const path = require('path');
 const prefix = require('./prefix');
 const config = require('../../app/config');
+const bs = require('browser-sync').create('main');
 
 const root = config.get('root');
 const scssPath = path.join(root, 'app', 'scss', '**', '*.scss');
+const templatePath = path.join(root, 'site', '**', '*.html');
 
 const watchTask = (gulp) => {
-  gulp.watch(scssPath, [prefix('scss:site')]);
+    bs.init({
+        open: false,
+        proxy: 'example.com:1337'
+    });
+
+    const justReload = [templatePath];
+
+    gulp.watch(justReload, bs.reload);
+    gulp.watch(scssPath, [prefix('scss:site')]);
+    gulp.watch(templatePath, [prefix('site:pages'), prefix('site:static')]);
 }
 
 module.exports = (gulp) => {

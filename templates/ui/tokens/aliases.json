@@ -58,5 +58,6 @@
     "LIGHT_BLUE_DARKEN": "#c4dce3",
     "LIGHT_BLUE_BORDER":"#b8d8e1",
     "AIRNZ_BLUE": "#CCE6EE",
-    "TABLE_STRIPE_GREEN": "#f4fcf1"
+    "TABLE_STRIPE_GREEN": "#f4fcf1",
+    "TEST_COLOR": "red"
 }

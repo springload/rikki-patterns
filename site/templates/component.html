@@ -4,20 +4,20 @@
 {% block body %}
 <script src="/static/js/iframeResizer.min.js"></script>
 
-<div class="comp-header">
-    <h1>
+<div class="page-header">
+    <h1 class="page-header__title">
         {{ component.displayName }}
     </h1>
 </div>
 
 <div class="panel-right-flex">
     <div class="panel-right-content">
-        <div class="panel-right-padding panel-intro">
+        <div class="gutters panel-intro">
             <div class="markdown component__description">
                 {{ component.readme|markdown|safe }}
             </div>
         </div>
-        <div class="panel-right-padding">
+        <div class="gutters">
             {% for flavour in component.flavours %}
                 <h2 id="flavour-{{ flavour.id }}">
                     {{ flavour.displayName }}
@@ -74,7 +74,7 @@
         </p>
 
         {% for flavour in component.flavours %}
-            <h4 class='u-tight  '>
+            <h4>
                 <a class="u-dark-text" href="/components/{{ component.id }}/#flavour-{{ flavour.id }}">
                     {{ flavour.title }}
                 </a>
@@ -82,7 +82,7 @@
 
             {% for state in flavour.states %}
             <div class="nav__item">
-                <a href="/components/{{ component.id }}/#flavour-{{ flavour.id }}/{{ state.id }}">
+                <a class="nav__link" href="/components/{{ component.id }}/#flavour-{{ flavour.id }}/{{ state.id }}">
                     {{ state.title }}
                 </a>
             </div>

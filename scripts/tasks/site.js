@@ -161,7 +161,6 @@ const siteDocsTask = (gulp, done) => {
   process.exit(0);
 }
 
-
 module.exports = (gulp) => {
   gulp.task(prefix('site:pages'), () => sitePagesTask(gulp));
   gulp.task(prefix('site:static'), () => siteStaticTask(gulp));

@@ -11,15 +11,15 @@ const NODEMON_BOOT_WAIT_TIME = config.get('NODEMON_BOOT_WAIT_TIME');
 
 
 const nodemonTask = (cb) => {
-  let script = Path.join(__dirname, '..', '..', 'dev.js')
+  let script = Path.join(__dirname, '..', '..', 'dev.js');
   let called = false;
 
   return nodemon({
     script: script,
     watch: [script],
     ignore: [
-      Path.join(config.get('root', 'gulpfile.js')),
-      Path.join(config.get('root', 'node_modules')),
+      Path.join(config.get('root'), 'gulpfile.js'),
+      Path.join(config.get('root'), 'node_modules'),
       'gulpfile.js',
       'node_modules',
     ],

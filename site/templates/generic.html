@@ -2,18 +2,18 @@
 {% block title %}{{ config.seo.title }} {{ component.name }} {% endblock %}
 
 {% block body %}
-<div class="comp-header">
+<div class="page-header">
     {% block header %}
-    <h1>
+    <h1 class="page-header__title">
         {{ title }}
     </h1>
     {% endblock %}
 </div>
 <div class="panel-right-flex">
-    <div class="panel-right-content">
+    <div class="gutter">
         {% block intro %}
         {% endblock %}
-        <div class="panel-right-padding">
+        <div class="gutters">
             {% block content %}{% endblock %}
         </div>
     </div>

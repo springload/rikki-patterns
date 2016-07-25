@@ -41,3 +41,4 @@ ui/css/
 
 site/static/css/site.css
 site/static/css/ui.css
+app/static/css/site.css
