@@ -16,14 +16,6 @@ const scssPath = path.join(root, 'app', 'scss', '**', '*.scss');
 const templatePath = path.join(root, 'site', '**', '*.html');
 
 const watchTask = (gulp) => {
-    bs.init({
-        open: false,
-        proxy: 'example.com:1337'
-    });
-
-    const justReload = [templatePath];
-
-    gulp.watch(justReload, bs.reload);
     gulp.watch(scssPath, [prefix('scss:site')]);
     gulp.watch(templatePath, [prefix('site:pages'), prefix('site:static')]);
 }

@@ -11,12 +11,13 @@ exports.default404 = (err, req, res, next) => {
     if (!err) {
         var err = new Error('Not Found');
         err.status = 404;
+        next(err);
+        return;
     }
-    next(err);
+
+    res.status(500).send(err);
 }
 
 exports.handle404 = (req, res, next) => {
-    if (req.status === 404) {
-        res.send('Not Found');
-    }
+    res.status(404).send('Not Found');
 }

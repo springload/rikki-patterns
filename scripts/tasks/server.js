@@ -11,12 +11,18 @@ const NODEMON_BOOT_WAIT_TIME = config.get('NODEMON_BOOT_WAIT_TIME');
 
 
 const nodemonTask = (cb) => {
-  let script = Path.join(__dirname, '..', '..', 'dev.js');
+  let script = Path.join(config.get('root'), 'dev.js');
   let called = false;
 
   return nodemon({
     script: script,
-    watch: [script],
+    watch: [
+        script,
+        Path.join('config'),
+        Path.join('site'),
+        Path.join('ui'),
+        Path.join(config.get('root'), 'config', '**', '*.js'),
+    ],
     ignore: [
       Path.join(config.get('root'), 'gulpfile.js'),
       Path.join(config.get('root'), 'node_modules'),
@@ -53,8 +59,12 @@ const browserSyncTask = () => {
   browserSync.init({
     proxy: `http://localhost:${config.get('PORT')}`,
     files: [
-      Path.join(config.get('root'), "app/static/**/*.*"),
-      "ui/**/*.*",
+        "ui/**/*",
+        "site/**/*",
+        "config/**/*",
+        Path.join(config.get('root'), "app/static/**/*"),
+        Path.join(config.get('root'), "site/**/*"),
+        Path.join(config.get('root'), "config/**/*"),
     ],
     browser: ['google chrome'],
     port: config.get('proxy'),

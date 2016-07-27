@@ -36,18 +36,20 @@ function Schema(props) {
       var id = path.basename(path.dirname(configPath));
       var title = createTitle(id);
       var config = yaml.safeLoad(fs.readFileSync(configPath).toString());
-      var localPath = path.dirname(configPath).replace(this.path, '');
+      var scriptPath = path.resolve(path.join('.'));
+      var localPath = path.dirname(configPath).replace(this.path, '').replace(scriptPath, '');
 
       return _.merge({}, {
         id,
         title,
-        path: pathTrimStart(localPath)
+        path: pathTrimStart(pathTrimStart(localPath)),
       }, config);
     },
 
     getComponents: function getComponents(categoryConfig) {
       return categoryConfig.components
         .map(function(name) {
+
           return path.resolve(
             this.path, categoryConfig.path, name, 'config.yaml'
           )

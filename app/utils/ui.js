@@ -11,7 +11,8 @@ const tokens = require('./tokens');
 const Schema = schema.default;
 const TokenSchema = tokens.default;
 
-const UI_PATH = Path.join(__dirname, '..', '..', 'ui');
+const UI_PATH = Path.join('ui');
+
 const COMPONENTS_PATH = Path.join(UI_PATH, 'components');
 
 let _cachedSchema = null;

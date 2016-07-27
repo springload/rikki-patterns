@@ -6,7 +6,8 @@
 </head>
 <body>
     <div class="app">
-        <div class="site-content panel-right">
+        <div class="site-co
+        zntent panel-right">
             <div class="container">
             {% block body %}
 
@@ -31,7 +32,7 @@
                         <a href="{{ nav.path }}">{{ nav.label }}</a>
                         {% endif %}
                     </h4>
-                    {% if nav.children|length > 1 %}
+                    {% if nav.children|length > 0 %}
                         <div class="nav__group">
                             {% for child in nav.children %}
                             <div class="nav__item">

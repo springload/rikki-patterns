@@ -15,7 +15,9 @@ const getTokens = _ui.getTokens;
 const nav = require('./navigation').nav;
 
 
-exports.getComponentData = (data) => {
+// console.log(nav);
+
+const getComponentData = (data) => {
     let id = data.id;
     let path = data.path;
     let componentData = findComponent(id);
@@ -23,11 +25,14 @@ exports.getComponentData = (data) => {
     return componentData;
 }
 
-
-exports.getComponentFromNav = (nav, name) => {
+const getComponentFromNav = (nav, name) => {
     let components = _.find(nav.children, {'id': 'components'});
     return _.find(components.children, {'id': name});
 }
+
+
+exports.getComponentData = getComponentData;
+exports.getComponentFromNav = getComponentFromNav;
 
 
 exports.componentOverviewView = (req, res, next) => {
@@ -72,7 +77,7 @@ exports.autoIndexify = autoIndexify;
 
 
 exports.generic = (req, res, next) => {
-    let page = req.params[0];
+    let page = req.params[0] || 'index';
     page = pathTrimStart(page);
     page = autoIndexify(page);
 

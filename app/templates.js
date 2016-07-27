@@ -9,47 +9,50 @@ const Path = require('path');
 
 // relative to project root.
 const TEMPLATE_PATHS = [
-  Path.join(__dirname, '..', 'site', 'templates'),
-  Path.join(__dirname, '..', 'site', 'pages'),
+    Path.join('.', 'site', 'templates'),
+    Path.join('.', 'site', 'pages'),
+    Path.join('.', 'ui'),
+    Path.join(__dirname, '..', 'site', 'templates'),
+    Path.join(__dirname, '..', 'site', 'pages'),
 ];
 
 const TEMPLATE_OPTIONS = {
-  autoescape: true,
-  watch: !PROD
+    autoescape: true,
+    watch: !PROD
 }
 
 
 const TEMPLATE_FILTERS = {
-  'json': (str) => {
-    return JSON.stringify(str);
-  },
-  'markdown': (str) => {
-    if (!str) {
-      return '';
-    }
+    'json': (str) => {
+        return JSON.stringify(str);
+    },
+    'markdown': (str) => {
+        if (!str) {
+            return '';
+        }
 
-    return marked(str);
-  },
-  'pretty': (str) => {
-    return beautify(str);
-  }
+        return marked(str);
+    },
+    'pretty': (str) => {
+        return beautify(str);
+    }
 }
 
 
 const TemplateRenderer = {
-  configure(app) {
-    if (app) {
-      TEMPLATE_OPTIONS.express = app;
+    configure(app) {
+        if (app) {
+            TEMPLATE_OPTIONS.express = app;
+        }
+
+        var templateEnv = nunjucks.configure(TEMPLATE_PATHS, TEMPLATE_OPTIONS);
+
+        for (let filterName in TEMPLATE_FILTERS) {
+            templateEnv.addFilter(filterName, TEMPLATE_FILTERS[filterName]);
+        }
+
+        return templateEnv;
     }
-
-    var templateEnv = nunjucks.configure(TEMPLATE_PATHS, TEMPLATE_OPTIONS);
-
-    for (let filterName in TEMPLATE_FILTERS) {
-      templateEnv.addFilter(filterName, TEMPLATE_FILTERS[filterName]);
-    }
-
-    return templateEnv;
-  }
 }
 
 

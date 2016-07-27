@@ -27,7 +27,6 @@ const formatNavItem = (item, parent) => {
 
 exports.formatNavItem = formatNavItem;
 
-
 module.exports = {
     nav: formatNavItem(nconf.get('navigation'))
 }

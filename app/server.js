@@ -32,6 +32,7 @@ templates.configure(app);
 // =============================================================================
 
 app.use(bodyParser.json());
+app.use('/static', express.static(staticPath));
 app.use(favicon(Path.join(staticPath, 'favicon.ico')));
 
 
@@ -50,14 +51,16 @@ const routePaths = {
       '/components/:name/:flavour',
       '/components/:name/:flavour/:variant'
   ],
-  generic: /^(.*)$/,
-  static: '/static'
+  // generic: /^(.*)$/,
+  // static: '/static',
 }
 
-app.use(routePaths.static, express.static(staticPath));
+
+
 app.get(routePaths.raw, views.componentRawView);
 app.get(routePaths.component, views.componentOverviewView);
-app.get(routePaths.generic, views.generic);
+app.get('/', views.generic);
+// app.get(routePaths.generic, views.generic);
 
 // =============================================================================
 // Error handling
