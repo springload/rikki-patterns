@@ -28,6 +28,16 @@
     "url": "https://github.com/springload/rikki-patterns/issues"
   },
   "homepage": "http://springload.github.io/rikki-patterns/",
+  "eslintConfig": {
+    "extends": "springload"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      "/pages/"
+    ]
+  },
   "devDependencies": {
     "coveralls": "^2.13.1",
     "eslint": "^3.19.0",

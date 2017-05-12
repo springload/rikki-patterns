@@ -71,7 +71,7 @@ describe('filters', () => {
         });
     });
 
-    describe('richtext', () => {
+    describe.skip('richtext', () => {
         it('exists', () => {
             expect(filters.richtext).toBeDefined();
         });
