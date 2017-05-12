@@ -5,8 +5,8 @@
   "description": "🎽⚡️ Living pattern library generator. Move fast and don't break your patterns.",
   "main": "site/server.js",
   "bin": {
-    "rikki": "./bin/rikki.js",
-    "rikki-patterns": "./bin/rikki.js"
+    "rikki": "./src/bin/rikki.js",
+    "rikki-patterns": "./src/bin/rikki.js"
   },
   "engines": {
     "node": ">= 6.0.0"

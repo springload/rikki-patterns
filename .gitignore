@@ -9,7 +9,6 @@
 *.pyc
 *.pyo
 .installed.cfg
-bin
 .idea/
 develop-eggs
 # dist
