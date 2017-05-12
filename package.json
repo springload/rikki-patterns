@@ -92,7 +92,7 @@
     "test:coverage": "jest --coverage",
     "test:ci": "npm run lint -s && npm run test -s",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "pages": "rm -rf pages && cp -R examples pages && webpack --config=webpack.config.prod.js --progress -p",
+    "pages": "rm -rf pages && cp -R examples pages",
     "deploy": "./bin/deploy.sh"
   }
 }
