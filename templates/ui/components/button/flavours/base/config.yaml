@@ -1,7 +1,0 @@
-title: 'Base'
-status: 'development'
-states:
-  - title: 'Base'
-    text: 'Title for Button'
-    theme: 'blue'
-    url: '/path/to/page'

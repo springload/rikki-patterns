@@ -1,9 +1,0 @@
-<div class="tile">
-    <h2{% if component.heading_class %} class="{{component.heading_class}}"{% endif %}>{{ component.title }}</h2>
-    <p>
-    	{{ component.body }} 
-    	{% if component.link %}
-			<a href="{{ component.link.url }}">{{ component.link.text }}</a>
-    	{% endif %}
-    </p>
-</div>

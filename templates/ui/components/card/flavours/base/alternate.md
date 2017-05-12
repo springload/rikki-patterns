@@ -1,1 +1,0 @@
-Markdown for alternate card.

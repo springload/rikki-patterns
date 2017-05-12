@@ -1,8 +1,0 @@
-title: 'Base'
-status: 'development'
-states:
-  - title: 'Ticked list'
-    features:
-      - 'No monthly account fee.'
-      - 'No transaction fees unless you need to visit a branch.'
-      - 'Your statements live in internet banking.'
