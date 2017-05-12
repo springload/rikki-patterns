@@ -1,7 +1,6 @@
 {
   "name": "rikki-patterns",
   "version": "0.1.0",
-  "private": true,
   "description": "🎽⚡️ Living pattern library generator. Move fast and don't break your patterns.",
   "main": "site/server.js",
   "bin": {
