@@ -8,14 +8,8 @@ const uiPath = path.join(process.cwd(), 'client', 'ui');
 module.exports = {
     DEBUG: !PROD,
     paths: {
-        // TODO Move to ui
-        components: path.join(uiPath, 'components'),
         generator: {
             template: path.join(__dirname, 'scripts', 'generator', '**', '*'),
-        },
-        staticSite: {
-            root: path.join(__dirname, 'www'),
-            static: path.join(__dirname, 'www', 'static'),
         },
         site: {
             templates: path.join(__dirname, 'site', 'templates'),
@@ -33,6 +27,10 @@ module.exports = {
             css: path.join(uiPath, 'css'),
             scss: path.join(uiPath, 'scss'),
             tokensScss: '_tokens.scss',
+        },
+        staticSite: {
+            root: path.join(uiPath, 'www'),
+            static: path.join(uiPath, 'www', 'static'),
         },
     },
     swatches: {

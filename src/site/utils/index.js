@@ -43,18 +43,10 @@ const mkdirSync = function (path) {
     }
 };
 
-const mkdirpSync = function (dirpath) {
-    const parts = dirpath.split(Path.sep);
-    for (let i = 1; i <= parts.length; i++) {
-        mkdirSync(Path.join.apply(null, parts.slice(0, i)));
-    }
-};
-
 module.exports = {
     makeCSSVariable: makeCSSVariable,
     makeCSSName: makeCSSName,
     makeName: makeName,
     quote: quote,
     mkdirSync: mkdirSync,
-    mkdirpSync: mkdirpSync,
 };

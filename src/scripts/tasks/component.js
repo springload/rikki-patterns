@@ -14,7 +14,7 @@ const config = require('../../config');
 const utils = require('../../site/utils');
 
 const makeName = utils.makeName;
-const basePath = config.paths.components;
+const basePath = config.paths.ui.components;
 
 const updateManifest = (callback) => {
     const manifestPath = Path.join(basePath, 'README.md');

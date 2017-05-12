@@ -5,8 +5,8 @@ const map = require('map-stream');
 const fs = require('fs');
 const _ = require('lodash');
 const rename = require('gulp-rename');
+const mkdirp = require('mkdirp');
 
-const utils = require('../../site/utils');
 const navigation = require('../../site/navigation');
 const templates = require('../../site/templates');
 const config = require('../../config');
@@ -70,9 +70,8 @@ function renderState(env, stateDir, nav, componentData, state) {
         tokens: getTokens(),
     });
 
-    utils.mkdirpSync(stateDir);
+    mkdirp.sync(stateDir);
     fs.writeFileSync(statePath, raw, 'utf-8');
-    console.log(statePath);
 }
 
 // Renders the documentation for each component
@@ -83,6 +82,7 @@ function renderDocs(SITE_DIR, name) {
 
     components.children.forEach((component) => {
         const dirPath = Path.join(SITE_DIR, component.path);
+        console.log(dirPath);
         const htmlPath = Path.join(dirPath, 'index.html');
         const rawDir = Path.join(SITE_DIR, 'raw', component.id);
 
@@ -96,8 +96,8 @@ function renderDocs(SITE_DIR, name) {
             tokens: getTokens(),
         });
 
-        utils.mkdirpSync(rawDir);
-        utils.mkdirpSync(dirPath);
+        mkdirp.sync(rawDir);
+        mkdirp.sync(dirPath);
 
         fs.writeFileSync(htmlPath, html, 'utf-8');
 

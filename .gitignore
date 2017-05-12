@@ -44,5 +44,5 @@ www/
 ui/swatches/
 ui/css/
 
-site/static/css/site.css
-site/static/css/ui.css
+src/site/static/css/site.css
+src/site/static/css/ui.css
