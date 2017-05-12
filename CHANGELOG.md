@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+## [[v0.1.1]](https://github.com/springload/rikki-patterns/releases/tag/v0.1.1)
+
+### Fixed
+
+- Add missing `bin` files to package.
+
 ## [[v0.1.0]](https://github.com/springload/rikki-patterns/releases/tag/v0.1.0)
 
 First usable release!
