@@ -16,7 +16,7 @@ app.get(['/raw/:name/:flavour/:variant', '/raw/:name/:flavour', '/raw/:name'], v
 
 app.get(
     ['/components/:name', '/components/:name/:flavour', '/components/:name/:flavour/:variant'],
-    views.componentOverviewView,
+    views.componentOverviewView
 );
 
 app.get(/^(.*)$/, views.generic);

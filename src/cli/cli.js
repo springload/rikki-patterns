@@ -15,6 +15,13 @@ const run = (argv = process.argv.slice(2)) => {
             },
         })
         .command({
+            command: 'static',
+            desc: 'Output as a static site',
+            handler: () => {
+                gulp.start('site');
+            },
+        })
+        .command({
             command: 'component',
             desc: '',
             handler: () => {

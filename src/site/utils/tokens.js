@@ -85,7 +85,7 @@ function TokenSchema(props) {
                 return tokens;
             },
         },
-        props,
+        props
     );
 }
 

@@ -36,7 +36,7 @@ function Schema(props) {
                         title,
                         path: pathTrimStart(localPath),
                     },
-                    config,
+                    config
                 );
             },
 
@@ -101,7 +101,7 @@ function Schema(props) {
                 }, {});
             },
         },
-        props,
+        props
     );
 }
 
