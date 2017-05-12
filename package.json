@@ -2,14 +2,14 @@
   "name": "rikki-patterns",
   "version": "0.1.0",
   "private": true,
-  "description": "Living pattern library generator",
+  "description": "🎽⚡️ Living pattern library generator. Move fast and don't break your patterns.",
   "main": "site/server.js",
   "bin": {
-    "rikki": "./bin/rikki.js"
+    "rikki": "./bin/rikki.js",
+    "rikki-patterns": "./bin/rikki.js"
   },
   "engines": {
-    "node": ">= 6",
-    "npm": "^3.10.10"
+    "node": ">= 6.0.0"
   },
   "author": "Springload",
   "license": "MIT",
@@ -28,7 +28,15 @@
     "url": "https://github.com/springload/rikki-patterns/issues"
   },
   "homepage": "http://springload.github.io/rikki-patterns/",
-  "devDependencies": {},
+  "devDependencies": {
+    "coveralls": "^2.13.1",
+    "eslint": "^3.19.0",
+    "eslint-config-springload": "1.0.2",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "3.0.2",
+    "eslint-plugin-react": "6.10.3",
+    "jest": "^20.0.1"
+  },
   "dependencies": {
     "ase-utils": "^0.1.1",
     "body-parser": "^1.15.1",
@@ -59,5 +67,17 @@
     "yaml-front-matter": "^3.4.0",
     "yargs": "^8.0.1"
   },
-  "scripts": {}
+  "scripts": {
+    "linter:js": "eslint",
+    "lint:versions": "NVM_VERSION=$(cat .nvmrc); NODE_VERSION=$(node --version); echo $NODE_VERSION | grep -q $NVM_VERSION && echo \"✓ running node $NODE_VERSION - all clear\" || (echo \"✗ running node $NODE_VERSION - expected $NVM_VERSION. Use nvm to install the right version.\" && exit 1)",
+    "lint:js": "npm run linter:js -s -- .",
+    "lint": "npm run lint:versions -s && npm run lint:js -s",
+    "test": "jest",
+    "test:watch": "jest --coverage --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "npm run lint -s && npm run test -s",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "pages": "rm -rf pages && cp -R examples pages && webpack --config=webpack.config.prod.js --progress -p",
+    "deploy": "./bin/deploy.sh"
+  }
 }

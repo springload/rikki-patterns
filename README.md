@@ -1,6 +1,6 @@
 # Rikki Patterns [![npm](https://img.shields.io/npm/v/rikki-patterns.svg?style=flat-square)](https://www.npmjs.com/package/rikki-patterns) [![Build Status](https://travis-ci.org/springload/rikki-patterns.svg?branch=master)](https://travis-ci.org/springload/rikki-patterns) [![Coverage Status](https://coveralls.io/repos/github/springload/rikki-patterns/badge.svg)](https://coveralls.io/github/springload/rikki-patterns)
 
-> Living pattern library generator.
+> :running_shirt_with_sash::zap: Living pattern library generator. Move fast and don't break your patterns.
 
 ## Features
 
@@ -9,13 +9,11 @@
 - Components documentation
 - Guidelines for writing content
 
-## Install
+## Usage
 
 ```sh
 npm install --save-dev rikki-patterns
 ```
-
-## Usage
 
 ### Running the preview server
 
@@ -25,20 +23,18 @@ rikki
 
 ### Building tokens
 
-We use a system of Design Tokens similar to SalesForce Lightning Design System, so that you can export the tokens for your environment (CSS, JS, SASS, XML).
+We use a system of Design Tokens similar to SalesForce Lightning Design System, so that you can export the tokens for your environment.
 
 ```sh
-npm run token --tokens colours,breakpoints,typography --path ./my_app/tokens --format sass
+rikki tokens --tokens colours,breakpoints,typography --path ./my_app/tokens --format sass
 ```
 
 Available formats are Sass, CSS, JSON, XML.
 
 ### Creating a new component
 
-Components can be generated via:
-
 ```sh
-npm run component [COMPONENT_NAME]
+rikki component [COMPONENT_NAME]
 ```
 
 ### Installing into Python apps
@@ -84,3 +80,56 @@ To watch changes to the Design System and automatically export them to your app:
 ```sh
 npm run watch ./my_app/static
 ```
+
+### Configuration
+
+## Development
+
+### Install
+
+> Clone the project on your computer, and install [Node](https://nodejs.org). This project also uses [nvm](https://github.com/creationix/nvm).
+
+```sh
+nvm install
+# Then, install all project dependencies.
+npm install
+# Install the git hooks.
+./.githooks/deploy
+# Set up a `.env` file with the appropriate secrets.
+touch .env
+```
+
+### Working on the project
+
+> Everything mentioned in the installation process should already be done.
+
+```sh
+# Make sure you use the right node version.
+nvm use
+# Start the server and the development tools.
+npm run start
+# Runs linting.
+npm run lint
+# Runs tests.
+npm run test
+# View other available commands with:
+npm run
+```
+
+### Releases
+
+- Make a new branch for the release of the new version.
+- Update the [CHANGELOG](CHANGELOG.md).
+- Update the version number in `package.json`, following semver.
+- Make a PR and squash merge it.
+- Back on master with the PR merged, follow the instructions below.
+
+```sh
+npm run dist
+# Use irish-pub to check the package content. Install w/ npm install -g first.
+irish-pub
+npm publish
+```
+
+- Finally, go to GitHub and create a release and a tag for the new version.
+- Done!

@@ -1,5 +1,5 @@
 const path = require('path');
-const package = require('../package.json');
+const pkg = require('../package.json');
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -45,5 +45,5 @@ module.exports = {
             title: 'Rikki Patterns',
         },
     },
-    package: package,
+    pkg: pkg,
 };

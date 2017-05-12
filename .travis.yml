@@ -1,0 +1,18 @@
+language: node_js
+cache:
+  directories:
+  - node_modules
+node_js:
+- 6
+script:
+- npm run test:ci
+after_success:
+- npm run coveralls
+branches:
+  except:
+  - gh-pages
+notifications:
+  email: false
+  slack:
+    rooms:
+      secure: YxufA5ZQZuB4cIhDC1r34wGmCSoC6CVsjWr/fS/s60xwWJPnY5727SdInAlfLludT5DuTHFe41umbQIPKetqxeGUilBNMLHC1yppYoy0HdcfFHNDacRCl5oqdQYHCTvcXG99t1lZj0Pb5VVBVmHi+45bsgfgaZE1CaY5Oqtp3t5EmmAVt8vOR170Tlisaa+G13U6xylyxQtcQ8vW0Sgd/dBsdHoQKNIDpRONFYeSBgKQJ7WL1IFV/K4pQ/1U0YXxeoGYgBQKzWD+3hYWJDUJH6Dc0pGEJJ5dHAJueZ1/I3cnWb32olw58EPv2jzmg12iomTlXN7uZOFVUkCOfbcsI9wtG1rE9ZV2J8a9RPR418DC3qUWPSG0jEu9ynUUWXEwwvfaNYQuy63xHK/66NhYPWatN90y4K3hwDa1P4LoW11xXNTvuRz2Om9Iv99tzySwqi17G4gTzK3w2pj0W5rpIvFqpbY55iitLS9gahFocQ/Qx3t7ZopY9hSHxrV0+86dUm1Tpv5kb79l+hZL3P8kd2ThFAe1vi1WdQObq3FyheZHYF4sF6t9DVb9Vkr0lI86XBGVR61dhLHCisiBJDEA848KaRJf0tpo7ojCa3ASpmS7zJG2yif+N6+V/xKlAPHOmB1heKLmHmuRLCv1eqX5cJoomZJxLh5r+pv7YcGBoQM=
