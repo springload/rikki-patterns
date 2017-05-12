@@ -1,0 +1,20 @@
+{
+  "global": {
+    "category": "transition",
+    "comment": "Available transitions"
+  },
+  "props": {
+    "EASE_IN_CUBIC": {
+      "value": "cubic-bezier(0.55, 0.055, 0.675, 0.19)",
+      "type": "transition"
+    },
+    "EASE_OUT_CUBIC": {
+      "value": "cubic-bezier(0.215, 0.61, 0.355, 1)",
+      "type": "transition"
+    },
+    "EASE_IN_OUT_CUBIC": {
+      "value": "cubic-bezier(0.785, 0.135, 0.150, 0.860)",
+      "type": "transition"
+    }
+  }
+}
