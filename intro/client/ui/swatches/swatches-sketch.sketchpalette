@@ -1,0 +1,10 @@
+{
+    "compatibleVersion": "1.0",
+    "pluginVersion": "1.1",
+    "colors": [
+        "rgba(0, 0, 0, 0)",
+        "rgb(255, 255, 255)",
+        "rgb(0, 0, 0)",
+        "rgb(207, 226, 232)"
+    ]
+}

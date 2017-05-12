@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rikki Patterns  </title>
+    <link rel='shortcut icon' href='/static/favicon.ico'>
+    <link rel="stylesheet" href="/static/css/site.css">
+</head>
+<body>
+    <div class="panels">
+        <div class="depth-1 panel-left">
+            <div class="nav">
+            
+                <h4 class="u-dark-text">
+                    <a href="/">Design System</a>
+                </h4>
+                
+                    <hr>
+                    <h4 class="u-dark-text u-tight">
+                        
+                            Design
+                        
+
+                        
+                    </h4>
+
+                    
+                        <div class="nav__item">
+                            <a href="/design/colours">
+                                Colours
+                            </a>
+                        </div>
+                    
+                
+                    <hr>
+                    <h4 class="u-dark-text u-tight">
+                        
+                            Components
+                        
+
+                        
+                    </h4>
+
+                    
+                        <div class="nav__item">
+                            <a href="/components/list">
+                                List
+                            </a>
+                        </div>
+                    
+                
+            
+
+            </div>
+        </div>
+        <div class="panel-right">
+            <div class="container">
+            
+<script src="/static/js/iframeResizer.min.js"></script>
+
+<div class="comp-header">
+    <h1>
+        List
+    </h1>
+</div>
+
+<div class="panel-right-flex">
+    <div class="panel-right-content">
+        <div class="panel-right-padding panel-intro">
+            <div class="markdown component__description">
+                
+            </div>
+        </div>
+        <div class="panel-right-padding">
+            
+                <h2 id="flavour-base">
+                    
+                    Base
+                    <small class='u-tiny'>
+                        <span class='pill'>production</span>
+                    </small>
+                </h2>
+
+                
+                    <h3 id="flavour-base/styled">Styled</h3>
+                    <div class="component__specs" id="flavour-base/styled">
+    <div>
+        <iframe id="example-base/styled" name="example" class='component__iframe' src="/raw/list/base/styled"></iframe>
+        <script>iFrameResize({}, '#example-base/styled')</script>
+    </div>
+</div>
+<div class="component__specs panel-code">
+
+<table class="table">
+    <thead>
+        <tr>
+            <td class="table_colheader">Language</td>
+            <td class="table_colheader">Sample</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="w-1/10 v-top">Jinja2 &amp; Nunjucks</td>
+            <td>
+<pre class="language-js"><code>{% import "rikki.html" as rikki %}
+rikki.list(
+    list_type=&quot;styled&quot;, 
+    elements=[&quot;The list component is really simple.&quot;,&quot;Yet so important.&quot;,&quot;Lists have content \&quot;elements\&quot;, and a type.&quot;]
+)</code></pre>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="w-1/10 v-top">HTML</td>
+            <td>
+
+
+<pre><code class="language-html">&lt;ul class=&quot;list-styled&quot;&gt;
+    &lt;li&gt;The list component is really simple.&lt;/li&gt;
+    &lt;li&gt;Yet so important.&lt;/li&gt;
+    &lt;li&gt;Lists have content &quot;elements&quot;, and a type.&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+
+</div>
+
+                
+                    <h3 id="flavour-base/numbered">Numbered</h3>
+                    <div class="component__specs" id="flavour-base/numbered">
+    <div>
+        <iframe id="example-base/numbered" name="example" class='component__iframe' src="/raw/list/base/numbered"></iframe>
+        <script>iFrameResize({}, '#example-base/numbered')</script>
+    </div>
+</div>
+<div class="component__specs panel-code">
+
+<table class="table">
+    <thead>
+        <tr>
+            <td class="table_colheader">Language</td>
+            <td class="table_colheader">Sample</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="w-1/10 v-top">Jinja2 &amp; Nunjucks</td>
+            <td>
+<pre class="language-js"><code>{% import "rikki.html" as rikki %}
+rikki.list(
+    list_type=&quot;numbered&quot;, 
+    elements=[&quot;Item 1&quot;,&quot;Item 2&quot;,&quot;Item 3&quot;]
+)</code></pre>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="w-1/10 v-top">HTML</td>
+            <td>
+
+
+<pre><code class="language-html">&lt;ul class=&quot;list-numbered&quot;&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+    &lt;li&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+
+</div>
+
+                
+                    <h3 id="flavour-base/ticked">Ticked</h3>
+                    <div class="component__specs" id="flavour-base/ticked">
+    <div>
+        <iframe id="example-base/ticked" name="example" class='component__iframe' src="/raw/list/base/ticked"></iframe>
+        <script>iFrameResize({}, '#example-base/ticked')</script>
+    </div>
+</div>
+<div class="component__specs panel-code">
+
+<table class="table">
+    <thead>
+        <tr>
+            <td class="table_colheader">Language</td>
+            <td class="table_colheader">Sample</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="w-1/10 v-top">Jinja2 &amp; Nunjucks</td>
+            <td>
+<pre class="language-js"><code>{% import "rikki.html" as rikki %}
+rikki.list(
+    list_type=&quot;ticked&quot;, 
+    elements=[&quot;List type determines what the list looks like.&quot;,&quot;And thus its purpose.&quot;]
+)</code></pre>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="w-1/10 v-top">HTML</td>
+            <td>
+
+
+<pre><code class="language-html">&lt;ul class=&quot;list-ticked&quot;&gt;
+    &lt;li&gt;List type determines what the list looks like.&lt;/li&gt;
+    &lt;li&gt;And thus its purpose.&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+
+</div>
+
+                
+                    <h3 id="flavour-base/action">Action</h3>
+                    <div class="component__specs" id="flavour-base/action">
+    <div>
+        <iframe id="example-base/action" name="example" class='component__iframe' src="/raw/list/base/action"></iframe>
+        <script>iFrameResize({}, '#example-base/action')</script>
+    </div>
+</div>
+<div class="component__specs panel-code">
+
+<table class="table">
+    <thead>
+        <tr>
+            <td class="table_colheader">Language</td>
+            <td class="table_colheader">Sample</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="w-1/10 v-top">Jinja2 &amp; Nunjucks</td>
+            <td>
+<pre class="language-js"><code>{% import "rikki.html" as rikki %}
+rikki.list(
+    list_type=&quot;action&quot;, 
+    elements=[&quot;Item 1&quot;,&quot;Item 2&quot;,&quot;Item 3&quot;]
+)</code></pre>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="w-1/10 v-top">HTML</td>
+            <td>
+
+
+<pre><code class="language-html">&lt;ul class=&quot;list-action&quot;&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+    &lt;li&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+
+</div>
+
+                
+                    <h3 id="flavour-base/quicklink-style">Quicklink style</h3>
+                    <div class="component__specs" id="flavour-base/quicklink-style">
+    <div>
+        <iframe id="example-base/quicklink-style" name="example" class='component__iframe' src="/raw/list/base/quicklink-style"></iframe>
+        <script>iFrameResize({}, '#example-base/quicklink-style')</script>
+    </div>
+</div>
+<div class="component__specs panel-code">
+
+<table class="table">
+    <thead>
+        <tr>
+            <td class="table_colheader">Language</td>
+            <td class="table_colheader">Sample</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="w-1/10 v-top">Jinja2 &amp; Nunjucks</td>
+            <td>
+<pre class="language-js"><code>{% import "rikki.html" as rikki %}
+rikki.list(
+    list_type=&quot;quicklink&quot;, 
+    elements=[&quot;Item 1&quot;,&quot;Item 2&quot;,&quot;Item 3&quot;]
+)</code></pre>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="w-1/10 v-top">HTML</td>
+            <td>
+
+
+<pre><code class="language-html">&lt;ul class=&quot;list-quicklink&quot;&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+    &lt;li&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+
+</div>
+
+                
+                    <h3 id="flavour-base/unstyled">Unstyled</h3>
+                    <div class="component__specs" id="flavour-base/unstyled">
+    <div>
+        <iframe id="example-base/unstyled" name="example" class='component__iframe' src="/raw/list/base/unstyled"></iframe>
+        <script>iFrameResize({}, '#example-base/unstyled')</script>
+    </div>
+</div>
+<div class="component__specs panel-code">
+
+<table class="table">
+    <thead>
+        <tr>
+            <td class="table_colheader">Language</td>
+            <td class="table_colheader">Sample</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="w-1/10 v-top">Jinja2 &amp; Nunjucks</td>
+            <td>
+<pre class="language-js"><code>{% import "rikki.html" as rikki %}
+rikki.list(
+    list_type=&quot;unstyled&quot;, 
+    elements=[&quot;Item 1&quot;,&quot;Item 2&quot;,&quot;Item 3&quot;]
+)</code></pre>
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="w-1/10 v-top">HTML</td>
+            <td>
+
+
+<pre><code class="language-html">&lt;ul class=&quot;list-unstyled&quot;&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+    &lt;li&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+
+</div>
+
+                
+            
+
+            <hr class="divider-body">
+
+            <h4>Data</h4>
+
+            <div class="" id="">
+                <div class="component__options">
+                    <table class='font-small table'>
+    <thead>
+        <tr>
+            <td class='table__colheader'>Property</td>
+            <td class='table__colheader'>Type</td>
+            <td class='table__colheader'>Example</td>
+            <td class='table__colheader'>Description</td>
+        </tr>
+    </thead>
+    
+        <tr>
+            <td><code class="language-html">elements</code></td>
+            <td>
+                <span class="pill t-array"><code>array</code></span>
+                
+            </td>
+            <td>
+                
+                    <code class="language-javascript">[&quot;The list component is really simple.&quot;,&quot;Yet so important.&quot;,&quot;Lists have content \&quot;elements\&quot;, and a type.&quot;]</code>
+                
+            </td>
+            <td>
+                <p>Array of list items</p>
+
+            </td>
+        </tr>
+    
+        <tr>
+            <td><code class="language-html">list_type</code></td>
+            <td>
+                <span class="pill t-string"><code>string</code></span>
+                
+            </td>
+            <td>
+                
+                    <code class="language-javascript">&quot;styled&quot;</code>
+                
+            </td>
+            <td>
+                <p>Type of list eg. Bulleted, numbered, alphanumeric</p>
+
+            </td>
+        </tr>
+    
+</table>
+
+                </div>
+            </div>
+
+            
+            <h4>Usage</h4>
+            <p>
+            This table gives you a quick overview of the classes that can be applied to the List.
+            </p>
+            <div class="">
+                <div class="component__options">
+    <table class="table">
+        <thead>
+            <tr>
+                <td class="table__colheader">Class name</td>
+                <td class="table__colheader">Usage</td>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr>
+                    <td class="w-4/10 v-top">
+
+                        <code class="language-css u-text-small">
+                            .list-[type]
+                        </code>
+                    </td>
+                    <td>
+                        <div class="def">
+                            <h4 class="u-xtight"> Required:</h4>
+                            Yes
+                            
+                        </div>
+                        <div class="def">
+                            <h4 class="u-xtight">Applied to:</h4>
+                            
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul" target="_blank" rel="noopener noreferrer">
+                                ul
+                            </a>
+                            
+                        </div>
+                        <div class="def">
+                            <h4 class="u-xtight">
+                            Outcome:
+                            </h4>
+                            <p>Defines the List component</p>
+
+                        </div>
+                        <div class="def">
+                            <h4 class="u-xtight">Comments:</h4>
+                            
+                            -
+                            
+                        </div>
+                    </td>
+                </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+            </div>
+            
+
+            
+        </div>
+    </div>
+
+    <div class="right-container">
+        <p>
+            <small>
+                <a href="https://github.com/springload/rikki-patterns/blob/master/client/ui/components/list" target="_blank" rel="noopener noreferrer">View code on GitHub</a>
+            </small>
+        </p>
+        <p>
+            <small>
+                Flavours and variations
+            </small>
+        </p>
+
+        
+            <h4 class='u-tight  '>
+                <a class="u-dark-text" href="/components/list/#flavour-base">
+                    Base
+                </a>
+            </h4>
+
+            
+            <div class="nav__item">
+                <a href="/components/list/#flavour-base/styled">
+                    Styled
+                </a>
+            </div>
+            
+            <div class="nav__item">
+                <a href="/components/list/#flavour-base/numbered">
+                    Numbered
+                </a>
+            </div>
+            
+            <div class="nav__item">
+                <a href="/components/list/#flavour-base/ticked">
+                    Ticked
+                </a>
+            </div>
+            
+            <div class="nav__item">
+                <a href="/components/list/#flavour-base/action">
+                    Action
+                </a>
+            </div>
+            
+            <div class="nav__item">
+                <a href="/components/list/#flavour-base/quicklink-style">
+                    Quicklink style
+                </a>
+            </div>
+            
+            <div class="nav__item">
+                <a href="/components/list/#flavour-base/unstyled">
+                    Unstyled
+                </a>
+            </div>
+            
+
+            <hr class="divider">
+        
+    </div>
+</div>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/prism.js"></script>
+</body>
+</html>
+
+
