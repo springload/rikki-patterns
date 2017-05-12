@@ -24,7 +24,7 @@ const loadComponentReferences = (val) => {
     if (isComponentReference(val)) {
         ret = renderComponentReference(val);
     } else if (Array.isArray(val)) {
-        ret = val.map((v) => isComponentReference(v) ? renderComponentReference(v) : v).join('');
+        ret = val.map(v => (isComponentReference(v) ? renderComponentReference(v) : v)).join('');
     } else {
         ret = val;
     }
@@ -37,7 +37,7 @@ const loadComponentReferences = (val) => {
  */
 module.exports = {
     // Process text as markdown.
-    markdown: str => str && marked(str) || '',
+    markdown: str => (str && marked(str)) || '',
     // Prettify code (HTML prettifier).
     pretty: beautify.html,
     // Slugify.

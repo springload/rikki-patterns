@@ -1,36 +1,37 @@
 const yargs = require('yargs');
 const gulp = require('gulp');
-const gulpfile = require('../gulpfile');
+require('../gulpfile');
 
-const run = (argv = process.argv.slice(2), project = process.cwd()) => {
+// eslint-disable-next-line
+const run = (argv = process.argv.slice(2)) => {
     // eslint-disable-next-line no-param-reassign
     argv = yargs(argv)
         .usage('Usage: <cmd> [args] [--config=<pathToConfigFile>]')
         .command({
             command: 'start',
             desc: 'Start the live server',
-            handler: (argv) => {
+            handler: () => {
                 gulp.start('watch');
             },
         })
         .command({
             command: 'component',
             desc: '',
-            handler: (argv) => {
+            handler: () => {
                 gulp.start('component');
             },
         })
         .command({
             command: 'uncomponent',
             desc: '',
-            handler: (argv) => {
+            handler: () => {
                 gulp.start('uncomponent');
             },
         })
         .command({
             command: 'tokens',
             desc: '',
-            handler: (argv) => {
+            handler: () => {
                 gulp.start('tokens');
             },
         })

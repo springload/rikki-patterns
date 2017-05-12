@@ -8,7 +8,7 @@ const config = require('../config');
 // data format: { label: 'Foo', id: 'foo', path: '/components/foo' }
 function getComponentData(data) {
     const component = findComponent(data.id);
-    component.template = pathTrimStart(path.join(data.path, data.id + '.html'));
+    component.template = pathTrimStart(path.join(data.path, `${data.id}.html`));
     return component;
 }
 

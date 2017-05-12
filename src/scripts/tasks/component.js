@@ -1,19 +1,20 @@
-var gulp = require('gulp');
-var Path = require('path');
-var nunjucks = require('nunjucks');
-var transform = require('vinyl-transform');
-var map = require('map-stream');
-var rename = require('gulp-rename');
-var yaml = require('js-yaml');
+const gulp = require('gulp');
+const Path = require('path');
+const nunjucks = require('nunjucks');
+const transform = require('vinyl-transform');
+const map = require('map-stream');
+const rename = require('gulp-rename');
+const yaml = require('js-yaml');
 const yamlFront = require('yaml-front-matter');
-var fs = require('fs');
-var del = require('del');
+const fs = require('fs');
+const del = require('del');
+const yargs = require('yargs');
 
-var config = require('../../config');
-var utils = require('../../site/utils');
+const config = require('../../config');
+const utils = require('../../site/utils');
 
-var makeName = utils.makeName;
-var basePath = config.paths.components;
+const makeName = utils.makeName;
+const basePath = config.paths.components;
 
 const updateManifest = (callback) => {
     const manifestPath = Path.join(basePath, 'README.md');
@@ -45,30 +46,29 @@ function removeFromManifest(name) {
     });
 }
 
-
 function addToComponentsMacro(name) {
-    var htmlFile = Path.join(basePath, 'rikki.html');
-    var data = '\n{% macro ' + name.replace('-', '_') + '() %}{{ _component(\'' + name + '\', kwargs) }}{% endmacro %}';
+    const htmlFile = Path.join(basePath, 'rikki.html');
+    const data = `\n{% macro ${name.replace('-', '_')}() %}{{ _component('${name}', kwargs) }}{% endmacro %}`;
     fs.appendFileSync(htmlFile, data);
 }
 
 function removeFromComponentsMacro(name) {
-    var htmlFile = Path.join(basePath, 'rikki.html');
-    var htmlContents = fs.readFileSync(htmlFile, { encoding: 'utf8' });
-    var data = '{% macro ' + name.replace('-', '_') + '() %}{{ _component(\'' + name + '\', kwargs) }}{% endmacro %}';
-    var match = htmlContents.includes(data);
+    const htmlFile = Path.join(basePath, 'rikki.html');
+    const htmlContents = fs.readFileSync(htmlFile, { encoding: 'utf8' });
+    const data = `{% macro ${name.replace('-', '_')}() %}{{ _component('${name}', kwargs) }}{% endmacro %}`;
+    const match = htmlContents.includes(data);
 
     if (match) {
-        var newHtmlContents = htmlContents.replace(data, '');
+        const newHtmlContents = htmlContents.replace(data, '');
         fs.writeFileSync(htmlFile, newHtmlContents);
     }
 }
 
-gulp.task('uncomponent', function () {
-    var argv = require('yargs').argv;
-    var name = argv.name;
-    var component = makeName(name, basePath);
-    var compPath = Path.join(basePath, component.paramName);
+gulp.task('uncomponent', () => {
+    const argv = yargs.argv;
+    const name = argv.name;
+    const component = makeName(name, basePath);
+    const compPath = Path.join(basePath, component.paramName);
 
     removeFromManifest(component.paramName);
     removeFromComponentsMacro(component.paramName);
@@ -78,18 +78,18 @@ gulp.task('uncomponent', function () {
     return del([compPath]);
 });
 
-gulp.task('component', function () {
-    var argv = require('yargs').argv;
-    var name = argv.name;
-    var component = makeName(name, basePath);
-    var compPath = Path.join(basePath, component.paramName);
+gulp.task('component', () => {
+    const argv = yargs.argv;
+    const name = argv.name;
+    const component = makeName(name, basePath);
+    const compPath = Path.join(basePath, component.paramName);
 
     console.log('[Writing]', Path.join(__dirname, '..', '..', compPath));
 
-    var template = transform(function (filename) {
-        return map(function (chunk, next) {
-            var str = chunk.toString();
-            var result = nunjucks.renderString(str, { data: component });
+    const template = transform((filename) => {
+        return map((chunk, next) => {
+            const str = chunk.toString();
+            const result = nunjucks.renderString(str, { data: component });
             return next(null, result);
         });
     });
@@ -104,8 +104,5 @@ gulp.task('component', function () {
     addToComponentsManifest(component.paramName);
     addToComponentsMacro(component.paramName);
 
-    gulp.src(config.paths.generator.template)
-        .pipe(template)
-        .pipe(rename(renameTemplate))
-        .pipe(gulp.dest(compPath));
+    gulp.src(config.paths.generator.template).pipe(template).pipe(rename(renameTemplate)).pipe(gulp.dest(compPath));
 });

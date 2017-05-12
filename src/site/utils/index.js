@@ -1,32 +1,29 @@
-var _ = require('lodash');
-var Path = require('path');
-var fs = require('fs');
-
+const _ = require('lodash');
+const Path = require('path');
+const fs = require('fs');
 
 function makeCSSVariable(prefix, key, val) {
-    return makeCSSName(prefix, key) + ': ' + val + ';';
+    return `${makeCSSName(prefix, key)}: ${val};`;
 }
 
 function makeCSSName(prefix, key) {
     if (prefix) {
-        return '$' + prefix + '-' + _.kebabCase(key);
+        return `$${prefix}-${_.kebabCase(key)}`;
     }
-    return '$' + _.kebabCase(key);
+    return `$${_.kebabCase(key)}`;
 }
-
 
 function quote(val) {
-    return '"' + val + '"';
+    return `"${val}"`;
 }
 
-
 function makeName(paramName, basePath) {
-    var _paramName = _.kebabCase(paramName);
-    var humanName = _.startCase(paramName);
-    var jsName = _.capitalize(_.camelCase(paramName));
-    var className = paramName;
-    var cssName = '.' + className;
-    var dirName = Path.join(basePath, paramName);
+    const _paramName = _.kebabCase(paramName);
+    const humanName = _.startCase(paramName);
+    const jsName = _.capitalize(_.camelCase(paramName));
+    const className = paramName;
+    const cssName = `.${className}`;
+    const dirName = Path.join(basePath, paramName);
 
     return {
         humanName: humanName,
@@ -38,8 +35,7 @@ function makeName(paramName, basePath) {
     };
 }
 
-
-var mkdirSync = function (path) {
+const mkdirSync = function (path) {
     try {
         fs.mkdirSync(path);
     } catch (e) {
@@ -47,20 +43,18 @@ var mkdirSync = function (path) {
     }
 };
 
-
-var mkdirpSync = function (dirpath) {
-    var parts = dirpath.split(Path.sep);
-    for (var i = 1; i <= parts.length; i++) {
+const mkdirpSync = function (dirpath) {
+    const parts = dirpath.split(Path.sep);
+    for (let i = 1; i <= parts.length; i++) {
         mkdirSync(Path.join.apply(null, parts.slice(0, i)));
     }
 };
 
-
 module.exports = {
-    'makeCSSVariable': makeCSSVariable,
-    'makeCSSName': makeCSSName,
-    'makeName': makeName,
-    'quote': quote,
+    makeCSSVariable: makeCSSVariable,
+    makeCSSName: makeCSSName,
+    makeName: makeName,
+    quote: quote,
     mkdirSync: mkdirSync,
     mkdirpSync: mkdirpSync,
 };

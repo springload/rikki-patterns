@@ -1,35 +1,33 @@
-var gulp = require('gulp');
-var Path = require('path');
-var transform = require('vinyl-transform');
-var map = require('map-stream');
-var fs = require('fs');
-var _ = require('lodash');
-var rename = require('gulp-rename');
+const gulp = require('gulp');
+const Path = require('path');
+const transform = require('vinyl-transform');
+const map = require('map-stream');
+const fs = require('fs');
+const _ = require('lodash');
+const rename = require('gulp-rename');
 
-
-var utils = require('../../site/utils');
-var navigation = require('../../site/navigation');
-var templates = require('../../site/templates');
-var config = require('../../config');
+const utils = require('../../site/utils');
+const navigation = require('../../site/navigation');
+const templates = require('../../site/templates');
+const config = require('../../config');
 
 // Destructuring, old school.
-var ui = require('./ui');
-var pathTrimStart = ui.pathTrimStart;
-var findComponent = ui.findComponent;
-var getStateFromFlavour = ui.getStateFromFlavour;
-var getTokens = ui.getTokens;
+const ui = require('./ui');
+const pathTrimStart = ui.pathTrimStart;
+const findComponent = ui.findComponent;
+const getStateFromFlavour = ui.getStateFromFlavour;
+const getTokens = ui.getTokens;
 
+gulp.task('site:pages', () => {
+    const dir = config.paths.site.pages;
+    const env = templates.configure();
 
-gulp.task('site:pages', function () {
-    var dir = config.paths.site.pages;
-    var env = templates.configure();
+    const render = transform((filename) => {
+        return map((chunk, next) => {
+            const str = chunk.toString();
+            const tokens = getTokens();
 
-    var render = transform(function (filename) {
-        return map(function (chunk, next) {
-            var str = chunk.toString();
-            var tokens = getTokens();
-
-            var html = env.renderString(str, {
+            const html = env.renderString(str, {
                 navigation: navigation.getNavigation(),
                 config: config,
                 tokens: tokens,
@@ -46,24 +44,22 @@ gulp.task('site:pages', function () {
         }
     }
 
-    return gulp.src([Path.join(dir, '**/*')])
+    return gulp
+        .src([Path.join(dir, '**/*')])
         .pipe(render)
         .pipe(rename(renameDirectory))
         .pipe(gulp.dest(config.paths.staticSite.root));
 });
 
-
-gulp.task('site:static', function () {
-    gulp.src(Path.join(config.paths.site.static, '**'))
-        .pipe(gulp.dest(config.paths.staticSite.static));
+gulp.task('site:static', () => {
+    gulp.src(Path.join(config.paths.site.static, '**')).pipe(gulp.dest(config.paths.staticSite.static));
 });
-
 
 // Renders the `raw` view of each component's state
 function renderState(env, stateDir, nav, componentData, state) {
-    var statePath = Path.join(stateDir, 'index.html');
+    const statePath = Path.join(stateDir, 'index.html');
 
-    var raw = env.render('component-raw.html', {
+    const raw = env.render('component-raw.html', {
         navigation: nav,
         component: componentData,
         state: state,
@@ -76,22 +72,21 @@ function renderState(env, stateDir, nav, componentData, state) {
     console.log(statePath);
 }
 
-
 // Renders the documentation for each component
 function renderDocs(SITE_DIR, name) {
-    var env = templates.configure();
-    var nav = navigation.getNavigation();
-    var components = _.find(nav.children, { id: name });
+    const env = templates.configure();
+    const nav = navigation.getNavigation();
+    const components = _.find(nav.children, { id: name });
 
-    components.children.forEach(function (component) {
-        var dirPath = Path.join(SITE_DIR, component.path);
-        var htmlPath = Path.join(dirPath, 'index.html');
-        var rawDir = Path.join(SITE_DIR, 'raw', component.id);
+    components.children.forEach((component) => {
+        const dirPath = Path.join(SITE_DIR, component.path);
+        const htmlPath = Path.join(dirPath, 'index.html');
+        const rawDir = Path.join(SITE_DIR, 'raw', component.id);
 
-        var componentData = findComponent(component.id);
-        componentData.template = pathTrimStart(Path.join(component.path, component.id + '.html'));
+        const componentData = findComponent(component.id);
+        componentData.template = pathTrimStart(Path.join(component.path, `${component.id}.html`));
 
-        var html = env.render('component.html', {
+        const html = env.render('component.html', {
             navigation: nav,
             component: componentData,
             config: config,
@@ -104,17 +99,17 @@ function renderDocs(SITE_DIR, name) {
         fs.writeFileSync(htmlPath, html, 'utf-8');
 
         if (componentData.flavours) {
-            componentData.flavours.forEach(function (flavour) {
+            componentData.flavours.forEach((flavour) => {
                 if (flavour.states) {
-                    flavour.states.forEach(function (variant) {
-                        var state = getStateFromFlavour(componentData, flavour.id, variant.id);
-                        var stateDir = Path.join(rawDir, flavour.id, variant.id);
+                    flavour.states.forEach((variant) => {
+                        const state = getStateFromFlavour(componentData, flavour.id, variant.id);
+                        const stateDir = Path.join(rawDir, flavour.id, variant.id);
                         renderState(env, stateDir, nav, componentData, state);
                     });
                 }
 
                 if (flavour.state) {
-                    var stateDir = Path.join(rawDir, flavour.id);
+                    const stateDir = Path.join(rawDir, flavour.id);
                     renderState(env, stateDir, nav, componentData, flavour.state);
                 }
             });
@@ -122,8 +117,7 @@ function renderDocs(SITE_DIR, name) {
     });
 }
 
-
-gulp.task('site', ['site:pages', 'site:static'], function (done) {
+gulp.task('site', ['site:pages', 'site:static'], (done) => {
     renderDocs(config.paths.staticSite.root, 'components');
     done(null);
     process.exit(0);

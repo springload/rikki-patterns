@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const path  = require('path');
+const path = require('path');
 const getUI = require('../scripts/tasks/ui').getUI;
 
 const formatNavItem = (item, parent) => {

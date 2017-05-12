@@ -52,11 +52,13 @@ describe('filters', () => {
         });
 
         it('bails for component references', () => {
-            expect(filters.python_value({
-                type: 'test',
-                flavour: 'test',
-                variant: 'test',
-            })).toEqual('{...}');
+            expect(
+                filters.python_value({
+                    type: 'test',
+                    flavour: 'test',
+                    variant: 'test',
+                }),
+            ).toEqual('{...}');
         });
     });
 
@@ -77,11 +79,16 @@ describe('filters', () => {
         });
 
         it('works', () => {
-            expect(filters.richtext({
-                type: 'list',
-                flavour: 'base',
-                variant: 'action',
-            })).toEqual({ length: 75, val: '<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n' });
+            expect(
+                filters.richtext({
+                    type: 'list',
+                    flavour: 'base',
+                    variant: 'action',
+                }),
+            ).toEqual({
+                length: 75,
+                val: '<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n',
+            });
         });
 
         it('bails for non-component reference values', () => {
@@ -89,18 +96,23 @@ describe('filters', () => {
         });
 
         it('supports arrays of references', () => {
-            expect(filters.richtext([
-                {
-                    type: 'list',
-                    flavour: 'base',
-                    variant: 'action',
-                },
-                {
-                    type: 'list',
-                    flavour: 'base',
-                    variant: 'action',
-                },
-            ])).toEqual({ length: 150, val: '<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n' });
+            expect(
+                filters.richtext([
+                    {
+                        type: 'list',
+                        flavour: 'base',
+                        variant: 'action',
+                    },
+                    {
+                        type: 'list',
+                        flavour: 'base',
+                        variant: 'action',
+                    },
+                ]),
+            ).toEqual({
+                length: 150,
+                val: '<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n',
+            });
         });
     });
 

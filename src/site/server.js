@@ -12,17 +12,12 @@ app.use('/static', express.static(staticPath));
 templates.configure(app);
 app.use(bodyParser.json());
 
-app.get([
-    '/raw/:name/:flavour/:variant',
-    '/raw/:name/:flavour',
-    '/raw/:name',
-], views.componentRawView);
+app.get(['/raw/:name/:flavour/:variant', '/raw/:name/:flavour', '/raw/:name'], views.componentRawView);
 
-app.get([
-    '/components/:name',
-    '/components/:name/:flavour',
-    '/components/:name/:flavour/:variant',
-], views.componentOverviewView);
+app.get(
+    ['/components/:name', '/components/:name/:flavour', '/components/:name/:flavour/:variant'],
+    views.componentOverviewView,
+);
 
 app.get(/^(.*)$/, views.generic);
 
