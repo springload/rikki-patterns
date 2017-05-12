@@ -29,7 +29,10 @@
   },
   "homepage": "http://springload.github.io/rikki-patterns/",
   "eslintConfig": {
-    "extends": "springload"
+    "extends": "springload",
+    "rules": {
+        "comma-dangle": ["error", "always-multiline"]
+    }
   },
   "jest": {
     "testPathIgnorePatterns": [
