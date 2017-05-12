@@ -2,10 +2,6 @@ const _ = require('lodash');
 const Path = require('path');
 const fs = require('fs');
 
-function makeCSSVariable(prefix, key, val) {
-    return `${makeCSSName(prefix, key)}: ${val};`;
-}
-
 function makeCSSName(prefix, key) {
     if (prefix) {
         return `$${prefix}-${_.kebabCase(key)}`;
@@ -13,12 +9,16 @@ function makeCSSName(prefix, key) {
     return `$${_.kebabCase(key)}`;
 }
 
+function makeCSSVariable(prefix, key, val) {
+    return `${makeCSSName(prefix, key)}: ${val};`;
+}
+
 function quote(val) {
     return `"${val}"`;
 }
 
 function makeName(paramName, basePath) {
-    const _paramName = _.kebabCase(paramName);
+    const paramNameKebab = _.kebabCase(paramName);
     const humanName = _.startCase(paramName);
     const jsName = _.capitalize(_.camelCase(paramName));
     const className = paramName;
@@ -28,7 +28,7 @@ function makeName(paramName, basePath) {
     return {
         humanName: humanName,
         jsName: jsName,
-        paramName: _paramName,
+        paramName: paramNameKebab,
         className: className,
         cssName: cssName,
         dirName: dirName,
@@ -39,7 +39,7 @@ const mkdirSync = function (path) {
     try {
         fs.mkdirSync(path);
     } catch (e) {
-        if (e.code != 'EEXIST') throw e;
+        if (e.code !== 'EEXIST') throw e;
     }
 };
 

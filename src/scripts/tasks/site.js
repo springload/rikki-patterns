@@ -13,6 +13,7 @@ const config = require('../../config');
 
 // Destructuring, old school.
 const ui = require('./ui');
+
 const pathTrimStart = ui.pathTrimStart;
 const findComponent = ui.findComponent;
 const getStateFromFlavour = ui.getStateFromFlavour;
@@ -22,7 +23,7 @@ gulp.task('site:pages', () => {
     const dir = config.paths.site.pages;
     const env = templates.configure();
 
-    const render = transform((filename) => {
+    const render = transform(() => {
         return map((chunk, next) => {
             const str = chunk.toString();
             const tokens = getTokens();
@@ -39,7 +40,9 @@ gulp.task('site:pages', () => {
 
     function renameDirectory(filepath) {
         if (filepath.basename !== 'index') {
+            // eslint-disable-next-line no-param-reassign
             filepath.dirname = Path.join(filepath.dirname, filepath.basename);
+            // eslint-disable-next-line no-param-reassign
             filepath.basename = 'index';
         }
     }

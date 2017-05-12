@@ -13,6 +13,7 @@ function Schema(props) {
                     .sync(path.resolve(this.path, '*/README.md'))
                     .map(this.getConfig, this)
                     .map(function (config) {
+                        // eslint-disable-next-line no-param-reassign
                         config = _.defaults(config, {
                             components: [],
                         });
@@ -46,6 +47,7 @@ function Schema(props) {
                     }, this)
                     .map(this.getConfig, this)
                     .map(function (config) {
+                        // eslint-disable-next-line no-param-reassign
                         config = _.defaults(config, {
                             uid: `${categoryConfig.id}-${config.id}`,
                             flavours: [],
@@ -60,6 +62,7 @@ function Schema(props) {
             getFlavours(componentConfig) {
                 return componentConfig.flavours.map((config) => {
                     const id = _.kebabCase(config.title);
+                    // eslint-disable-next-line no-param-reassign
                     config = _.defaults(config, {
                         id: id,
                         uid: `${componentConfig.id}-${id}`,
@@ -67,7 +70,9 @@ function Schema(props) {
                         states: [],
                     });
 
+                    // eslint-disable-next-line no-param-reassign
                     config.states = config.states.map((state) => {
+                        // eslint-disable-next-line no-param-reassign
                         state.id = _.kebabCase(state.title);
                         return state;
                     });

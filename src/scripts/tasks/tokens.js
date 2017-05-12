@@ -62,6 +62,7 @@ gulp.task('tokens:css', () => {
         _.forOwn(tokens.props, (val, key) => {
             let textValue = val;
 
+            // eslint-disable-next-line
             if (val.hasOwnProperty('value')) {
                 textValue = val.value;
             }
@@ -91,16 +92,16 @@ gulp.task('tokens:css', () => {
         });
     });
 
-    const template = transform((filename) => {
+    const template = transform(() => {
         return map((chunk, next) => {
-            const template = '// Design System Tokens \n// Generated at <%= time %> \n\n<%= data %>';
+            const tpl = '// Design System Tokens \n// Generated at <%= time %> \n\n<%= data %>';
             const ctx = {
                 data: chunk.toString(),
                 time: new Date().toString(),
                 file: chunk,
             };
 
-            return next(null, gutil.template(template, ctx));
+            return next(null, gutil.template(tpl, ctx));
         });
     });
 
@@ -119,6 +120,7 @@ gulp.task('tokens:sketch', () => {
     function getColors(data) {
         const arr = [];
 
+        // eslint-disable-next-line
         for (const key in data) {
             const val = data[key];
             const color = Color(val);
@@ -128,7 +130,7 @@ gulp.task('tokens:sketch', () => {
         return arr;
     }
 
-    const sketchify = transform((filename) => {
+    const sketchify = transform(() => {
         return map((chunk, next) => {
             const data = JSON.parse(chunk.toString());
             const formatted = {
@@ -167,6 +169,7 @@ gulp.task('tokens:adobe', () => {
     function generateColours(data) {
         const arr = [];
 
+        // eslint-disable-next-line
         for (const key in data) {
             const val = data[key];
             const colour = formatAdobeFloatColour(val);
@@ -182,7 +185,7 @@ gulp.task('tokens:adobe', () => {
         return arr;
     }
 
-    const swatchify = transform((filename) => {
+    const swatchify = transform(() => {
         return map((chunk, next) => {
             const data = JSON.parse(chunk);
             const input = {

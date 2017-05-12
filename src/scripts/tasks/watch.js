@@ -4,6 +4,7 @@ const config = require('../../config');
 
 gulp.task('watch', ['tokens', 'scss', 'scss:site'], () => {
     // Start the server.
+    // eslint-disable-next-line
     require('../../site/server');
 
     gulp.watch(path.join('.', 'site', 'scss', '**', '*.scss'), ['scss:site']);

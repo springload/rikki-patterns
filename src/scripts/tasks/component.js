@@ -86,7 +86,7 @@ gulp.task('component', () => {
 
     console.log('[Writing]', Path.join(__dirname, '..', '..', compPath));
 
-    const template = transform((filename) => {
+    const template = transform(() => {
         return map((chunk, next) => {
             const str = chunk.toString();
             const result = nunjucks.renderString(str, { data: component });
@@ -96,6 +96,7 @@ gulp.task('component', () => {
 
     function renameTemplate(filepath) {
         if (filepath.extname === '.html' || filepath.extname === '.scss') {
+            // eslint-disable-next-line no-param-reassign
             filepath.basename = component.paramName;
         }
     }

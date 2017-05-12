@@ -8,6 +8,7 @@ const plz = require('gulp-pleeease');
 const size = require('gulp-size');
 const sourcemaps = require('gulp-sourcemaps');
 const rename = require('gulp-rename');
+// eslint-disable-next-line
 const moduleImporter = require('sass-module-importer');
 
 const config = require('../../config');

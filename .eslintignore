@@ -5,3 +5,4 @@ dist/
 pages
 src/site/static/js
 src/scripts/generator/index.js
+www/

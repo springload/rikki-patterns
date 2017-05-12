@@ -4,6 +4,7 @@ const gulp = require('gulp');
 
 const schema = require('../../site/utils/schema');
 const tokens = require('../../site/utils/tokens');
+
 const Schema = schema.Schema;
 const TokenSchema = tokens.default;
 
@@ -15,8 +16,8 @@ function getUI(category) {
 }
 
 function getSchema(category) {
-    const schema = Schema({ path: config.paths.ui.root }).generate();
-    return _.find(schema, { id: category });
+    const s = Schema({ path: config.paths.ui.root }).generate();
+    return _.find(s, { id: category });
 }
 
 function findComponent(id) {
@@ -40,8 +41,7 @@ function getStateFromFlavour(component, flavour, variant) {
 }
 
 function getTokens() {
-    const tokens = TokenSchema({ path: path.join(config.paths.ui.tokens, '*.json') }).generate();
-    return tokens;
+    return TokenSchema({ path: path.join(config.paths.ui.tokens, '*.json') }).generate();
 }
 
 module.exports = {

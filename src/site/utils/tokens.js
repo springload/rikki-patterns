@@ -57,12 +57,15 @@ function TokenSchema(props) {
 
                 const compiled = _.template(tokens.contents);
                 const result = compiled(context);
+                // eslint-disable-next-line no-param-reassign
                 delete tokens.contents;
+                // eslint-disable-next-line no-param-reassign
                 tokens.data = JSON.parse(result);
                 return tokens;
             },
             toArray(tokens) {
                 if (tokens.data.global) {
+                    // eslint-disable-next-line no-param-reassign
                     tokens.items = _.values(tokens.data.props);
                 } else {
                     return this.aliases(tokens);
@@ -77,6 +80,7 @@ function TokenSchema(props) {
                         value: value,
                     });
                 });
+                // eslint-disable-next-line no-param-reassign
                 tokens.items = aliases.map(mapToCSS);
                 return tokens;
             },
