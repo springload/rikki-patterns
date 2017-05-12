@@ -1,0 +1,25 @@
+// Design System Tokens
+// Generated at Fri May 12 2017 21:43:52 GMT+0300 (EEST)
+
+$color-transparent: transparent;
+$color-white: #ffffff;
+$color-black: #000000;
+$color-light-blue: #cfe2e8;
+$breakpoint-xsmall: 30em;
+$breakpoint-small: 47.9375em;
+$breakpoint-smallish: 37.5em;
+$breakpoint-upto-smallish: 37.4375em;
+$breakpoint-medium: 48em;
+$breakpoint-large: 64.0625em;
+$breakpoint-xlarge: 80em;
+$media-query-mq-xsmall: "only screen and (max-width: 30em)";
+$media-query-mq-small: "only screen and (max-width: 47.9375em)";
+$media-query-mq-upto-smallish: "only screen and (max-width: 37.4375em)";
+$media-query-mq-smallish: "only screen and (min-width: 37.5em)";
+$media-query-mq-medium: "only screen and (min-width: 48em)";
+$media-query-mq-medium-landscape: "only screen and (min-width: 48em) and (min-aspect-ratio: 4/3)";
+$media-query-mq-large: "only screen and (min-width:64.0625em)";
+$media-query-mq-xlarge: "only screen and (min-width:80em)";
+$transition-ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$transition-ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+$transition-ease-in-out-cubic: cubic-bezier(0.785, 0.135, 0.150, 0.860);

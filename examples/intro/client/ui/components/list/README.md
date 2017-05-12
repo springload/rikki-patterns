@@ -22,9 +22,9 @@ flavours:
         data:
           list_type: styled
           elements:
-            - You can have up to four Front Runner accounts.
-            - You won't pay any account or transaction fees unless the balance across all your front runner accounts slips below $4,000.
-            - Earn interest based on the balance of your accounts.
+            - The list component is really simple.
+            - Yet so important.
+            - Lists have content "elements", and a type.
       - title: Numbered
         data:
           list_type: numbered
@@ -36,9 +36,8 @@ flavours:
         data:
           list_type: ticked
           elements:
-            - You can have up to four Front Runner accounts.
-            - You won't pay any account or transaction fees unless the balance across all your front runner accounts slips below $4,000.
-            - Earn interest based on the balance of your accounts.
+            - List type determines what the list looks like.
+            - And thus its purpose.
       - title: Action
         data:
           list_type: action
