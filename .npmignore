@@ -14,5 +14,5 @@ webpack.config.dev.js
 .editorconfig
 .githooks
 .github
-bin
+/bin
 .env
