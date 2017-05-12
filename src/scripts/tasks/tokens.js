@@ -94,7 +94,7 @@ gulp.task('tokens:css', () => {
 
     const template = transform(() => {
         return map((chunk, next) => {
-            const tpl = '// Design System Tokens \n// Generated at <%= time %> \n\n<%= data %>';
+            const tpl = '// Design System Tokens\n// Generated at <%= time %>\n\n<%= data %>';
             const ctx = {
                 data: chunk.toString(),
                 time: new Date().toString(),
