@@ -1,9 +1,11 @@
 const path = require('path');
 const pkg = require('../package.json');
+const readPkgUp = require('read-pkg-up');
 
 const PROD = process.env.NODE_ENV === 'production';
 
 const uiPath = path.join(process.cwd(), 'client', 'ui');
+const staticPath = path.join(process.cwd(), 'client', 'static');
 
 module.exports = {
     DEBUG: !PROD,
@@ -29,8 +31,8 @@ module.exports = {
             tokensScss: '_tokens.scss',
         },
         staticSite: {
-            root: path.join(uiPath, 'www'),
-            static: path.join(uiPath, 'www', 'static'),
+            root: staticPath,
+            static: staticPath,
         },
     },
     swatches: {
@@ -44,4 +46,5 @@ module.exports = {
         },
     },
     pkg: pkg,
+    targetPkg: readPkgUp.sync().pkg,
 };

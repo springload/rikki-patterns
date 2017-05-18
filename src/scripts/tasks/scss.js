@@ -45,7 +45,7 @@ gulp.task('scss', () => {
             // TODO Find out what this line was meant for.
             // .pipe(gulp.dest(config.paths.ui.css))
             .pipe(rename('ui.css'))
-            .pipe(gulp.dest(config.paths.site.css)));
+            .pipe(gulp.dest(config.paths.staticSite.static)));
 });
 
 gulp.task('scss:site', () => {
@@ -61,5 +61,5 @@ gulp.task('scss:site', () => {
         .pipe(plz(PlzOptions))
         .pipe(prod ? gutil.noop() : sourcemaps.write())
         .pipe(size({ title: prod ? 'CSS' : 'CSS (unminified)', showFiles: true, gzip: prod }))
-        .pipe(gulp.dest(config.paths.site.css));
+        .pipe(gulp.dest(config.paths.staticSite.static));
 });
