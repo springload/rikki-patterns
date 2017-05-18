@@ -60,6 +60,9 @@ module.exports = {
             tokens: tokens,
             colours: _.find(tokens, { name: 'aliases' }).items,
             sizes: _.find(tokens, { name: 'sizes' }).items,
+            transitions: _.find(tokens, { name: 'transitions' }).items,
+            breakpoints: _.find(tokens, { name: 'breakpoints' }).items,
+            fonts: _.find(tokens, { name: 'fonts' }).items,
         });
     },
 };

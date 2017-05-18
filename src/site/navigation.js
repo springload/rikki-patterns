@@ -38,12 +38,11 @@ const getNavigation = () => {
                     // {
                     //     label: 'Layout',
                     // },
-                    {
-                        label: 'Colours',
-                    },
-                    {
-                        label: 'Sizes',
-                    },
+                    { label: 'Colours' },
+                    { label: 'Sizes' },
+                    { label: 'Transitions' },
+                    { label: 'Breakpoints' },
+                    { label: 'Fonts' },
                     // {
                     //     label: 'Typography',
                     // },
