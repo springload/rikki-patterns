@@ -56,25 +56,22 @@ function TokenSchema(props) {
             return tokens;
         },
         toArray(tokens) {
+            let category;
+            let items;
+
+            // Most tokens.
             if (tokens.data.global) {
-                // eslint-disable-next-line no-param-reassign
-                tokens.items = _.values(tokens.data.props);
+                category = tokens.data.global.category;
+                items = _.map(tokens.data.props, (value, key) => Object.assign({ name: key }, value));
+            // Colors / aliases.
             } else {
-                return this.aliases(tokens);
+                category = 'color';
+                items = _.map(tokens.data, (value, key) => ({ name: key, value: value }));
             }
-            return tokens;
-        },
-        aliases(tokens) {
-            const aliases = [];
-            _.forOwn(tokens.data, (value, key) => {
-                aliases.push({
-                    name: key,
-                    value: value,
-                });
+
+            return Object.assign({}, tokens, {
+                items: items.map(mapToCSS.bind(null, category)),
             });
-            // eslint-disable-next-line no-param-reassign
-            tokens.items = aliases.map(mapToCSS);
-            return tokens;
         },
     };
 

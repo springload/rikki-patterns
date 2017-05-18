@@ -41,6 +41,9 @@ const getNavigation = () => {
                     {
                         label: 'Colours',
                     },
+                    {
+                        label: 'Sizes',
+                    },
                     // {
                     //     label: 'Typography',
                     // },

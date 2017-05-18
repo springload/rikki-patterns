@@ -9,10 +9,10 @@ const makeCSSName = (key, prefix = '') => {
 
 const makeCSSVariable = (prefix, key, val) => `${makeCSSName(key, prefix)}: ${val};`;
 
-const mapToCSS = (item) => {
+const mapToCSS = (prefix, item) => {
     return Object.assign({}, item, {
         humanName: _.startCase(_.lowerCase(item.name)),
-        cssName: makeCSSName(item.name, 'color'),
+        cssName: makeCSSName(item.name, prefix),
     });
 };
 

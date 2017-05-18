@@ -24,7 +24,7 @@ describe('tokenUtils', () => {
 
     describe('mapToCSS', () => {
         it('works', () => {
-            expect(mapToCSS({ name: 'potato' })).toEqual({
+            expect(mapToCSS('color', { name: 'potato' })).toEqual({
                 cssName: '$color-potato',
                 humanName: 'Potato',
                 name: 'potato',

@@ -57,8 +57,9 @@ module.exports = {
         res.render(`${page}.html`, {
             navigation: nav,
             config: config,
-            tokens: getTokens(),
+            tokens: tokens,
             colours: _.find(tokens, { name: 'aliases' }).items,
+            sizes: _.find(tokens, { name: 'sizes' }).items,
         });
     },
 };
