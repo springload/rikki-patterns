@@ -5,6 +5,8 @@ const { pathTrimStart, findComponent, getStateFromFlavour, getTokens } = require
 const { getNavigation } = require('./navigation');
 const config = require('../config');
 
+const autoIndexify = page => (page === '' ? 'index' : page);
+
 // data format: { label: 'Foo', id: 'foo', path: '/components/foo' }
 function getComponentData(data) {
     const component = findComponent(data.id);
@@ -16,8 +18,6 @@ function getComponentFromNav(nav, name) {
     const components = _.find(nav.children, { id: 'components' });
     return _.find(components.children, { id: name });
 }
-
-const autoIndexify = page => (page === '' ? 'index' : page);
 
 module.exports = {
     getComponentData: getComponentData,
