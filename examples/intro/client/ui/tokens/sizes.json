@@ -1,0 +1,48 @@
+{
+  "global": {
+    "category": "size",
+    "comment": "Intro asset sizing"
+  },
+  "props": {
+    "SPACE_DEFAULT": {
+      "value": "1.5rem",
+      "comment": "Generic sizing token scale for UI components."
+    },
+    "SPACE_PARAGRAPH": {
+        "value": ".8125rem",
+        "comment": "Generic sizing token scale for Body copy elements."
+    },
+    "LOGO": {
+      "value": "3.5rem",
+      "comment": "Generic sizing token scale for UI components."
+    },
+    "LOGO_SMALL": {
+      "value": "2.875rem",
+      "comment": "Generic sizing token scale for UI components."
+    },
+    "ICON": {
+      "value": "1rem",
+      "comment": "Standard icon should be hinted for 16px"
+    },
+    "ICON_SMALL": {
+      "value": ".875rem",
+      "comment": "Standard icon should be hinted for 14px"
+    },
+    "ICON_XSMALL": {
+      "value": ".75rem",
+      "comment": "Standard icon should be hinted for 12px"
+    },
+    "ICON_LARGE": {
+      "value": "1.25rem",
+      "comment": "Standard icon should be hinted for 20px"
+    },
+    "ICON_XLARGE": {
+      "value": "1.5rem",
+      "comment": "Standard icon should be hinted for 24px"
+    },
+    "ICON_DOUBLE": {
+      "value": "2rem",
+      "comment": "Standard icon should be hinted for 16px"
+    }
+  }
+}
