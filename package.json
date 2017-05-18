@@ -30,7 +30,10 @@
   "eslintConfig": {
     "extends": "springload",
     "rules": {
-        "comma-dangle": ["error", "always-multiline"]
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ]
     }
   },
   "jest": {
@@ -75,6 +78,7 @@
     "mkdirp": "^0.5.1",
     "normalize.css": "^5.0.0",
     "nunjucks": "github:springload/nunjucks#v3.0.0-jinja2-macros-kwargs-variable",
+    "read-pkg-up": "^1.0.1 || ^2.0.0",
     "sass-module-importer": "^1.4.0",
     "slugify": "^1.1.0",
     "vinyl-transform": "^1.0.0",

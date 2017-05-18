@@ -1,0 +1,22 @@
+{
+  "name": "rikki-patterns-intro",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Introduction to Rikki patterns",
+  "author": "Springload",
+  "main": "index.js",
+  "keywords": [],
+  "devDependencies": {
+
+  },
+  "dependencies": {
+
+  },
+  "scripts": {
+    "patterns": "../../src/bin/rikki.js",
+    "patterns:start": "../../src/bin/rikki.js start",
+    "patterns:component": "../../src/bin/rikki.js component --name",
+    "patterns:uncomponent": "../../src/bin/rikki.js uncomponent --name"
+  }
+}

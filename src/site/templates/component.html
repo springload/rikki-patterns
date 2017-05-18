@@ -65,7 +65,7 @@
     <div class="right-container">
         <p>
             <small>
-                <a href="{{ config.pkg.repository.url }}/blob/master/client/ui/components/{{ component.id }}" target="_blank" rel="noopener noreferrer">View code on GitHub</a>
+                <a href="{{ config.targetPkg.repository.url|replace('git+', '')|replace('.git', '') }}/blob/master/client/ui/components/{{ component.id }}" target="_blank" rel="noopener noreferrer">View code on GitHub</a>
             </small>
         </p>
         <p>
