@@ -13,12 +13,6 @@ const concat = require('gulp-concat');
 const utils = require('../../site/utils');
 const config = require('../../config');
 
-const OUTPATH_TOKENS = config.paths.ui.swatches;
-const PATH_TOKENS = config.paths.ui.tokens;
-const PATH_ALIASES = config.paths.ui.aliases;
-const PATH_SCSS = config.paths.ui.scss;
-const TOKENS_SCSS = config.paths.ui.tokensScss;
-
 function makeContext(arr) {
     const obj = {};
     arr.forEach((item) => {
@@ -105,14 +99,17 @@ gulp.task('tokens:css', () => {
         });
     });
 
-    gulp
-        .src([PATH_ALIASES, Path.join(PATH_TOKENS, '*.json')])
+    return gulp
+        .src([config.paths.ui.aliases, Path.join(config.paths.ui.tokens, '*.json')])
         .pipe(cssify)
-        .pipe(concat(TOKENS_SCSS))
+        .pipe(concat(config.swatches.scss))
         .pipe(template)
-        .pipe(gulp.dest(PATH_SCSS))
+        .pipe(gulp.dest(config.paths.ui.scss))
         .on('error', (err) => {
             gutil.log(err.message);
+        })
+        .on('end', () => {
+            gutil.log(`Built ${config.swatches.scss} in ${config.paths.ui.scss}`);
         });
 });
 
@@ -142,13 +139,16 @@ gulp.task('tokens:sketch', () => {
         });
     });
 
-    gulp
-        .src([PATH_ALIASES])
+    return gulp
+        .src([config.paths.ui.aliases])
         .pipe(sketchify)
         .pipe(rename(config.swatches.sketch))
-        .pipe(gulp.dest(OUTPATH_TOKENS))
+        .pipe(gulp.dest(config.paths.ui.swatches))
         .on('error', (err) => {
             gutil.log(err.message);
+        })
+        .on('end', () => {
+            gutil.log(`Built ${config.swatches.sketch} in ${config.paths.ui.swatches}`);
         });
 });
 
@@ -197,14 +197,21 @@ gulp.task('tokens:adobe', () => {
         });
     });
 
-    gulp
-        .src([PATH_ALIASES])
+    return gulp
+        .src([config.paths.ui.aliases])
         .pipe(swatchify)
         .pipe(rename(config.swatches.adobe))
-        .pipe(gulp.dest(OUTPATH_TOKENS))
+        .pipe(gulp.dest(config.paths.ui.swatches))
         .on('error', (err) => {
             gutil.log(err.message);
+        })
+        .on('end', () => {
+            gutil.log(`Built ${config.swatches.adobe} in ${config.paths.ui.swatches}`);
         });
 });
 
-gulp.task('tokens', ['tokens:sketch', 'tokens:adobe', 'tokens:css']);
+gulp.task('tokens', [
+    'tokens:sketch',
+    'tokens:adobe',
+    'tokens:css',
+]);

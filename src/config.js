@@ -28,16 +28,17 @@ module.exports = {
             aliases: path.join(uiPath, 'tokens', 'aliases.json'),
             css: path.join(uiPath, 'css'),
             scss: path.join(uiPath, 'scss'),
-            tokensScss: '_tokens.scss',
         },
         staticSite: {
             root: staticPath,
             static: staticPath,
         },
     },
+    // Names of the output files for Sketch and Adobe versions of our tokens.
     swatches: {
         sketch: 'swatches-sketch.sketchpalette',
         adobe: 'swatches-adobe.ase',
+        scss: '_tokens.scss',
     },
     app: {
         title: 'Rikki Design System',
