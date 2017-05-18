@@ -18,7 +18,7 @@ npm install --save-dev rikki-patterns
 ### Running the preview server
 
 ```sh
-rikki
+rikki start
 ```
 
 ### Building tokens
@@ -26,7 +26,8 @@ rikki
 We use a system of Design Tokens similar to SalesForce Lightning Design System, so that you can export the tokens for your environment.
 
 ```sh
-rikki tokens --tokens colours,breakpoints,typography --path ./my_app/tokens --format sass
+rikki tokens
+# Potential future arguments: --tokens colours,breakpoints,typography --path ./my_app/tokens --format sass
 ```
 
 Available formats are Sass, CSS, JSON, XML.
@@ -34,7 +35,7 @@ Available formats are Sass, CSS, JSON, XML.
 ### Creating a new component
 
 ```sh
-rikki component [COMPONENT_NAME]
+rikki component <name>
 ```
 
 ### Installing into Python apps
