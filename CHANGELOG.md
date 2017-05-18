@@ -4,6 +4,18 @@
 
 ## Unreleased
 
+## [[v0.2.0]](https://github.com/springload/rikki-patterns/releases/tag/v0.2.0)
+
+### Added
+
+- Add output of sizes, transitions, breakpoints, fonts on live design system.
+
+### Fixed
+
+- Fix routing of static files.
+- Fix output destination of static files.
+- Fix link to component source.
+
 ## [[v0.1.1]](https://github.com/springload/rikki-patterns/releases/tag/v0.1.1)
 
 ### Fixed
