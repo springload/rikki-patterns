@@ -10,7 +10,7 @@ const transform = require('vinyl-transform');
 const map = require('map-stream');
 const concat = require('gulp-concat');
 
-const utils = require('../../site/utils');
+const tokenUtils = require('../../tokens/tokenUtils');
 const config = require('../../config');
 
 function makeContext(arr) {
@@ -25,39 +25,28 @@ function makeContext(arr) {
 
 gulp.task('tokens:css', () => {
     function formatAliases(tokens, filename) {
-        const doc = [];
-        let prefix = null;
-
-        if (filename.match(/aliases/)) {
-            prefix = 'color';
-        }
-
-        _.forOwn(tokens, (val, key) => {
-            doc.push(utils.makeCSSVariable(prefix, key, val));
-        });
+        const prefix = filename.match(/aliases/) ? 'color' : null;
+        const doc = _.map(tokens, (val, key) => tokenUtils.makeCSSVariable(prefix, key, val));
 
         return doc.join('\n');
     }
 
     function formatTokens(tokens, filename) {
-        const doc = [];
-        let imports;
-        let context;
         const category = _.kebabCase(tokens.global.category);
+        let context;
 
         if (tokens.imports) {
-            imports = tokens.imports.map((file) => {
+            const imports = tokens.imports.map((file) => {
                 const path = Path.join(Path.dirname(filename), file);
                 return JSON.parse(fs.readFileSync(path));
             });
             context = makeContext(imports);
         }
 
-        _.forOwn(tokens.props, (val, key) => {
+        const doc = _.map(tokens.props, (val, key) => {
             let textValue = val;
 
-            // eslint-disable-next-line
-            if (val.hasOwnProperty('value')) {
+            if (typeof val.value !== 'undefined') {
                 textValue = val.value;
             }
 
@@ -66,10 +55,10 @@ gulp.task('tokens:css', () => {
 
             // Deal with string types
             if (tokens.global.format === 'string') {
-                textValue = utils.quote(textValue);
+                textValue = tokenUtils.quote(textValue);
             }
 
-            doc.push(utils.makeCSSVariable(category, key, textValue));
+            return tokenUtils.makeCSSVariable(category, key, textValue);
         });
 
         return doc.join('\n');
@@ -78,17 +67,15 @@ gulp.task('tokens:css', () => {
     const cssify = transform((filename) => {
         return map((chunk, next) => {
             const tokens = JSON.parse(chunk.toString());
+            const format = tokens.global ? formatTokens : formatAliases;
 
-            if (tokens.global) {
-                return next(null, formatTokens(tokens, filename));
-            }
-            return next(null, formatAliases(tokens, filename));
+            return next(null, format(tokens, filename));
         });
     });
 
     const template = transform(() => {
         return map((chunk, next) => {
-            const tpl = '// Design System Tokens\n// Generated at <%= time %>\n\n<%= data %>';
+            const tpl = '// Design System Tokens\n\n<%= data %>';
             const ctx = {
                 data: chunk.toString(),
                 time: new Date().toString(),

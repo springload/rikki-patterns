@@ -3,10 +3,9 @@ const path = require('path');
 const gulp = require('gulp');
 
 const schema = require('../../site/utils/schema');
-const tokens = require('../../site/utils/tokens');
+const TokenSchema = require('../../tokens/TokenSchema');
 
 const Schema = schema.Schema;
-const TokenSchema = tokens.default;
 
 const config = require('../../config');
 
