@@ -1,14 +1,14 @@
 {
   "global": {
     "category": "background-color",
-    "comment": "Kiwibank panel/background colours"
+    "comment": "Available panel/background colours"
   },
   "imports": [
     "./aliases.json"
   ],
   "props": {
-    "GREEN": {
-      "value": "<%= BRAND_PRIMARY_GREEN %>",
+    "LIGHT_BLUE": {
+      "value": "<%= LIGHT_BLUE %>",
       "type": "color",
       "cssProperties": ["color", "background-color"]
     }
