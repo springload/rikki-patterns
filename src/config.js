@@ -1,10 +1,13 @@
 const path = require('path');
-const pkg = require('../package.json');
 const readPkgUp = require('read-pkg-up');
+
+const pkg = require('../package.json');
+
+const targetPkg = readPkgUp.sync().pkg;
 
 const PROD = process.env.NODE_ENV === 'production';
 
-const uiPath = path.join(process.cwd(), 'client', 'ui');
+const uiPath = path.join(process.cwd(), 'client', 'pattern-library');
 const staticPath = path.join(process.cwd(), 'client', 'static');
 
 module.exports = {
@@ -41,11 +44,11 @@ module.exports = {
         scss: '_tokens.scss',
     },
     app: {
-        title: 'Rikki Design System',
+        title: `${targetPkg.name} Design System`,
         seo: {
-            title: 'Rikki Patterns',
+            title: `${targetPkg.name} Design System`,
         },
     },
     pkg: pkg,
-    targetPkg: readPkgUp.sync().pkg,
+    targetPkg: targetPkg,
 };
