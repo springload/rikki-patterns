@@ -4,6 +4,19 @@
 
 ## Unreleased
 
+## [[v0.3.0]](https://github.com/springload/rikki-patterns/releases/tag/v0.3.0)
+
+### Added
+
+- Add disclaimer that the tokens file is automatically generated.
+
+### Changed
+
+- Move pattern library location to `client/pattern-library` (will be configurable in the future).
+- Load components from `components.html` instead of `rikki.html`.
+- Stop referring to Rikki inside of the pattern library.
+
+
 ## [[v0.2.0]](https://github.com/springload/rikki-patterns/releases/tag/v0.2.0)
 
 ### Added
