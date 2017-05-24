@@ -2,7 +2,7 @@
 {% macro _component(name, component) -%}{% include "components/" + name + "/" + name + ".html" %}{%- endmacro %}
 
 {# Usage example: #}
-{# {% import "rikki.html" as rikki %} #}
-{# {{ rikki.icon(icon="logo", class="icon-logo") }} #}
+{# {% import "components.html" as components %} #}
+{# {{ components.icon(icon="logo", class="icon-logo") }} #}
 
 {% macro list() %}{{ _component('list', kwargs) }}{% endmacro %}

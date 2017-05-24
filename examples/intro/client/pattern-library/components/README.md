@@ -3,7 +3,7 @@ components:
   - list
 ---
 
-# Rikki intro pattern library manifest
+# Pattern library manifest
 
 > This file defines the building blocks of the design system.
 
