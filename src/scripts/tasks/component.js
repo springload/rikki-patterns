@@ -47,13 +47,13 @@ function removeFromManifest(name) {
 }
 
 function addToComponentsMacro(name) {
-    const htmlFile = Path.join(basePath, 'rikki.html');
+    const htmlFile = Path.join(basePath, 'components.html');
     const data = `\n{% macro ${name.replace('-', '_')}() %}{{ _component('${name}', kwargs) }}{% endmacro %}`;
     fs.appendFileSync(htmlFile, data);
 }
 
 function removeFromComponentsMacro(name) {
-    const htmlFile = Path.join(basePath, 'rikki.html');
+    const htmlFile = Path.join(basePath, 'components.html');
     const htmlContents = fs.readFileSync(htmlFile, { encoding: 'utf8' });
     const data = `{% macro ${name.replace('-', '_')}() %}{{ _component('${name}', kwargs) }}{% endmacro %}`;
     const match = htmlContents.includes(data);
