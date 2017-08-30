@@ -31,11 +31,7 @@
     "extends": "plugin:springload/prettier"
   },
   "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/",
-      "/pages/"
-    ]
+    "testPathIgnorePatterns": ["/node_modules/", "/dist/", "/pages/"]
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
@@ -85,7 +81,7 @@
     "formatter:js": "prettier",
     "formatter:css": "prettier",
     "lint": "npm run lint:versions -s && npm run lint:js -s",
-    "format": "npm run formatter:js -- --write src/**/*.js && npm run formatter:scss -- --write src/**/*.scss",
+    "format": "npm run formatter:js -s -- --write src/**/*.js && npm run formatter:scss -s -- --write src/**/*.scss",
     "test": "jest",
     "test:watch": "jest --coverage --watch",
     "test:coverage": "jest --coverage",
