@@ -11,12 +11,13 @@
     "type": "git",
     "url": "https://github.com/springload/rikki-patterns"
   },
-  "devDependencies": {
-
+  "rikki": {
+    "title": "Introduction pattern library",
+    "rootDir": "patterns",
+    "staticDir": "static"
   },
-  "dependencies": {
-
-  },
+  "devDependencies": {},
+  "dependencies": {},
   "scripts": {
     "patterns:start": "../../src/bin/rikki.js start",
     "patterns:component": "../../src/bin/rikki.js component --name",
