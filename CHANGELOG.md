@@ -4,6 +4,19 @@
 
 ## Unreleased
 
+## [[v0.4.0]](https://github.com/springload/rikki-patterns/releases/tag/v0.4.0)
+
+### Added
+
+- Make rikki configurable via package.json field
+- Add better header for Sass tokens, with tokens hash.
+- Disable Sass linting in generated tokens file.
+- Ignore npm-debug.log files in npm package.
+
+### Changed
+
+- Drop support for Node 6 and 7, require Node 8.0.0 or above.
+
 ## [[v0.3.0]](https://github.com/springload/rikki-patterns/releases/tag/v0.3.0)
 
 ### Added
