@@ -8,7 +8,7 @@
     "rikki-patterns": "./src/bin/rikki.js"
   },
   "engines": {
-    "node": ">= 6.0.0"
+    "node": ">= 8.0.0"
   },
   "author": "Springload",
   "license": "MIT",
