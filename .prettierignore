@@ -1,0 +1,9 @@
+node_modules
+*.min.js
+coverage/
+dist/
+pages
+src/site/static/js
+src/scripts/generator/
+www/
+*.json
