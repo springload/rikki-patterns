@@ -7,8 +7,17 @@ const targetPkg = readPkgUp.sync().pkg;
 
 const PROD = process.env.NODE_ENV === 'production';
 
-const uiPath = path.join(process.cwd(), 'client', 'pattern-library');
-const staticPath = path.join(process.cwd(), 'client', 'static');
+const rikkiConfigDefaults = {
+    title: `${targetPkg.name} Pattern Library`,
+    verbose: true,
+    rootDir: 'client/pattern-library',
+    staticDir: 'client/static',
+};
+
+const rikkiConfig = Object.assign({}, rikkiConfigDefaults, targetPkg.rikki);
+
+const uiPath = path.join(process.cwd(), rikkiConfig.rootDir);
+const staticPath = path.join(process.cwd(), rikkiConfig.staticDir);
 
 module.exports = {
     DEBUG: !PROD,
@@ -44,9 +53,9 @@ module.exports = {
         scss: '_tokens.scss',
     },
     app: {
-        title: `${targetPkg.name} Design System`,
+        title: rikkiConfig.title,
         seo: {
-            title: `${targetPkg.name} Design System`,
+            title: rikkiConfig.title,
         },
     },
     pkg: pkg,
