@@ -17,3 +17,6 @@ webpack.config.dev.js
 /bin
 .env
 npm-debug.log*
+.vscode
+.prettierignore
+prettier.config.js
