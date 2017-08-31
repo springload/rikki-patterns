@@ -1,5 +1,6 @@
 const path = require('path');
 const readPkgUp = require('read-pkg-up');
+const cosmiconfig = require('cosmiconfig');
 
 const pkg = require('../package.json');
 
@@ -14,7 +15,13 @@ const rikkiConfigDefaults = {
     staticDir: 'client/static',
 };
 
-const rikkiConfig = Object.assign({}, rikkiConfigDefaults, targetPkg.rikki);
+const rikkiConfig = Object.assign(
+    {},
+    rikkiConfigDefaults,
+    cosmiconfig('rikki', {
+        sync: true,
+    }),
+);
 
 const uiPath = path.join(process.cwd(), rikkiConfig.rootDir);
 const staticPath = path.join(process.cwd(), rikkiConfig.staticDir);

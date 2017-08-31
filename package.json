@@ -31,7 +31,11 @@
     "extends": "plugin:springload/prettier"
   },
   "jest": {
-    "testPathIgnorePatterns": ["/node_modules/", "/dist/", "/pages/"]
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      "/pages/"
+    ]
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
@@ -45,6 +49,7 @@
     "ase-utils": "^0.1.1",
     "body-parser": "^1.15.1",
     "color": "^0.11.1",
+    "cosmiconfig": "^2.0.0",
     "del": "^2.2.0",
     "express": "^4.0.0",
     "glob": "^7.0.3",
