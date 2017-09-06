@@ -7,7 +7,8 @@ const makeCSSName = (key, prefix = '') => {
     return `$${_.kebabCase(key)}`;
 };
 
-const makeCSSVariable = (prefix, key, val) => `${makeCSSName(key, prefix)}: ${val};`;
+const makeCSSVariable = (prefix, key, val) =>
+    `${makeCSSName(key, prefix)}: ${val};`;
 
 const mapToCSS = (prefix, item) => {
     return Object.assign({}, item, {

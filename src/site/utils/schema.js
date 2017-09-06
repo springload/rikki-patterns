@@ -12,7 +12,7 @@ function Schema(props) {
                 return glob
                     .sync(path.resolve(this.path, '*/README.md'))
                     .map(this.getConfig, this)
-                    .map(function (config) {
+                    .map(function(config) {
                         // eslint-disable-next-line no-param-reassign
                         config = _.defaults(config, {
                             components: [],
@@ -27,7 +27,9 @@ function Schema(props) {
                 const id = path.basename(path.dirname(configPath));
                 const title = _.startCase(_.lowerCase(id));
                 const config = yamlFront.loadFront(configPath, 'readme');
-                const localPath = path.dirname(configPath).replace(this.path, '');
+                const localPath = path
+                    .dirname(configPath)
+                    .replace(this.path, '');
 
                 return _.merge(
                     {},
@@ -36,17 +38,22 @@ function Schema(props) {
                         title,
                         path: pathTrimStart(localPath),
                     },
-                    config
+                    config,
                 );
             },
 
             getComponents: function getComponents(categoryConfig) {
                 return categoryConfig.components
-                    .map(function (name) {
-                        return path.resolve(this.path, categoryConfig.path, name, 'README.md');
+                    .map(function(name) {
+                        return path.resolve(
+                            this.path,
+                            categoryConfig.path,
+                            name,
+                            'README.md',
+                        );
                     }, this)
                     .map(this.getConfig, this)
-                    .map(function (config) {
+                    .map(function(config) {
                         // eslint-disable-next-line no-param-reassign
                         config = _.defaults(config, {
                             uid: `${categoryConfig.id}-${config.id}`,
@@ -60,7 +67,7 @@ function Schema(props) {
                     }, this);
             },
             getFlavours(componentConfig) {
-                return componentConfig.flavours.map((config) => {
+                return componentConfig.flavours.map(config => {
                     const id = _.kebabCase(config.title);
                     // eslint-disable-next-line no-param-reassign
                     config = _.defaults(config, {
@@ -71,7 +78,7 @@ function Schema(props) {
                     });
 
                     // eslint-disable-next-line no-param-reassign
-                    config.states = config.states.map((state) => {
+                    config.states = config.states.map(state => {
                         // eslint-disable-next-line no-param-reassign
                         state.id = _.kebabCase(state.title);
                         return state;
@@ -82,10 +89,15 @@ function Schema(props) {
             },
 
             getSchema(componentConfig) {
-                return Object.keys(componentConfig.schema).reduce((schema, key) => {
+                return Object.keys(
+                    componentConfig.schema,
+                ).reduce((schema, key) => {
                     let example = null;
-                    componentConfig.flavours.some((flav) => {
-                        const state = flav.states.find(st => st.data && typeof st.data[key] !== 'undefined');
+                    componentConfig.flavours.some(flav => {
+                        const state = flav.states.find(
+                            st =>
+                                st.data && typeof st.data[key] !== 'undefined',
+                        );
                         if (state) {
                             example = state.data[key];
                         }
@@ -93,15 +105,19 @@ function Schema(props) {
                     });
 
                     // eslint-disable-next-line no-param-reassign
-                    schema[key] = Object.assign({}, componentConfig.schema[key], {
-                        example: example,
-                    });
+                    schema[key] = Object.assign(
+                        {},
+                        componentConfig.schema[key],
+                        {
+                            example: example,
+                        },
+                    );
 
                     return schema;
                 }, {});
             },
         },
-        props
+        props,
     );
 }
 

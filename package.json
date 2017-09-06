@@ -86,7 +86,7 @@
     "formatter:js": "prettier --write",
     "formatter:css": "prettier --write",
     "lint": "npm run lint:versions -s && npm run lint:js -s",
-    "format": "npm run formatter:js -s -- src/**/*.js && npm run formatter:scss -s -- src/**/*.scss",
+    "format": "npm run formatter:js -s -- src/**/*.js && npm run formatter:css -s -- src/**/*.scss",
     "test": "jest",
     "test:watch": "jest --coverage --watch",
     "test:coverage": "jest --coverage",

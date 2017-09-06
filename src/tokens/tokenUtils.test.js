@@ -12,13 +12,17 @@ describe('tokenUtils', () => {
         });
 
         it('prefix', () => {
-            expect(makeCSSName('Light Blue', 'color')).toEqual('$color-light-blue');
+            expect(makeCSSName('Light Blue', 'color')).toEqual(
+                '$color-light-blue',
+            );
         });
     });
 
     describe('makeCSSVariable', () => {
         it('works', () => {
-            expect(makeCSSVariable('color', 'Light Blue', '#0000ff')).toEqual('$color-light-blue: #0000ff;');
+            expect(makeCSSVariable('color', 'Light Blue', '#0000ff')).toEqual(
+                '$color-light-blue: #0000ff;',
+            );
         });
     });
 

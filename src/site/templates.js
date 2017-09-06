@@ -22,9 +22,12 @@ module.exports = {
 
         nunjucks.installJinjaCompat();
 
-        const templateEnv = nunjucks.configure(TEMPLATE_PATHS, TEMPLATE_OPTIONS);
+        const templateEnv = nunjucks.configure(
+            TEMPLATE_PATHS,
+            TEMPLATE_OPTIONS,
+        );
 
-        Object.keys(filters).forEach((name) => {
+        Object.keys(filters).forEach(name => {
             templateEnv.addFilter(name, filters[name]);
         });
 

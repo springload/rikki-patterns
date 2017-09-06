@@ -7,23 +7,28 @@ const templates = require('./templates');
 
 const app = express();
 
-app.use('/static', express.static(path.join(process.cwd(), 'client', 'static')));
+app.use(
+    '/static',
+    express.static(path.join(process.cwd(), 'client', 'static')),
+);
 app.use('/static', express.static(path.join(process.cwd(), 'core', 'static')));
 app.use('/static', express.static(path.join(__dirname, 'static')));
 templates.configure(app);
 app.use(bodyParser.json());
 
-app.get([
-    '/raw/:name/:flavour/:variant',
-    '/raw/:name/:flavour',
-    '/raw/:name',
-], views.componentRawView);
+app.get(
+    ['/raw/:name/:flavour/:variant', '/raw/:name/:flavour', '/raw/:name'],
+    views.componentRawView,
+);
 
-app.get([
-    '/components/:name',
-    '/components/:name/:flavour',
-    '/components/:name/:flavour/:variant',
-], views.componentOverviewView);
+app.get(
+    [
+        '/components/:name',
+        '/components/:name/:flavour',
+        '/components/:name/:flavour/:variant',
+    ],
+    views.componentOverviewView,
+);
 
 app.get('*', views.generic);
 

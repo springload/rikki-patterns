@@ -7,7 +7,7 @@ const { mapToCSS } = require('./tokenUtils');
 
 function makeContext(arr) {
     const obj = {};
-    arr.forEach((item) => {
+    arr.forEach(item => {
         _.forOwn(item, (val, key) => {
             obj[key] = val;
         });
@@ -20,7 +20,7 @@ function TokenSchema(props) {
         generate() {
             return glob
                 .sync(this.path)
-                .map((path) => {
+                .map(path => {
                     const extName = Path.extname(path);
                     const name = Path.basename(path, extName);
                     const contents = fs.readFileSync(path, 'utf-8').toString();
@@ -40,7 +40,7 @@ function TokenSchema(props) {
             const initialData = JSON.parse(tokens.contents);
 
             if (initialData.imports) {
-                imports = initialData.imports.map((file) => {
+                imports = initialData.imports.map(file => {
                     const path = Path.join(Path.dirname(tokens.path), file);
                     return JSON.parse(fs.readFileSync(path));
                 });
@@ -62,11 +62,16 @@ function TokenSchema(props) {
             // Most tokens.
             if (tokens.data.global) {
                 category = tokens.data.global.category;
-                items = _.map(tokens.data.props, (value, key) => Object.assign({ name: key }, value));
-            // Colors / aliases.
+                items = _.map(tokens.data.props, (value, key) =>
+                    Object.assign({ name: key }, value),
+                );
+                // Colors / aliases.
             } else {
                 category = 'color';
-                items = _.map(tokens.data, (value, key) => ({ name: key, value: value }));
+                items = _.map(tokens.data, (value, key) => ({
+                    name: key,
+                    value: value,
+                }));
             }
 
             return Object.assign({}, tokens, {

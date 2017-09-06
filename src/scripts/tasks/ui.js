@@ -40,7 +40,9 @@ function getStateFromFlavour(component, flavour, variant) {
 }
 
 function getTokens() {
-    return TokenSchema({ path: path.join(config.paths.ui.tokens, '*.json') }).generate();
+    return TokenSchema({
+        path: path.join(config.paths.ui.tokens, '*.json'),
+    }).generate();
 }
 
 module.exports = {
@@ -52,7 +54,7 @@ module.exports = {
     getStateFromFlavour: getStateFromFlavour,
 };
 
-gulp.task('schema', (done) => {
+gulp.task('schema', done => {
     getTokens();
     done();
 });

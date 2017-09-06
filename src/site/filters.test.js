@@ -11,7 +11,9 @@ describe('filters', () => {
         });
 
         it('works', () => {
-            expect(filters.markdown('*bold*')).toEqual('<p><em>bold</em></p>\n');
+            expect(filters.markdown('*bold*')).toEqual(
+                '<p><em>bold</em></p>\n',
+            );
         });
 
         it('no value', () => {
@@ -25,7 +27,9 @@ describe('filters', () => {
         });
 
         it('works', () => {
-            expect(filters.pretty('<p>test</p><p>test</p>')).toEqual('<p>test</p>\n<p>test</p>');
+            expect(filters.pretty('<p>test</p><p>test</p>')).toEqual(
+                '<p>test</p>\n<p>test</p>',
+            );
         });
     });
 
@@ -87,7 +91,8 @@ describe('filters', () => {
                 }),
             ).toEqual({
                 length: 75,
-                val: '<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n',
+                val:
+                    '<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n',
             });
         });
 
@@ -111,7 +116,8 @@ describe('filters', () => {
                 ]),
             ).toEqual({
                 length: 150,
-                val: '<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n',
+                val:
+                    '<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n<ul class="list-action"><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>\n',
             });
         });
     });

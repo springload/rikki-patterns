@@ -50,7 +50,9 @@ const getNavigation = () => {
             },
             {
                 label: 'Components',
-                children: getUI('components').map(component => ({ label: component.title })),
+                children: getUI('components').map(component => ({
+                    label: component.title,
+                })),
             },
             // {
             //     label: 'Style and Tone',

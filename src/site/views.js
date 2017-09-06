@@ -1,7 +1,12 @@
 const _ = require('lodash');
 const path = require('path');
 
-const { pathTrimStart, findComponent, getStateFromFlavour, getTokens } = require('../scripts/tasks/ui');
+const {
+    pathTrimStart,
+    findComponent,
+    getStateFromFlavour,
+    getTokens,
+} = require('../scripts/tasks/ui');
 const { getNavigation } = require('./navigation');
 const config = require('../config');
 
