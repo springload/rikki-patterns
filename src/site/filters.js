@@ -1,5 +1,5 @@
 const path = require('path');
-const nunjucks = require('nunjucks');
+const nunjucks = require('@springload/nunjucks');
 const marked = require('marked');
 const beautify = require('js-beautify');
 const slugify = require('slugify');

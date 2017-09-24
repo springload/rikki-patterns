@@ -1,4 +1,4 @@
-const nunjucks = require('nunjucks');
+const nunjucks = require('@springload/nunjucks');
 const config = require('../config');
 const filters = require('./filters');
 

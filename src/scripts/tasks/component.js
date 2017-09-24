@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 const Path = require('path');
-const nunjucks = require('nunjucks');
+const nunjucks = require('@springload/nunjucks');
 const transform = require('vinyl-transform');
 const map = require('map-stream');
 const rename = require('gulp-rename');
@@ -16,7 +16,7 @@ const utils = require('../../site/utils');
 const makeName = utils.makeName;
 const basePath = config.paths.ui.components;
 
-const updateManifest = (callback) => {
+const updateManifest = callback => {
     const manifestPath = Path.join(basePath, 'README.md');
     const manifest = yamlFront.loadFront(manifestPath, 'readme');
     const readme = manifest.readme;
@@ -30,7 +30,7 @@ const updateManifest = (callback) => {
 };
 
 function addToComponentsManifest(name) {
-    updateManifest((manifest) => {
+    updateManifest(manifest => {
         if (manifest.components.indexOf(name) === -1) {
             manifest.components.push(name);
         }
@@ -38,7 +38,7 @@ function addToComponentsManifest(name) {
 }
 
 function removeFromManifest(name) {
-    updateManifest((manifest) => {
+    updateManifest(manifest => {
         const index = manifest.components.indexOf(name);
         if (index !== -1) {
             manifest.components.splice(index, 1);
@@ -48,14 +48,20 @@ function removeFromManifest(name) {
 
 function addToComponentsMacro(name) {
     const htmlFile = Path.join(basePath, 'components.html');
-    const data = `\n{% macro ${name.replace('-', '_')}() %}{{ _component('${name}', kwargs) }}{% endmacro %}`;
+    const data = `\n{% macro ${name.replace(
+        '-',
+        '_',
+    )}() %}{{ _component('${name}', kwargs) }}{% endmacro %}`;
     fs.appendFileSync(htmlFile, data);
 }
 
 function removeFromComponentsMacro(name) {
     const htmlFile = Path.join(basePath, 'components.html');
     const htmlContents = fs.readFileSync(htmlFile, { encoding: 'utf8' });
-    const data = `{% macro ${name.replace('-', '_')}() %}{{ _component('${name}', kwargs) }}{% endmacro %}`;
+    const data = `{% macro ${name.replace(
+        '-',
+        '_',
+    )}() %}{{ _component('${name}', kwargs) }}{% endmacro %}`;
     const match = htmlContents.includes(data);
 
     if (match) {
@@ -105,5 +111,9 @@ gulp.task('component', () => {
     addToComponentsManifest(component.paramName);
     addToComponentsMacro(component.paramName);
 
-    gulp.src(config.paths.generator.template).pipe(template).pipe(rename(renameTemplate)).pipe(gulp.dest(compPath));
+    gulp
+        .src(config.paths.generator.template)
+        .pipe(template)
+        .pipe(rename(renameTemplate))
+        .pipe(gulp.dest(compPath));
 });
