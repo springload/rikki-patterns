@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Changed
+
+- Switch from git-installed nunjucks@3.0.0 fork to npm-installed nunjucks@3.0.2-dev fork.
+
 ## [[v0.4.0]](https://github.com/springload/rikki-patterns/releases/tag/v0.4.0)
 
 ### Added
