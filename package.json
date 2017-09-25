@@ -42,7 +42,7 @@
     "eslint": "^3.19.0",
     "eslint-plugin-springload": "^2.0.4",
     "jest": "^20.0.1",
-    "prettier": "^1.6.0",
+    "prettier": "^1.7.0",
     "sass-module-importer": "^1.4.0"
   },
   "dependencies": {
