@@ -227,4 +227,5 @@ gulp.task('tokens:adobe', () => {
         });
 });
 
-gulp.task('tokens', ['tokens:sketch', 'tokens:adobe', 'tokens:css']);
+// gulp.task('tokens', ['tokens:sketch', 'tokens:adobe', 'tokens:css']);
+gulp.task('tokens', ['tokens:css']);
