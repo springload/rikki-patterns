@@ -8,7 +8,11 @@ describe('schema', () => {
         });
 
         it('generate', () => {
-            expect(Schema({ path: path.join(__dirname, '..', '..', 'ui') }).generate()).toBeInstanceOf(Object);
+            expect(
+                Schema({
+                    path: path.join(__dirname, '..', '..', 'ui'),
+                }).generate(),
+            ).toBeInstanceOf(Object);
         });
     });
 

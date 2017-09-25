@@ -10,8 +10,11 @@ gulp.task('watch', ['tokens', 'scss', 'scss:site'], () => {
     gulp.watch(path.join('.', 'site', 'scss', '**', '*.scss'), ['scss:site']);
 
     gulp.watch(
-        [path.join(config.paths.ui.scss, '**', '*.scss'), path.join(config.paths.ui.components, '**', '*.scss')],
-        ['scss']
+        [
+            path.join(config.paths.ui.scss, '**', '*.scss'),
+            path.join(config.paths.ui.components, '**', '*.scss'),
+        ],
+        ['scss'],
     );
 
     gulp.watch(path.join(config.paths.ui.tokens, '**', '*.json'), ['tokens']);

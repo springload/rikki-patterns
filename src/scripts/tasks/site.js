@@ -55,7 +55,9 @@ gulp.task('site:pages', () => {
 });
 
 gulp.task('site:static', () => {
-    gulp.src(Path.join(config.paths.site.static, '**')).pipe(gulp.dest(config.paths.staticSite.static));
+    gulp
+        .src(Path.join(config.paths.site.static, '**'))
+        .pipe(gulp.dest(config.paths.staticSite.static));
 });
 
 // Renders the `raw` view of each component's state
@@ -80,14 +82,16 @@ function renderDocs(SITE_DIR, name) {
     const nav = navigation.getNavigation();
     const components = _.find(nav.children, { id: name });
 
-    components.children.forEach((component) => {
+    components.children.forEach(component => {
         const dirPath = Path.join(SITE_DIR, component.path);
         console.log(dirPath);
         const htmlPath = Path.join(dirPath, 'index.html');
         const rawDir = Path.join(SITE_DIR, 'raw', component.id);
 
         const componentData = findComponent(component.id);
-        componentData.template = pathTrimStart(Path.join(component.path, `${component.id}.html`));
+        componentData.template = pathTrimStart(
+            Path.join(component.path, `${component.id}.html`),
+        );
 
         const html = env.render('component.html', {
             navigation: nav,
@@ -102,25 +106,39 @@ function renderDocs(SITE_DIR, name) {
         fs.writeFileSync(htmlPath, html, 'utf-8');
 
         if (componentData.flavours) {
-            componentData.flavours.forEach((flavour) => {
+            componentData.flavours.forEach(flavour => {
                 if (flavour.states) {
-                    flavour.states.forEach((variant) => {
-                        const state = getStateFromFlavour(componentData, flavour.id, variant.id);
-                        const stateDir = Path.join(rawDir, flavour.id, variant.id);
+                    flavour.states.forEach(variant => {
+                        const state = getStateFromFlavour(
+                            componentData,
+                            flavour.id,
+                            variant.id,
+                        );
+                        const stateDir = Path.join(
+                            rawDir,
+                            flavour.id,
+                            variant.id,
+                        );
                         renderState(env, stateDir, nav, componentData, state);
                     });
                 }
 
                 if (flavour.state) {
                     const stateDir = Path.join(rawDir, flavour.id);
-                    renderState(env, stateDir, nav, componentData, flavour.state);
+                    renderState(
+                        env,
+                        stateDir,
+                        nav,
+                        componentData,
+                        flavour.state,
+                    );
                 }
             });
         }
     });
 }
 
-gulp.task('site', ['site:pages', 'site:static'], (done) => {
+gulp.task('site', ['site:pages', 'site:static'], done => {
     renderDocs(config.paths.staticSite.root, 'components');
     done(null);
     process.exit(0);

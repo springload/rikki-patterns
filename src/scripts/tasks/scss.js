@@ -28,7 +28,8 @@ const PlzOptions = {
 };
 
 gulp.task('scss', () => {
-    return (gulp
+    return (
+        gulp
             .src(path.join(config.paths.ui.scss, '*.scss'), {
                 base: config.paths.ui.scss,
             })
@@ -41,11 +42,18 @@ gulp.task('scss', () => {
             })
             .pipe(plz(PlzOptions))
             .pipe(prod ? gutil.noop() : sourcemaps.write())
-            .pipe(size({ title: prod ? 'CSS' : 'CSS (unminified)', showFiles: true, gzip: prod }))
+            .pipe(
+                size({
+                    title: prod ? 'CSS' : 'CSS (unminified)',
+                    showFiles: true,
+                    gzip: prod,
+                }),
+            )
             // TODO Find out what this line was meant for.
             // .pipe(gulp.dest(config.paths.ui.css))
             .pipe(rename('ui.css'))
-            .pipe(gulp.dest(config.paths.staticSite.static)));
+            .pipe(gulp.dest(config.paths.staticSite.static))
+    );
 });
 
 gulp.task('scss:site', () => {
@@ -60,6 +68,12 @@ gulp.task('scss:site', () => {
         })
         .pipe(plz(PlzOptions))
         .pipe(prod ? gutil.noop() : sourcemaps.write())
-        .pipe(size({ title: prod ? 'CSS' : 'CSS (unminified)', showFiles: true, gzip: prod }))
+        .pipe(
+            size({
+                title: prod ? 'CSS' : 'CSS (unminified)',
+                showFiles: true,
+                gzip: prod,
+            }),
+        )
         .pipe(gulp.dest(config.paths.staticSite.static));
 });
