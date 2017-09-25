@@ -40,7 +40,7 @@
   "devDependencies": {
     "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
-    "eslint-plugin-springload": "^2.0.4",
+    "eslint-plugin-springload": "^2.2.0",
     "jest": "^20.0.1",
     "prettier": "^1.7.0",
     "sass-module-importer": "^1.4.0"
