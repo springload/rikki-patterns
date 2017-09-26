@@ -1,6 +1,7 @@
 ---
 components:
   - list
+  - icon
 ---
 
 # Pattern library manifest
