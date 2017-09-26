@@ -122,6 +122,6 @@ function Schema(props) {
 }
 
 module.exports = {
-    Schema: Schema,
-    pathTrimStart: pathTrimStart,
+    Schema,
+    pathTrimStart,
 };

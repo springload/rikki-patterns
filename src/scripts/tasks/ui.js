@@ -46,12 +46,12 @@ function getTokens() {
 }
 
 module.exports = {
-    getUI: getUI,
-    getSchema: getSchema,
-    getTokens: getTokens,
-    findComponent: findComponent,
+    getUI,
+    getSchema,
+    getTokens,
+    findComponent,
     pathTrimStart: schema.pathTrimStart,
-    getStateFromFlavour: getStateFromFlavour,
+    getStateFromFlavour,
 };
 
 gulp.task('schema', done => {
